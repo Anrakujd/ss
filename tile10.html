@@ -1,0 +1,451 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen matematika bebas diakses oleh guru dan siswa untuk membantu memahami matematika di sekolah">
+<meta name="Keywords" content="matematika, eksperimen, praktikum online, webbase praktikum, matematika online, pengubinan, tiling, tile, gasing">
+<meta name="author" content="Djukarna">
+<title>Game Menara Hanoi</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> GAME MENARA HANOI</h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-square-o" aria-hidden="true"></i><b> Geometri </b>
+				<ul>
+					<li><a href="tile1.html">Pengubinan Segitiga Sama Sisi (Polyamonds)</a></li>
+					<li><a href="tile2.html">Pengubinan Persegi (Polyominos)</a></li>
+					<li><a href="tile3.html">Pengubinan Polyamonds & Polyominos </a></li>
+					<li><a href="tile4.html">Tangram</a></li>
+					<li><a href="tile5.html">Puzzle Two and Half</a></li>
+					<li><a href="tile6.html">Puzzle Angka Satu</a></li>
+					<li><a href="tile7.html">Kubus Iluminasi (Polyrhomb)</a></li>
+					<li><a href="tile8.html">Heptomino</a></li>
+					<li><a href="tile8.html">Pentomino</a></li>
+					<li><a href="tile8.html">Menara Hanoi</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1> Menara Hanoi </h1>
+<p>Pindahkan semua balok dari tiang satu ke tiang lainnya, dengan tidak menempatkan balok yang lebih besar di atas balok yang lebih kecil !</p>
+<script type="text/processing" >
+float x, x1, x2, x3, x4, x5, x6;
+float y, y1, y2, y3, y4, y5, y6;
+float h = 20;
+float w1 = 180;
+float w2 = 160;
+float w3 = 140;
+float w4 = 120;
+float w5 = 100;
+float w6 = 80;
+float w7 = 60;
+boolean t, t1, t2, t3, t4, t5, t6;
+
+void setup(){
+  size(900,600);
+  x = 150;  y = 435;  
+  x1 = 150;  y1 = 405;  
+  x2 = 150;  y2 = 375;
+  x3 = 150;  y3 = 345;
+  x4 = 150;  y4 = 315;
+  x5 = 150;  y5 = 285;
+  x6 = 150;  y6 = 255;
+   
+  t =  true;
+  t1 = false;
+  t2 = false;
+  t3 = false;
+  t4 = false;
+  t5 = false;
+  t6 = false;
+  
+}
+
+void draw(){
+  background(0,255,255);
+ 
+  if(!t){
+    x = lerp(x,(x<300)?(150):((x>600)?(750):(450)),1);
+  }
+  if(!t1){
+    x1 = lerp(x1,(x1<300)?(150):((x1>600)?(750):(450)),1);
+  }
+  if(!t2){
+    x2 = lerp(x2,(x2<300)?(150):((x2>600)?(750):(450)),1);
+  }
+  if(!t3){
+    x3 = lerp(x3,(x3<300)?(150):((x3>600)?(750):(450)),1);
+  }
+  if(!t4){
+    x4 = lerp(x4,(x4<300)?(150):((x4>600)?(750):(450)),1);
+  }
+  if(!t5){
+    x5 = lerp(x5,(x5<300)?(150):((x5>600)?(750):(450)),1);
+  }
+  if(!t6){
+    x6 = lerp(x6,(x6<300)?(150):((x6>600)?(750):(450)),1);
+  }
+  
+  strokeWeight(2);
+  fill(128);
+  rectMode(CENTER);
+  rect(150,300,10,300,5,5,0,0);
+  rect(450,300,10,300,5,5,0,0);
+  rect(750,300,10,300,5,5,0,0);
+  fill(0);
+  rect(450,475,800,50,10,10,10,10);
+  
+  strokeWeight(1);
+  if( over1() ){ fill(150);} 
+  if( over2() ){ fill(150);}
+  if( over3() ){ fill(150);} 
+  if( over4() ){ fill(150);}
+  if( over5() ){ fill(150);} 
+  if( over6() ){ fill(150);}
+  if( over7() ){ fill(150);} 
+  fill(#FA0D0D);
+  rect(x, y, w1, h, 15, 15, 15, 15);
+  fill(#FA0DE3);
+  rect(x1, y1, w2, h, 15, 15, 15, 15);
+  fill(#B20DFA);
+  rect(x2, y2, w3, h, 15, 15, 15, 15);
+  fill(#0F0DFA);
+  rect(x3, y3, w4, h, 15, 15, 15, 15);
+  fill(#1BFA0D);
+  rect(x4, y4, w5, h, 15, 15, 15, 15);
+  fill(#F9FA0D);
+  rect(x5, y5, w6, h, 15, 15, 15, 15);
+  fill(#FA880D);
+  rect(x6, y6, w7, h, 15, 15, 15, 15);
+  
+  
+  textSize(16);
+  fill(255);
+  text("Menara 1", 120,480);
+  text("Menara 2", 420,480);
+  text("Menara 3", 720,480);
+  }
+
+boolean over1(){
+ return(dist(x,y,mouseX,mouseY) < 20);
+}
+
+boolean over2(){
+ return(dist(x1,y1,mouseX,mouseY) < 20);
+}
+
+boolean over3(){
+ return(dist(x2,y2,mouseX,mouseY) < 20);
+}
+
+boolean over4(){
+ return(dist(x3,y3,mouseX,mouseY) < 20);
+}
+
+boolean over5(){
+ return(dist(x4,y4,mouseX,mouseY) < 20);
+}
+
+boolean over6(){
+ return(dist(x5,y5,mouseX,mouseY) < 20);
+}
+
+boolean over7(){
+ return(dist(x6,y6,mouseX,mouseY) < 20);
+}
+
+void mousePressed(){
+  if( over1() ){
+    t = true;
+    t1 = false;
+    t2 = false;
+    t3 = false;
+    t4 = false;
+    t5 = false;
+    t6 = false;
+  }
+  if( over2() ){
+    t = false;
+    t1 = true;
+    t2 = false;
+    t3 = false;
+    t4 = false;
+    t5 = false;
+    t6 = false;
+  }
+  if( over3() ){
+    t = false;
+    t1 = false;
+    t2 = true;
+    t3 = false;
+    t4 = false;
+    t5 = false;
+    t6 = false;
+  }
+  if( over4() ){
+    t = false;
+    t1 = false;
+    t2 = false;
+    t3 = true;
+    t4 = false;
+    t5 = false;
+    t6 = false;
+  }
+  if( over5() ){
+    t = false;
+    t1 = false;
+    t2 = false;
+    t3 = false;
+    t4 = true;
+    t5 = false;
+    t6 = false;
+  }
+  if( over6() ){
+    t = false;
+    t1 = false;
+    t2 = false;
+    t3 = false;
+    t4 = false;
+    t5 = true;
+    t6 = false;
+  }
+  if( over7() ){
+    t = false;
+    t1 = false;
+    t2 = false;
+    t3 = false;
+    t4 = false;
+    t5 = false;
+    t6 = true;
+  }
+}
+
+void mouseDragged(){
+  if( t ){
+    x +=mouseX-pmouseX;
+    y +=mouseY-pmouseY;
+    y = constrain(y, 0, 440);
+  }
+  if( t1 ){
+    x1 +=mouseX-pmouseX;
+    y1 +=mouseY-pmouseY;
+    y1 = constrain(y1, 0, 440);
+  }
+  if( t2 ){
+    x2 +=mouseX-pmouseX;
+    y2 +=mouseY-pmouseY;
+    y2 = constrain(y2, 0, 440);
+  }
+  if( t3 ){
+    x3 +=mouseX-pmouseX;
+    y3 +=mouseY-pmouseY;
+    y3 = constrain(y3, 0, 440);
+  }
+  if( t4 ){
+    x4 +=mouseX-pmouseX;
+    y4 +=mouseY-pmouseY;
+    y4 = constrain(y4, 0, 440);
+  }
+  if( t5 ){
+    x5 +=mouseX-pmouseX;
+    y5 +=mouseY-pmouseY;
+    y5 = constrain(y5, 0, 440);
+  }
+  if( t6 ){
+    x6 +=mouseX-pmouseX;
+    y6 +=mouseY-pmouseY;
+    y6 = constrain(y6, 0, 440);
+  }
+}
+    
+void mouseReleased(){
+   if (t) { 
+    if(y < 250){
+      y = 255;
+    } else if(y > 250 && y < 270){
+      y = 255;
+    } else if(y > 270 && y < 290){
+      y = 285;
+    } else if(y > 290 && y < 320){
+      y = 315;
+    } else if(y > 320 && y < 350){
+      y = 345;
+    } else if(y > 350 && y < 380){
+      y = 375;
+    } else if(y > 380 && y < 420){
+      y = 405;
+    } else if(y > 420 && y < 450){
+      y = 435;
+    }
+    t = false;
+    y = constrain(y, 0, 440);
+  }
+  if (t1) {
+    if(y1 < 250){
+      y1 = 255;
+    } else if(y1+10 > 240 && y1+10 < 270){
+      y1 = 255;
+    } else if(y1+10 > 270 && y1+10 < 300){
+      y1 = 285;
+    } else if(y1+10 > 300 && y1+10 < 330){
+      y1 = 315;
+    } else if(y1+10 > 330 && y1+10 < 360){
+      y1 = 345;
+    } else if(y1+10 > 360 && y1+10 < 390){
+      y1 = 375;
+    } else if(y1+10 > 390 && y1+10 < 420){
+      y1 = 405;
+    } else if(y1+10 > 420 && y1+10 <  450){
+      y1 = 435;
+    }
+    t1 = false;
+    y1 = constrain(y1, 0, 440);
+  }
+  if (t2) {
+    if(y2 < 250){
+      y2 = 255;
+    } else if(y2+10 > 240 && y2+10 < 270){
+      y2 = 255;
+    } else if(y2+10 > 270 && y2+10 < 300){
+      y2 = 285;
+    } else if(y2+10 > 300 && y2+10 < 330){
+      y2 = 315;
+    } else if(y2+10 > 330 && y2+10 < 360){
+      y2 = 345;
+    } else if(y2+10 > 360 && y2+10 < 390){
+      y2 = 375;
+    } else if(y2+10 > 390 && y2+10 < 420){
+      y2 = 405;
+    } else if(y2+10 > 420 && y2+10 < 450){
+      y2 = 435;
+    }
+    t2= false;
+    y2 = constrain(y2, 0, 440);
+  }
+  if (t3) {
+    if(y3 < 250){
+      y3 = 255;
+    } else if(y3+10 > 240 && y3+10 < 270){
+      y3 = 255;
+    } else if(y3+10 > 270 && y3+10 < 300){
+      y3 = 285;
+    } else if(y3+10 > 300 && y3+10 < 330){
+      y3 = 315;
+    } else if(y3+10 > 330 && y3+10 < 360){
+      y3 = 345;
+    } else if(y3+10 > 360 && y3+10 < 390){
+      y3 = 375;
+    } else if(y3+10 > 390 && y3+10 < 420){
+      y3 = 405;
+    } else if(y3+10 > 420 && y3+10 < 450){
+      y3 = 435;
+    }
+    t3 = false;
+    y3 = constrain(y3, 0, 440);
+  }
+  if (t4) {
+    if(y4 < 250){
+      y4 = 255;
+    } else if(y4+10 > 240 && y4+10 < 270){
+      y4 = 255;
+    } else if(y4+10 > 270 && y4+10 < 300){
+      y4 = 285;
+    } else if(y4+10 > 300 && y4+10 < 330){
+      y4 = 315;
+    } else if(y4+10 > 330 && y4+10 < 360){
+      y4 = 345;
+    } else if(y4+10 > 360 && y4+10 < 390){
+      y4 = 375;
+    } else if(y4+10 > 390 && y4+10 < 420){
+      y4 = 405;
+    } else if(y4+10 > 420 && y4+10 < 450){
+      y4 = 435;
+    }
+    t4 = false;
+    y4 = constrain(y4, 0, 440);
+  }
+  if (t5) {
+   if(y5<250){
+      y5 = 255;
+    } else if(y5+10>240 && y5+10<270){
+      y5 = 255;
+    } else if(y5+10>270 && y5+10<300){
+      y5 = 285;
+    } else if(y5+10>300 && y5+10<330){
+      y5 = 315;
+    } else if(y5+10>330 && y5+10<360){
+      y5 = 345;
+    } else if(y5+10>360 && y5+10<390){
+      y5 = 375;
+    } else if(y5+10>390 && y5+10<420){
+      y5 = 405;
+    } else if(y5+10>420 && y5+10<450){
+      y5 = 435;
+    }
+    t5 = false;
+    y5 = constrain(y5, 0, 440);
+  }
+  if (t6) {
+    if(y6<250){
+      y6 = 255;
+    } else if(y6+10>240 && y6+10<270){
+      y6 = 255;
+    } else if(y6+10>270 && y6+10<300){
+      y6 = 285;
+    } else if(y6+10>300 && y6+10<330){
+      y6 = 315;
+    } else if(y6+10>330 && y6+10<360){
+      y6 = 345;
+    } else if(y6+10>360 && y6+10<390){
+      y6 = 375;
+    } else if(y6+10>390 && y6+10<420){
+      y6 = 405;
+    } else if(y6+10>420 && y6+10<450){
+      y6 = 435;
+    }
+    t6 = false;
+    y6 = constrain(y6, 0, 440);
+  }
+}
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

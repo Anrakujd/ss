@@ -1,0 +1,248 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Energi & Kalor</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> PROSES ISOTERMAL </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Animasi Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Animasi kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Animasi Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Teknik Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="" target="_blank">Download Source Code</a></li>
+					
+				</ul>
+			</li>
+				<li><i class="fa fa-thermometer-half" aria-hidden="true"></i><b> Energi & Kalor</b>
+				<ul>
+					<li><a href="termometer.html">Skala Termometer</a></li>
+					<li><a href="gaylussac.html">Proses Isokhorik</a></li>
+					<li><a href="isothermal.html">Proses Isotermal</a></li>
+					<li><a href="isentropis.html">Proses Isentropis</a></li>
+					<li><a href="isobar.html">Proses Isobar</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1>Proses Isotermal </h1>
+<script type="text/processing" >
+SilinderPiston Sil;
+float i;
+float R;
+float V;
+float V0 = 175;
+float p;
+
+void setup() {
+  size(900, 600);
+  Sil = new SilinderPiston(350, 170, 200, 350, 10);
+}
+
+void draw() {
+  background(230,500);
+  strokeWeight(2);
+  fill(0);
+  textSize(25);
+  //text(" Simulasi Hukum Boyle", 300, 50);
+  fill(0);
+  textSize(12);
+  Sil.update();
+  Sil.display();
+  i = Sil.getPos()-170;
+  fill(0);
+  //grafik
+  strokeWeight(3);
+  line(550,500,850,500);
+  line(850,500,830,495);
+  line(850,500,830,505);
+  line(550,500,550,200);
+  line(550,200,545,220);
+  line(550,200,555,220);
+  textSize(25);
+  text("p(bar)",550,180);
+  text("V(cm  )",790,530);
+  textSize(18);
+  text("3",848,520);
+  strokeWeight(5);
+  R = (i*100/V0);
+  p=100/R;
+  textSize(16);
+  text(nf(i,0,2), 775,250);
+  text(nf(p,1,2), 775,300);
+  text("cm  ", 830,250);
+  text("3",852,245);
+  text("Volume (V) : ",680,250);
+  text("bar",830,300);
+  text("Tekanan (p) : ",680,300);
+  strokeWeight(2);
+  fill(255,0,0);
+  stroke(255,0,0);
+  ellipse(i+560,450-(p*1.75),5,5); 
+ // line(560+i,350+R,734,450);
+  Tekanan(nf(p,1,2),150,75);
+  fill(255,255,0);
+  stroke(255,255,0);
+  rect(239,168, 196, i);
+  
+  stroke(0);
+  for (int i=500; i >=300; i = i-50){
+  line(550,i,530,i);}
+  textSize(20);
+  fill(0);
+  text("0",515,495);
+  text("1",515,445);
+  text("30",515,395);
+  text("60",515,345);
+  text("90",515,295);
+  text("Pressure Gauge", 150,65);
+  textSize(14);
+  text("Proses Isotermal terjadi jika sistem tidak diisolasi secara adiabatis",400,50);
+  text("dan proses kompressi atau expansi berlangsung secara lambat",400,70);
+  text("Persamaan umum proses isotermal adalah :",400,90);
+  text("0",810,115);
+  text("atau:", 650,130);
+  textSize(20);
+  text("p .V  = n.R.T", 700,110);
+  text("p .V  = p  .V ",700,155);
+  textSize(14);
+  text("  1    1         0     0", 700,160);
+  strokeWeight(3);
+  line(250,115,250,165);
+}
+class SilinderPiston {
+  int swidth, sheight;    // width and height of bar
+  float xpos, ypos;       // x and y position of bar
+  float spos, newspos;    // x position of slider
+  float sposMin, sposMax; // max and min values of slider
+  int loose;              // how loose/heavy
+  boolean over;           // is the mouse over the slider?
+  boolean locked;
+  float ratio;
+  float N;
+  SilinderPiston (float xp, float yp, int sw, int sh, int l) {
+    swidth = sw;
+    sheight = sh;
+    xpos = xp-swidth/2;
+    ypos = yp;
+    spos = ypos;
+    newspos = spos;
+    sposMin = ypos+2;
+    sposMax = ypos+sheight-swidth/2.5-20;
+    loose = l;
+  }
+  void update() {
+    if (overEvent()) {
+      over = true;
+    } else {
+      over = false;
+    }
+    if (mousePressed && over) {
+      locked = true;
+    }
+    if (!mousePressed) {
+      locked = false;
+      newspos = ypos + sheight/2;
+    }
+    if (locked) {
+      newspos = constrain(mouseY-swidth/2, sposMin, sposMax);
+    }
+    if (abs(newspos - spos) > 1) {
+      spos = spos + (newspos-spos)/loose;
+    }
+  }
+  float constrain(float val, float minv, float maxv) {
+    return min(max(val, minv), maxv);
+  }
+  boolean overEvent() {
+    if (mouseX > xpos-10 && mouseX < xpos+swidth &&
+      mouseY > ypos && mouseY < ypos+sheight) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  void display() {
+    strokeWeight(2);
+    fill(100);
+    rect(xpos-25, ypos-20, swidth+25, sheight+15);
+    fill(0, 0, 255);
+    rect(xpos-13, ypos-5, swidth, sheight);
+    for (i=0; i < 350; i=i+5) {
+      line(xpos+swidth+5, ypos+i, xpos+swidth+15, ypos+i);
+    }
+    for (i=0; i < 350; i=i+25) {
+      line(xpos+swidth+5, ypos+i, xpos+swidth+30, ypos+i);
+    }
+    N = spos;
+    if (over || locked) {
+      fill(255, 0, 0);
+    } else {
+      fill(100, 100, 100);
+    }
+    rect(xpos-12, spos, swidth-1, swidth/3);
+    fill(255);
+    ellipse(xpos+swidth/2-12, spos+25, 20, 20);
+    line(xpos-10, spos+10, xpos+swidth-15, spos+10);
+  }
+  float getPos() {
+    return spos;
+  }
+}
+public void Tekanan(float p, int x, int y){
+stroke(0);
+strokeWeight(2);
+fill(120);
+rect(x,y,150,40);
+fill(150,0,0);
+rect(x+5,y+5,80, 30);
+fill(255);
+textSize(25);
+text("bar", x+95, y+30);
+text(nf(p,1,2), x+17, y+30);
+}
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

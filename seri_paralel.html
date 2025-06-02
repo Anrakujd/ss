@@ -1,0 +1,1672 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Listrik & Magnet</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> Rangkaian Lampu Seri & Paralel </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="file/seri_paralel.windows64.rar" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="file/seri_paralel.rar" target="_blank">Download Source Code</a></li>
+					
+				</ul>
+			</li>
+				<li><i class="fa fa-bolt" aria-hidden="true"></i><b> Listrik & Magnet</b>
+				<ul>
+					<li><a href="sel_Volta.html">Sel Volta</a></li>
+					<li><a href="hukum_Ohm.html">Hukum Ohm</a></li>
+					<li><a href="resistor.html">Hambatan Resistor</a></li>
+					<li><a href="Rangkaian Sederhana.html">Rangkaian Sederhana</a></li>
+					<li><a href="seri_paralel.html">Rangkaian Lampu Seri & Paralel</a></li>
+					<li><a href="lampu_seri.html">Simulasi Rangkaian Lampu Seri</a></li>
+					<li><a href="lampu_paralel.html">Simulasi Rangkaian Lampu Paralel</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+		
+<div class="kotak2">
+<h1>Rangkaian Lampu Seri & Paralel</h1>
+<script type="text/processing" >
+boolean L1, L2, L3, L4, L5, L6;
+boolean s1, s2, s3, s4;
+boolean LPS1, LPS2, LPS3;
+boolean sps1, sps2, sps3;
+
+void setup() {
+  size(800, 650);
+  ellipseMode(RADIUS);
+}
+
+void draw() {
+  background(230);
+  strokeWeight(2);
+  fill(0);
+  textSize(16);
+  text("Rangkaian Lampu Paralel", 75, 50);
+  fill(0);
+  text("S1", 125, 85);
+  text("S2", 125, 135);
+  text("S3", 125, 185);
+  text("L1", 210, 90);
+  text("L2", 210, 140);
+  text("L3", 210, 190);
+  text("V",185,265);
+  bateraiH(185, 275);
+  line(160,100,210,100);
+  line(160,150,210,150);
+  line(160,200,210,200);
+  line(105,100,105,200);
+  line(290,100,290,200);
+  stroke(255,0,0);
+  line(105,150,90,150);
+  line(90,150,90,300);
+  line(90,300,145,300);
+  stroke(0,0,255);
+  line(235,300, 310,300);
+  line(310,300,310,150);
+  line(310,150,290,150);
+  stroke(0);
+  //rangkaian paralel
+  //1
+  if (!s1 && !s2 && !s3 && !L1 && !L2 && !L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //2
+  if (!s1 && !s2 && !s3 && !L1 && !L2 && L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //3
+  if (!s1 && !s2 && !s3 && !L1 && L2 && !L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //4
+  if (!s1 && !s2 && !s3 && !L1 && L2 && L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //5
+  if (!s1 && !s2 && !s3 && L1 && !L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //6
+  if (!s1 && !s2 && !s3 && L1 && !L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //7
+  if (!s1 && !s2 && !s3 && L1 && L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //8
+  if (!s1 && !s2 && !s3 && L1 && L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //9
+  if (!s1 && !s2 && s3 && !L1 && !L2 && !L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //10
+  if (!s1 && !s2 && s3 && !L1 && !L2 && L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //11
+  if (!s1 && !s2 && s3 && !L1 && L2 && !L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //12
+  if (!s1 && !s2 && s3 && !L1 && L2 && L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //13
+  if (!s1 && !s2 && s3 && L1 && !L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //14
+  if (!s1 && !s2 && s3 && L1 && !L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //15
+  if (!s1 && !s2 && s3 && L1 && L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //16
+  if (!s1 && !s2 && s3 && L1 && L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //17
+  if (!s1 && s2 && !s3 && !L1 && !L2 && !L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //18
+  if (!s1 && s2 && !s3 && !L1 && !L2 && L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //19
+  if (!s1 && s2 && !s3 && !L1 && L2 && !L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //20
+  if (!s1 && s2 && !s3 && !L1 && L2 && L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //21
+  if (!s1 && s2 && !s3 && L1 && !L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //22
+  if (!s1 && s2 && !s3 && L1 && !L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //23
+  if (!s1 && s2 && !s3 && L1 && L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //24
+  if (!s1 && s2 && !s3 && L1 && L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //25
+  if (!s1 && s2 && s3 && !L1 && !L2 && !L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //26
+  if (!s1 && s2 && s3 && !L1 && !L2 && L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //27
+  if (!s1 && s2 && s3 && !L1 && L2 && !L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //28
+  if (!s1 && s2 && s3 && !L1 && L2 && L3) {
+    lampuHOFF(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //29
+  if (!s1 && s2 && s3 && L1 && !L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //30
+  if (!s1 && s2 && s3 && L1 && !L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //31
+  if (!s1 && s2 && s3 && L1 && L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //32
+  if (!s1 && s2 && s3 && L1 && L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHOFF(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //33
+  if (s1 && !s2 && !s3 && !L1 && !L2 && !L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //34
+  if (s1 && !s2 && !s3 && !L1 && !L2 && L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //35
+  if (s1 && !s2 && !s3 && !L1 && L2 && !L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //36
+  if (s1 && !s2 && !s3 && !L1 && L2 && L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //37
+  if (s1 && !s2 && !s3 && L1 && !L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //38
+  if (s1 && !s2 && !s3 && L1 && !L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //39
+  if (s1 && !s2 && !s3 && L1 && L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //40
+  if (s1 && !s2 && !s3 && L1 && L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //41
+  if (s1 && !s2 && s3 && !L1 && !L2 && !L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //42
+  if (s1 && !s2 && s3 && !L1 && !L2 && L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //43
+  if (s1 && !s2 && s3 && !L1 && L2 && !L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //44
+  if (s1 && !s2 && s3 && !L1 && L2 && L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //45
+  if (s1 && !s2 && s3 && L1 && !L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //46
+  if (!s1 && !s2 && s3 && L1 && !L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHOFF(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //47
+  if (s1 && !s2 && s3 && L1 && L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //48
+  if (s1 && !s2 && s3 && L1 && L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHOFF(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //49
+  if (s1 && s2 && !s3 && !L1 && !L2 && !L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //50
+  if (s1 && s2 && !s3 && !L1 && !L2 && L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //51
+  if (s1 && s2 && !s3 && !L1 && L2 && !L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //52
+  if (s1 && s2 && !s3 && !L1 && L2 && L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //53
+  if (s1 && s2 && !s3 && L1 && !L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //54
+  if (s1 && s2 && !s3 && L1 && !L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //55
+  if (s1 && s2 && !s3 && L1 && L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHOFF(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //56
+  if (s1 && s2 && !s3 && L1 && L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHOFF(125, 200);//s3
+  }
+  //57
+  if (s1 && s2 && s3 && !L1 && !L2 && !L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //58
+  if (s1 && s2 && s3 && !L1 && !L2 && L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //59
+  if (s1 && s2 && s3 && !L1 && L2 && !L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //60
+  if (s1 && s2 && s3 && !L1 && L2 && L3) {
+    lampuHON(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //61
+  if (s1 && s2 && s3 && L1 && !L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //62
+  if (s1 && s2 && s3 && L1 && !L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHON(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //63
+  if (s1 && s2 && s3 && L1 && L2 && !L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHON(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //64
+  if (s1 && s2 && s3 && L1 && L2 && L3) {
+    lampuHRusak(250, 100, 20);//l1
+    lampuHRusak(250, 150, 20);//l2
+    lampuHRusak(250, 200, 20);//l3
+    saklarHON(125, 100);//s1
+    saklarHON(125, 150);//s2
+    saklarHON(125, 200);//s3
+  }
+  //Rangkaian lampu seri
+  fill(0);
+  textSize(16);
+  text("Rangkaian Lampu Seri", 475, 50);
+  line(620,125,660,125);
+  line(520,125,560,125);
+  bateraiH(550, 275);
+  stroke(255,0,0);
+  line(520,300,380,300);
+  line(380,300,380,125);
+  stroke(0,0,255);
+  line(600,300,740,300);
+  line(740,300,740,125);
+  stroke(0);
+  fill(0);
+  text("V",550,265);
+  text("S1",400,100);
+  text("L1",490,100);
+  text("L2",590,100);
+  text("L3",690,100);
+  //1
+  if(!s4 && !L4 && !L5 && !L6){
+  saklarHOFF(400,125);//S4
+  lampuHOFF(500,125,20);//L4
+  lampuHOFF(600,125,20);//L5
+  lampuHOFF(700,125,20);//L6
+  }
+  //2
+  if(!s4 && !L4 && !L5 && L6){
+  saklarHOFF(400,125);//S4
+  lampuHOFF(500,125,20);//L4
+  lampuHOFF(600,125,20);//L5
+  lampuHRusak(700,125,20);//L6
+  }
+  //3
+  if(!s4 && !L4 && L5 && !L6){
+  saklarHOFF(400,125);//S4
+  lampuHOFF(500,125,20);//L4
+  lampuHRusak(600,125,20);//L5
+  lampuHOFF(700,125,20);//L6
+  }
+  //4
+  if(!s4 && !L4 && L5 && L6){
+  saklarHOFF(400,125);//S4
+  lampuHOFF(500,125,20);//L4
+  lampuHRusak(600,125,20);//L5
+  lampuHRusak(700,125,20);//L6
+  }
+  //5
+  if(!s4 && L4 && !L5 && !L6){
+  saklarHOFF(400,125);//S4
+  lampuHRusak(500,125,20);//L4
+  lampuHOFF(600,125,20);//L5
+  lampuHOFF(700,125,20);//L6
+  }
+  //6
+  if(!s4 && L4 && !L5 && L6){
+  saklarHOFF(400,125);//S4
+  lampuHRusak(500,125,20);//L4
+  lampuHOFF(600,125,20);//L5
+  lampuHRusak(700,125,20);//L6
+  }
+  //7
+  if(!s4 && L4 && L5 && !L6){
+  saklarHOFF(400,125);//S4
+  lampuHRusak(500,125,20);//L4
+  lampuHRusak(600,125,20);//L5
+  lampuHOFF(700,125,20);//L6
+  }
+  //8
+  if(!s4 && L4 && L5 && L6){
+  saklarHOFF(400,125);//S4
+  lampuHRusak(500,125,20);//L4
+  lampuHRusak(600,125,20);//L5
+  lampuHRusak(700,125,20);//L6
+  }
+  //9
+  if(s4 && !L4 && !L5 && !L6){
+  saklarHON(400,125);//S4
+  lampuHON(500,125,20);//L4
+  lampuHON(600,125,20);//L5
+  lampuHON(700,125,20);//L6
+  }
+  //10
+  if(s4 && !L4 && !L5 && L6){
+  saklarHON(400,125);//S4
+  lampuHOFF(500,125,20);//L4
+  lampuHOFF(600,125,20);//L5
+  lampuHRusak(700,125,20);//L6
+  }
+  //11
+  if(s4 && !L4 && L5 && !L6){
+  saklarHON(400,125);//S4
+  lampuHOFF(500,125,20);//L4
+  lampuHRusak(600,125,20);//L5
+  lampuHOFF(700,125,20);//L6
+  }
+  //12
+  if(s4 && !L4 && L5 && L6){
+  saklarHON(400,125);//S4
+  lampuHOFF(500,125,20);//L4
+  lampuHRusak(600,125,20);//L5
+  lampuHRusak(700,125,20);//L6
+  }
+  //13
+  if(s4 && L4 && !L5 && !L6){
+  saklarHON(400,125);//S4
+  lampuHRusak(500,125,20);//L4
+  lampuHOFF(600,125,20);//L5
+  lampuHOFF(700,125,20);//L6
+  }
+  //14
+  if(s4 && L4 && !L5 && L6){
+  saklarHON(400,125);//S4
+  lampuHRusak(500,125,20);//L4
+  lampuHOFF(600,125,20);//L5
+  lampuHRusak(700,125,20);//L6
+  }
+  //15
+  if(s4 && L4 && L5 && !L6){
+  saklarHON(400,125);//S4
+  lampuHRusak(500,125,20);//L4
+  lampuHRusak(600,125,20);//L5
+  lampuHOFF(700,125,20);//L6
+  }
+  //16
+  if(s4 && L4 && L5 && L6){
+  saklarHON(400,125);//S4
+  lampuHRusak(500,125,20);//L4
+  lampuHRusak(600,125,20);//L5
+  lampuHRusak(700,125,20);//L6
+  }
+ //Rangkaian kombinasi seri-paralel
+  textSize(16);
+  text("Rangkaian Lampu Kombinasi Seri & Paralel", 230,375);
+  bateraiH(370, 550);
+  fill(0);
+  text("V", 370,545);
+  text("S1",150,450);
+  text("L1",245,450);
+  text("S2",400,410);
+  text("L2",495,410);
+  text("S3",400,490);
+  text("L3",495,490);
+  line(290,475,350,475);
+  line(350,435,350,515);
+  line(350,435,380,435);
+  line(350,515,380,515);
+  stroke(255,0,0);
+  line(130,475,100,475);
+  line(100,475,100,570);
+  line(100,575,335,575);
+  stroke(0,0,255);
+  line(410,575,570,575);
+  line(570,575,570,475);
+  line(540,435,540,515);
+  line(540,475,570,475);
+  stroke(0);
+  //1
+ if(!sps1 && !LPS1 && !sps2 && !LPS2 && !sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //2
+ if(!sps1 && !LPS1 && !sps2 && !LPS2 && !sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //3
+ if(!sps1 && !LPS1 && !sps2 && !LPS2 && sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //4
+ if(!sps1 && !LPS1 && !sps2 && !LPS2 && sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //5
+ if(!sps1 && !LPS1 && !sps2 && LPS2 && !sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //6
+ if(!sps1 && !LPS1 && !sps2 && LPS2 && !sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //7
+ if(!sps1 && !LPS1 && !sps2 && LPS2 && sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //8
+ if(!sps1 && !LPS1 && !sps2 && LPS2 && sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //9
+ if(!sps1 && !LPS1 && sps2 && !LPS2 && !sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //10
+ if(!sps1 && !LPS1 && sps2 && !LPS2 && !sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //11
+ if(!sps1 && !LPS1 && sps2 && !LPS2 && sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //12
+ if(!sps1 && !LPS1 && sps2 && !LPS2 && sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //13
+ if(!sps1 && !LPS1 && sps2 && LPS2 && !sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //14
+ if(!sps1 && !LPS1 && sps2 && LPS2 && !sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //15
+ if(!sps1 && !LPS1 && sps2 && LPS2 && sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //16
+ if(!sps1 && !LPS1 && sps2 && LPS2 && sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //17
+ if(!sps1 && LPS1 && !sps2 && !LPS2 && !sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //18
+ if(!sps1 && LPS1 && !sps2 && !LPS2 && !sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //19
+ if(!sps1 && LPS1 && !sps2 && !LPS2 && sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //20
+ if(!sps1 && LPS1 && !sps2 && !LPS2 && sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //21
+ if(!sps1 && LPS1 && !sps2 && LPS2 && !sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //22
+ if(!sps1 && LPS1 && !sps2 && LPS2 && !sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //23
+ if(!sps1 && LPS1 && !sps2 && LPS2 && sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //24
+ if(!sps1 && LPS1 && !sps2 && LPS2 && sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //25
+ if(!sps1 && LPS1 && sps2 && !LPS2 && !sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //26
+ if(!sps1 && LPS1 && sps2 && !LPS2 && !sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //27
+ if(!sps1 && LPS1 && sps2 && !LPS2 && sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //28
+ if(!sps1 && LPS1 && sps2 && !LPS2 && sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //29
+ if(!sps1 && LPS1 && sps2 && LPS2 && !sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //30
+ if(!sps1 && LPS1 && sps2 && LPS2 && !sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //31
+ if(!sps1 && LPS1 && sps2 && LPS2 && sps3 && !LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //32
+ if(!sps1 && LPS1 && sps2 && LPS2 && sps3 && LPS3){
+    saklarHOFF(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //33
+ if(sps1 && !LPS1 && !sps2 && !LPS2 && !sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //34
+ if(sps1 && !LPS1 && !sps2 && !LPS2 && !sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //35
+ if(sps1 && !LPS1 && !sps2 && !LPS2 && sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHON(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHON(500,515,20);//LPS3
+ }
+ //36
+ if(sps1 && !LPS1 && !sps2 && !LPS2 && sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //37
+ if(sps1 && !LPS1 && !sps2 && LPS2 && !sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //38
+ if(sps1 && !LPS1 && !sps2 && LPS2 && !sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //39
+ if(sps1 && !LPS1 && !sps2 && LPS2 && sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHON(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHON(500,515,20);//LPS3
+ }
+ //40
+ if(sps1 && !LPS1 && !sps2 && LPS2 && sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //41
+ if(sps1 && !LPS1 && sps2 && !LPS2 && !sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHON(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHON(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //42
+ if(sps1 && !LPS1 && sps2 && !LPS2 && !sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHON(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHON(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //43
+ if(sps1 && !LPS1 && sps2 && !LPS2 && sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHON(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHON(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHON(500,515,20);//LPS3
+ }
+ //44
+ if(sps1 && !LPS1 && sps2 && !LPS2 && sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHON(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHON(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //45
+ if(sps1 && !LPS1 && sps2 && LPS2 && !sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //46
+ if(sps1 && !LPS1 && sps2 && LPS2 && !sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //47
+ if(sps1 && !LPS1 && sps2 && LPS2 && sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHON(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHON(500,515,20);//LPS3
+ }
+ //48
+ if(sps1 && !LPS1 && sps2 && LPS2 && sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHOFF(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //49
+ if(sps1 && LPS1 && !sps2 && !LPS2 && !sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //50
+ if(sps1 && LPS1 && !sps2 && !LPS2 && !sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //51
+ if(sps1 && LPS1 && !sps2 && !LPS2 && sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //52
+ if(sps1 && LPS1 && !sps2 && !LPS2 && sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //53
+ if(sps1 && LPS1 && !sps2 && LPS2 && !sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //54
+ if(sps1 && LPS1 && !sps2 && LPS2 && !sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //55
+ if(sps1 && LPS1 && !sps2 && LPS2 && sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //56
+ if(sps1 && LPS1 && !sps2 && LPS2 && sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHOFF(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //57
+ if(sps1 && LPS1 && sps2 && !LPS2 && !sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //58
+ if(sps1 && LPS1 && sps2 && !LPS2 && !sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //59
+ if(sps1 && LPS1 && sps2 && !LPS2 && sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //60
+ if(sps1 && LPS1 && sps2 && !LPS2 && sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHOFF(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //61
+ if(sps1 && LPS1 && sps2 && LPS2 && !sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //62
+ if(sps1 && LPS1 && sps2 && LPS2 && !sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHOFF(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }
+ //63
+ if(sps1 && LPS1 && sps2 && LPS2 && sps3 && !LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHOFF(500,515,20);//LPS3
+ }
+ //64
+ if(sps1 && LPS1 && sps2 && LPS2 && sps3 && LPS3){
+    saklarHON(150,475);//sps1
+    lampuHRusak(250,475,20);//LPS1
+    saklarHON(400,435);//sps2
+    lampuHRusak(500,435,20);//LPS2
+    saklarHON(400,515);//sps3
+    lampuHRusak(500,515,20);//LPS3
+ }   
+}
+//class
+public void bateraiV(int x, int y) {
+  //baterai vertikal "bateraiV(posisi X, posisiY)"
+  strokeWeight(2);
+  line(x, y, x+50, y);
+  int x2, y2, x3;
+  x2 = x+10;
+  y2 = y+10;
+  x3 = x+40;
+  line(x2, y2, x3, y2);
+  line(x2+((x3-x2)/2), y2, x2+((x3-x2)/2), y2+40);
+  line(x2+((x3-x2)/2), y, x2+((x3-x2)/2), y-40);
+  textSize(14);
+  fill(255, 0, 0);
+  text("+", x2+((x3-x2)/2)+5, y-5);
+}
+public void bateraiH(int x, int y) {
+  //baterai vertikal "bateraiV(posisi X, posisiY)"
+  strokeWeight(2);
+  line(x, y+50, x, y);
+  int y2, x2, y3;
+  y2 = y+10;
+  x2 = x+10;
+  y3 = y+40;
+  line(x2, y2, x2, y3);
+  line(x2, y2+((y3-y2)/2), x2+40, y2+((y3-y2)/2));
+  line(x, y2+((y3-y2)/2), x-40, y2+((y3-y2)/2));
+  textSize(14);
+  fill(255, 0, 0);
+  text("+", x-15, y2+((y3-y2)/2)-5);
+}
+public void lampuVOFF(int x, int y, int r) {
+  //Lampu OFF
+  fill(255);
+  ellipse(x, y, r, r);
+  line(x, y+r, x, y+(2*r));
+  line(x, y-r, x, y-(2*r));
+  fill(0);
+  text("Off", x-(r/2), y+(r/3));
+}
+public void lampuHOFF(int x, int y, int r) {
+  //Lampu OFF
+  fill(255);
+  ellipse(x, y, r, r);
+  line(x+r, y, x+(2*r), y);
+  line(x-r, y, x-(2*r), y);
+  fill(0);
+  text("Off", x-(r/2), y+(r/3));
+}
+public void lampuHRusak(int x, int y, int r) {
+  //Lampu rusak
+  fill(0);
+  ellipse(x, y, r, r);
+  line(x+r, y, x+(2*r), y);
+  line(x-r, y, x-(2*r), y);
+  stroke(255, 0, 0);
+  line(x+r, y-r, x-r, y+r);
+  line(x+r, y+r, x-r, y-r);
+  stroke(0);
+}
+public void lampuVRusak(int x, int y, int r) {
+  //Lampu rusak
+  fill(0);
+  ellipse(x, y, r, r);
+  line(x, y+r, x, y+(2*r));
+  line(x, y-r, x, y-(2*r));
+  stroke(255, 0, 0);
+  line(x+r, y-r, x-r, y+r);
+  line(x+r, y+r, x-r, y-r);
+  stroke(0);
+}
+public void lampuVON(int x, int y, int r) {
+  //Lampu OFF vertikal (posisi X, posisi Y, Jari-jari r)
+  fill(255, 255, 0);
+  ellipse(x, y, r, r);
+  line(x, y+r, x, y+(2*r));
+  line(x, y-r, x, y-(2*r));
+  fill(0);
+  text("ON", x-(r/2), y+(r/3));
+}
+public void lampuHON(int x, int y, int r) {
+  //Lampu OFF vertikal (posisi X, posisi Y, Jari-jari r)
+  fill(255, 255, 0);
+  ellipse(x, y, r, r);
+  line(x+r, y, x+(2*r), y);
+  line(x-r, y, x-(2*r), y);
+  fill(0);
+  text("ON", x-(r/2), y+(r/3));
+}
+public void saklarHOFF(int x1, int y1) {
+  //saklar OFF (posisi X1, posisi y1)
+  line(x1, y1, x1-20, y1);
+  line(x1+30, y1, x1+60, y1);
+  line(x1, y1, x1+25, y1-15);
+  fill(255, 0, 0);
+  ellipse(x1+30, y1, 3, 3);
+  ellipse(x1+25, y1-15, 3, 3);
+  ellipse(x1, y1, 3, 3);
+}
+public void saklarVOFF(int x1, int y1) {
+  //saklar OFF (posisi X1, posisi y1)
+  line(x1, y1+20, x1, y1);
+  line(x1, y1-60, x1, y1-30);
+  line(x1+15, y1-25, x1, y1);
+  fill(255, 0, 0);
+  ellipse(x1, y1-30, 3, 3);
+  ellipse(x1+15, y1-25, 3, 3);
+  ellipse(x1, y1, 3, 3);
+}
+public void saklarHON(int x1, int y1) {
+  //saklar OFF (posisi X1, posisi y1)
+  line(x1, y1, x1-20, y1);
+  line(x1+30, y1, x1+60, y1);
+  line(x1, y1, x1+25, y1);
+  fill(255, 0, 0);
+  ellipse(x1+30, y1, 3, 3);
+  ellipse(x1+25, y1, 3, 3);
+  ellipse(x1, y1, 3, 3);
+}
+public void saklarVON(int x1, int y1) {
+  //saklar OFF (posisi X1, posisi y1)
+  line(x1, y1+20, x1, y1);
+  line(x1, y1-60, x1, y1-30);
+  line(x1, y1-25, x1, y1);
+  fill(255, 0, 0);
+  ellipse(x1, y1-30, 3, 3);
+  ellipse(x1, y1-25, 3, 3);
+  ellipse(x1, y1, 3, 3);
+}
+void mousePressed() {
+  if (mouseX >230 && mouseX < 280 && mouseY>90 && mouseY<110) {
+    if (L1==false) {
+      L1 = true;
+    } else {
+      L1 = false;
+    }
+  }
+  if (mouseX >230 && mouseX < 280 && mouseY> 140 && mouseY<160) {
+    if (L2==false) {
+      L2 = true;
+    } else {
+      L2 = false;
+    }
+  }
+  if (mouseX >230 && mouseX < 280 && mouseY> 190 && mouseY<210) {
+    if (L3==false) {
+      L3 = true;
+    } else {
+      L3 = false;
+    }
+  }
+  if (mouseX >475 && mouseX < 525 && mouseY> 110 && mouseY<140) {
+    if (L4==false) {
+      L4 = true;
+    } else {
+      L4 = false;
+    }
+  }
+  if (mouseX >575 && mouseX < 625 && mouseY> 110 && mouseY<140) {
+    if (L5==false) {
+      L5 = true;
+    } else {
+      L5 = false;
+    }
+  }
+  if (mouseX >675 && mouseX < 725 && mouseY> 110 && mouseY<140) {
+    if (L6==false) {
+      L6 = true;
+    } else {
+      L6 = false;
+    }
+  }
+  if (mouseX >110 && mouseX < 150 && mouseY> 90 && mouseY<110) {
+    if (s1==false) {
+      s1 = true;
+    } else {
+      s1 = false;
+    }
+  }
+  if (mouseX >110 && mouseX < 150 && mouseY> 140 && mouseY<160) {
+    if (s2==false) {
+      s2 = true;
+    } else {
+      s2 = false;
+    }
+  }
+  if (mouseX >110 && mouseX < 150 && mouseY> 190 && mouseY<210) {
+    if (s3==false) {
+      s3 = true;
+    } else {
+      s3 = false;
+    }
+  }
+  if (mouseX >395 && mouseX < 430 && mouseY> 110 && mouseY<140) {
+    if (s4==false) {
+      s4 = true;
+    } else {
+      s4 = false;
+    }
+  }
+  if (mouseX >225 && mouseX < 275 && mouseY> 460 && mouseY<490) {
+    if (LPS1==false) {
+      LPS1 = true;
+    } else {
+      LPS1 = false;
+    }
+  }
+  if (mouseX >475 && mouseX < 525 && mouseY> 420 && mouseY<450) {
+    if (LPS2==false) {
+      LPS2 = true;
+    } else {
+      LPS2 = false;
+    }
+  }
+  if (mouseX >475 && mouseX < 525 && mouseY> 500 && mouseY<530) {
+    if (LPS3==false) {
+      LPS3 = true;
+    } else {
+      LPS3 = false;
+    }
+  }
+  if (mouseX >125 && mouseX < 175 && mouseY> 460 && mouseY<490) {
+    if (sps1==false) {
+      sps1 = true;
+    } else {
+      sps1 = false;
+    }
+  }
+  if (mouseX >375 && mouseX < 425 && mouseY> 420 && mouseY<450) {
+    if (sps2==false) {
+      sps2 = true;
+    } else {
+      sps2 = false;
+    }
+  }
+  if (mouseX >375 && mouseX < 425 && mouseY> 500 && mouseY<530) {
+    if (sps3==false) {
+      sps3 = true;
+    } else {
+      sps3 = false;
+    }
+  }
+}
+</script>
+<canvas></canvas>
+</div>	
+</div>
+
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

@@ -1,0 +1,185 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Games</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> Ayo Memilah Sampah</h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="file/memilah_sampah.windows64.rar" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="file/memilah_sampah.rar" target="_blank">Download Source Code</a></li>
+				</ul>
+			</li>
+				<li><i class="fa fa-bolt" aria-hidden="true"></i><b>Games</b>
+				<ul>
+					<li><a href="games1.html">Gerak Random Molekul</a></li>
+					<li><a href="sampah1.html">Memilah Sampah</a></li>
+					<li><a href="ular.html">Ular</a></li>
+					<li><a href="frogger.html">Frogger</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+		
+<div class="kotak2">
+<h1> Buanglah Sampah Pada Tempatnya ! </h1>
+<script type="text/processing" >
+boolean t1, t2, t3;
+PImage tombol_kanan;
+PImage tong_kuning;
+PImage tong_hijau;
+PImage[] images = new PImage[18];
+PImage img = new PImage();
+int r;
+float N;
+float score = 0;
+float amplitude = 50;
+String S="";
+
+void setup() {
+  size(1000, 700);
+  frameRate(30);
+  tombol_kanan = loadImage("image/tombol_kanan.jpg");
+  tong_kuning = loadImage("image/tong_kuning.jpg");
+  tong_hijau = loadImage("image/tong_hijau.jpg");
+ images[0] = loadImage("image/0.jpg");
+ images[1] = loadImage("image/1.jpg");
+ images[2] = loadImage("image/2.jpg");
+ images[3] = loadImage("image/3.jpg");
+ images[4] = loadImage("image/4.jpg");
+ images[5] = loadImage("image/5.jpg");
+ images[6] = loadImage("image/6.jpg");
+ images[7] = loadImage("image/7.jpg");
+ images[8] = loadImage("image/8.jpg");
+ images[9] = loadImage("image/9.jpg");
+ images[10] = loadImage("image/10.jpg");
+ images[11] = loadImage("image/11.jpg");
+ images[12] = loadImage("image/12.jpg");
+ images[13] = loadImage("image/13.jpg");
+ images[14] = loadImage("image/14.jpg");
+ images[15] = loadImage("image/15.jpg");
+ images[16] = loadImage("image/16.jpg");
+ images[17] = loadImage("image/17.jpg");
+ 
+  //for (int i=0; i<images.length; i ++) {
+   // images[i].resize(400, 300);
+  //}
+  
+ 
+}
+
+void draw() {
+  background(120, 230, 230);
+  image(tombol_kanan, 800, 250);//t1
+  image(tong_kuning, 325, 475); //t4
+  image(tong_hijau, 525, 475); //t5
+  fill(255);
+  rect(180, 50, 600, 400);
+  fill(0);
+  textSize(22);
+  text("Score:", 50, 250);
+  text(nf(score), 120, 250);
+  text(S, 75, 300);
+  fill(255);
+  //----------migrasi gambar------------------
+  if (t1)
+  {
+    r = int(random(18));
+  }
+
+  image(images[r], 180, 50);
+  N = r + 1;
+  t1=false;
+  //-------------score-----------
+  if (t2) {
+    if (N%2 == 0) {
+      score = score + 100;
+      S = "Betul!";
+    } else {
+      S = "Keliru!";
+    }
+  }
+  t2=false;
+
+  if (t3 ) {
+    if (N%2 == 1) {
+      score = score +100;
+      S = "Betul!";
+    } else {
+      S = "Keliru!";
+    }
+  }
+  t3=false;
+}
+
+void mousePressed() {
+  if (mouseX >805 && mouseX < 900 && mouseY>250 && mouseY<350) {
+    if (t1==false) {
+      t1 = true;
+    } else {
+      t1 = false;
+    }
+  }
+  if (mouseX >350 && mouseX < 500 && mouseY> 500 && mouseY<675) {
+    if (t2==false) {
+      t2 = true;
+    } else {
+      t2 = false;
+    }
+  }
+  if (mouseX >550 && mouseX < 700 && mouseY> 500 && mouseY<675) {
+    if (t3==false) {
+      t3 = true;
+    } else {
+      t3 = false;
+    }
+  }
+}
+</script>
+<canvas></canvas>
+</div>	
+</div>
+
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

@@ -1,0 +1,435 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Listrik & Magnet</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> SEL VOLTA </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="file/sel_volta.windows64.rar" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="file/sel Volta.rar" target="_blank">Download Source Code</a></li>
+					
+				</ul>
+			</li>
+				<li><i class="fa fa-bolt" aria-hidden="true"></i><b> Listrik & Magnet</b>
+				<ul>
+					<li><a href="sel_Volta.html">Sel Volta</a></li>
+					<li><a href="hukum_Ohm.html">Hukum Ohm</a></li>
+					<li><a href="resistor.html">Hambatan Resistor</a></li>
+					<li><a href="Rangkaian Sederhana.html">Rangkaian Sederhana</a></li>
+					<li><a href="seri_paralel.html">Rangkaian Lampu Seri & Paralel</a></li>
+					<li><a href="lampu_seri.html">Simulasi Rangkaian Lampu Seri</a></li>
+					<li><a href="lampu_paralel.html">Simulasi Rangkaian Lampu Paralel</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+		<div class="kotak2">
+		<h1> Simulasi Sel Volta  </h1>
+<script type="text/processing" >
+float yzn = 175;
+float yzn2 = 95;
+float ycu = 175;
+float ycu2 = 80;
+float xzn = 508;
+float xcu = 242;
+float vh = 2;
+float vv= 2;
+boolean t1=false;
+boolean t2=false;
+//------------
+int rad = 15;
+float xpos, ypos;
+float xpos1, ypos1;
+float xpos2, ypos2;
+float xpos3, ypos3;
+float xpos4, ypos4;
+float xpos5, ypos5;
+float xpos6, ypos6;
+float xpos7, ypos7;
+float vx =2;
+float vy = 3;
+float vx1 = 3;
+float vy1 = 4;
+float vx2 =2;
+float vy2 = 1;
+float vx3 = 2;
+float vy3 = 4;
+float vx4 =2;
+float vy4 = 5;
+float vx5 = 4;
+float vy5 = 4;
+float vx6 =2;
+float vy6 = 3;
+float vx7 = 3;
+float vy7 = 4;
+int xdir = 1;
+int ydir = 1;
+int xdir1 = -1;
+int ydir1 = -1;
+
+void setup() {
+  size(1000, 600);
+  frameRate(30);
+  xpos = 350;
+  ypos = 350;
+  xpos1 = 440;
+  ypos1 = 440;
+  xpos2 = 350;
+  ypos2 = 350;
+  xpos3 = 375;
+  ypos3 = 375;
+  xpos4 = 325;
+  ypos4 = 325;
+  xpos5 = 300;
+  ypos5 = 300;
+  xpos6 = 370;
+  ypos6 = 370;
+  xpos7 = 355;
+  ypos7 = 355;
+  ellipseMode(RADIUS);
+}
+
+void draw() {
+  background(230, 230, 230);
+  fill(0);
+  textSize(18);
+  text("lampu",375,55);
+  //textSize(25);
+  //text("Sel Volta",width/2-50,30); 
+  //gelas kimia
+  fill(255);
+  rect(200, 200, 400, 250, 0, 0, 20, 20);
+  // asam klorida
+  fill(0, 200, 255);
+  rect(200, 250, 400, 300, 0, 0, 20, 20);
+  fill(0);
+  textSize(24);
+  text("Asam klorida (HCl)", 300, 520);
+  fill(0);
+  line(200, 200, 600, 200);
+  line(200, 250, 600, 250);
+  //tombol
+  fill(200);
+  rect(650,100,125,20);
+//------------gerak acak molekul-------------------
+  xpos = xpos + (vx*xdir);
+  ypos = ypos + (vy*ydir);
+  xpos1 = xpos1 + (vx1*xdir);
+  ypos1 = ypos1 + (vy1*ydir);
+  xpos2 = xpos2 + (vx2*xdir1);
+  ypos2 = ypos2 + (vy2*ydir1);
+  xpos3 = xpos3 + (vx3*xdir1);
+  ypos3 = ypos3 + (vy3*ydir1);
+  xpos4 = xpos4 + (vx4*xdir);
+  ypos4 = ypos4 + (vy4*ydir);
+  xpos5 = xpos5 + (vx5*xdir1);
+  ypos5 = ypos5 + (vy5*ydir1);
+  xpos6 = xpos6 + (vx6*xdir);
+  ypos6 = ypos6 + (vy6*ydir);
+  xpos7 = xpos7 + (vx7*xdir1);
+  ypos7 = ypos7 + (vy7*ydir1);
+  if (ypos > 500-rad || ypos < 250+rad) {
+    ydir *=-1;
+  }
+  if (xpos > 600-rad || xpos < 200+rad) {
+    xdir *=-1;
+  }
+  if (ypos1 > 500-rad || ypos1 < 250+rad) {
+    ydir *=-1;
+  }
+  if (xpos1 > 600-rad || xpos1 < 200+rad) {
+    xdir *=-1;
+  }
+  if (ypos2 > 500-rad || ypos2 < 250+rad) {
+    ydir1 *=-1;
+  }
+  if (xpos2 > 600-rad || xpos2 < 200+rad) {
+    xdir1 *=-1;
+  }
+  if (ypos3 > 500-rad || ypos3 < 250+rad) {
+    ydir1 *=-1;
+  }
+  if (xpos3 > 600-rad || xpos3 < 200+rad) {
+    xdir1 *=-1;
+  }
+  if (ypos4 > 500-rad || ypos4 < 250+rad) {
+    ydir *=-1;
+  }
+  if (xpos4 > 600-rad || xpos4 < 200+rad) {
+    xdir *=-1;
+  }
+  if (ypos5 > 500-rad || ypos5 < 250+rad) {
+    ydir1 *=-1;
+  }
+  if (xpos5 > 600-rad || xpos5 < 200+rad) {
+    xdir1 *=-1;
+  } 
+  if (ypos6 > 500-rad || ypos6 < 250+rad) {
+    ydir *=-1;
+  }
+  if (xpos6 > 600-rad || xpos6 < 200+rad) {
+    xdir *=-1;
+  }
+  if (ypos7 > 500-rad || ypos7 < 250+rad) {
+    ydir1 *=-1;
+  }
+  if (xpos7 > 600-rad || xpos7 < 200+rad) {
+    xdir1 *=-1;
+  }
+  fill(255);
+  ellipse(xpos, ypos, rad, rad);
+  ellipse(xpos1, ypos1, rad, rad);
+  ellipse(xpos2, ypos2, rad, rad);
+  ellipse(xpos3, ypos3, rad, rad);
+  ellipse(xpos4, ypos4, rad, rad);
+  ellipse(xpos5, ypos5, rad, rad);
+  ellipse(xpos6, ypos6, rad, rad);
+  ellipse(xpos7, ypos7, rad, rad);
+  ellipse(xpos, ypos3, rad, rad);
+  ellipse(xpos1, ypos3, rad, rad);
+  ellipse(xpos3, ypos1, rad, rad);
+  ellipse(xpos3, ypos, rad, rad);
+  ellipse(xpos2, ypos, rad, rad);
+  ellipse(xpos, ypos2, rad, rad);
+  ellipse(xpos2, ypos1, rad, rad);
+  ellipse(xpos1, ypos2, rad, rad);
+  fill(0);
+  textSize(12);
+  text("Cl-", xpos-8, ypos+3);
+  text("Cl-", xpos1-8, ypos1+3);
+  text("Cl-", xpos2-8, ypos2+3);
+  text("Cl-", xpos3-8, ypos3+3);
+  text("Cl-", xpos4-8, ypos4+3);
+  text("Cl-", xpos5-8, ypos5+3);
+  text("Cl-", xpos6-8, ypos6+3);
+  text("Cl-", xpos7-8, ypos7+3);
+  text("H+", xpos-8, ypos3+3);
+  text("H+", xpos1-8, ypos3+3);
+  text("H+", xpos3-8, ypos1+3);
+  text("H+", xpos3-8, ypos+3);
+  text("H+", xpos2-8, ypos+3);
+  text("H+", xpos-8, ypos2+3);
+  text("H+", xpos2-8, ypos1+3);
+  text("H+", xpos1-8, ypos2+3);
+  //----------------------------------------------
+  if(!t1){
+  fill(0);
+  textSize(12);
+  text("klik kotak ini", 655, 90);
+  text("Masukkan Elektroda",655,115);
+  textSize(24);
+  fill(150, 150, 50);
+  rect(100, 175, 20, 300);
+  text("Cu", 100, 170);
+  fill(150, 150, 150);
+  rect(720, 175, 20, 300);
+  text("Zn", 720, 170);
+  //lampu----
+  fill(255);
+  ellipse(400,80,20,20);
+  fill(0);
+  textSize(18);
+  text("OFF",383,88);
+  //text("lampu",375,55);
+  //------kabel dan saklar--
+  fill(255,0,0);
+  strokeWeight(2);
+  //line(260,80,280,80);
+  //line(320,80,380,80);
+  //fill(255,0,0);
+ // ellipse(320,80,3,3);
+ // ellipse(280,80,3,3);
+ // ellipse(320,65,3,3);
+  //line(280,80,320,65);
+  //line(260,80,260,175);
+  //line(530,80,420,80);
+  //line(530,80,530,175);
+  }
+  else if(t1){
+   //---- rangkaian lampu ---
+  fill(255);
+  ellipse(400,80,20,20);
+  fill(0);
+  textSize(18);
+  text("OFF",383,88);
+  //text("lampu",375,55);
+  //keterangan tombol
+  fill(0);
+  textSize(12);
+  text("klik kotak ini", 655, 90);
+  text("Keluarkan Elektroda",655,115);
+  //elektroda
+  textSize(24);
+  fill(150, 150, 50);
+  rect(250, 175, 20, 300);
+  text("Cu", 250, 170);
+  fill(150, 150, 150);
+  rect(520, 175, 20, 300);
+  text("Zn", 520, 170);
+  fill(255);
+  for(int i=0; i<230; i = i+26){
+  fill(255);
+  ellipse(234, 266+i, 13,13);
+  ellipse(285, 266+i, 13,13);
+  ellipse(260, 488,13,13);
+  ellipse(504, 266+i, 13,13);
+  ellipse(555, 266+i, 13,13);
+  ellipse(530, 488,13);
+  fill(0);
+  textSize(12);
+  text("H+",227,269+i);
+  text("H+",279,269+i);
+  text("H+",254,491);
+  text("Cl-",497,269+i);
+  text("Cl-",549,269+i);
+  text("Cl-",524,491);
+  }
+  }
+  if(t1 && t2){
+  //----lampu ON ----
+  fill(255,255,0);
+  ellipse(400,80,20,20);
+  line(400,55,400,30);
+  line(400,105,400,130);
+  line(420,60, 450,40);
+  line(420,100, 450,125);
+  line(380,60, 350,40);
+  line(380,100, 350,125);
+  fill(255,0,0);
+  textSize(20);
+  text("ON",385,88);
+  //text("lampu",375,55);
+  //------elektron bergerak ---
+  fill(255,0,0);
+  strokeWeight(2);
+  line(260,80,380,80);
+  line(260,80,260,175);
+  ellipse(260,175,2,2);
+  line(530,80,420,80);
+  line(530,80,530,175);
+  ellipse(530,175,2,2);
+    fill(0);
+  textSize(22);
+   yzn = yzn - vv;
+   if(yzn<=95){
+    yzn=175; 
+   }
+   xzn =xzn - vh;
+   if(xzn<= 260){
+    xzn = 508; 
+   }
+   yzn2 = yzn2 + vv;
+   if(yzn2 >= 175 ){
+    yzn2 = 95;
+   }
+   ycu = ycu - vv;
+   if(ycu<=80){
+    ycu = 175; 
+   }
+   xcu = xcu + vh;
+   if(xcu >= 530){
+    xcu = 242; 
+   }
+   ycu2 = ycu2 + vv;
+   if(ycu2 >= 175){
+    ycu2 = 80; 
+   }
+  fill(0,0,255);
+  text("e-",508,yzn);
+  text("e-",xzn,95);
+  text("e-",262,yzn2);
+  fill(255,0,0);
+  text("+",242,ycu);
+  text("+",xcu,80);
+  text("+",530,ycu2);
+  }
+  if(!t2){
+  line(260,80,280,80);
+  line(320,80,380,80);
+  fill(255,0,0);
+  ellipse(320,80,3,3);
+  ellipse(280,80,3,3);
+  ellipse(320,65,3,3);
+  line(280,80,320,65);
+  line(260,80,260,175);
+  line(530,80,420,80);
+  line(530,80,530,175);
+  }
+  else if(t2){
+  line(260,80,280,80);
+  line(320,80,380,80);
+  fill(255,0,0);
+  ellipse(320,80,3,3);
+  ellipse(280,80,3,3);
+  ellipse(317,80,3,3);
+  line(280,80,317,80);
+  line(260,80,260,175);
+  line(530,80,420,80);
+  line(530,80,530,175);
+  }
+}
+
+void mousePressed(){
+  if (mouseX >650 && mouseX < 775 && mouseY> 100 && mouseY<120){
+  if(t1==false){
+  t1 = true;
+  }else{
+   t1 = false; 
+  }
+  }
+  if (mouseX >260 && mouseX < 380 && mouseY> 60 && mouseY<80){
+  if(t2==false){
+  t2 = true;
+  }else{
+   t2 = false; 
+  }
+  }
+}
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

@@ -1,0 +1,217 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="600">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Cahaya & Warna</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> CAHAYA DAN WARNA </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="file/application.windows64.rar" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="file/pencampuran warna.rar" target="_blank">Download Source Code</a></li>
+				</ul>
+			</li>
+				<li><i class="fa fa-sun-o" aria-hidden="true"></i><b> Cahaya & Warna</b>
+				<ul>
+					<li><a href="Warna.html" target="_blank">Pencampuran Warna</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1> Pencampuran Warna Merah, Hijau & Biru (RGB) </h1>
+			<script type="text/processing" >
+			class HScrollbar 
+			{
+				int swidth, sheight;    // width and height of bar
+				float xpos, ypos;       // x and y position of bar
+				float spos, newspos;    // x position of slider
+				float sposMin, sposMax; // max and min values of slider
+				int loose;              // how loose/heavy
+				boolean over;           // is the mouse over the slider?
+				boolean locked;
+				float ratio;
+
+				HScrollbar (float xp, float yp, int sw, int sh, int l) 
+				{
+					swidth = sw;
+					sheight = sh;
+					//int widthtoheight = sw - sh;
+					//ratio = (float)sw / (float)widthtoheight;
+					xpos = xp;
+					ypos = yp-sheight/2;
+					spos = xpos + swidth/2 - sheight/2;
+					newspos = spos;
+					sposMin = xpos;
+					sposMax = xpos + swidth - sheight;
+					loose = l;
+				}
+				
+				void update() 
+				{
+					if (overEvent()) 
+					{
+						over = true;
+					} else 
+					{
+						over = false;
+					}
+					if (mousePressed && over) 
+					{
+						locked = true;
+					}
+					if (!mousePressed) 
+					{
+						locked = false;
+					}
+					if (locked) 
+					{
+						newspos = constrain(mouseX-sheight/2, sposMin, sposMax);
+					}
+					if (abs(newspos - spos) > 1) 
+					{
+						spos = spos + (newspos-spos)/loose;
+					}
+				}
+				
+				float constrain(float val, float minv, float maxv) 
+				{
+					return min(max(val, minv), maxv);
+				}
+				
+				boolean overEvent() 
+				{
+					if (mouseX > xpos && mouseX < xpos+swidth &&
+						mouseY > ypos && mouseY < ypos+sheight) 
+					{
+						return true;
+					} else 
+					{
+						return false;
+					}
+				}
+				
+				void display()
+				{
+					noStroke();
+					fill(204);
+					rect(xpos, ypos, swidth, sheight);
+					if (over || locked) 
+					{
+						fill(0, 0, 0);
+					} else 
+					{
+						fill(102, 102, 102);
+					}
+					rect(spos, ypos, sheight, sheight);
+				}
+				
+				float getPos() {
+					return spos;
+				}
+			}
+//----------------------------- main program -----------------------
+    
+			HScrollbar hs1;
+			HScrollbar hs2;
+			HScrollbar hs3;
+			float warnared;
+			float warnagreen;
+			float warnablue;
+
+			void setup()
+			{
+				size(920,550);
+				hs1 = new HScrollbar(20, 50, 282, 25, 10); 
+				hs2 = new HScrollbar(320, 50, 282, 25, 10);
+				hs3 = new HScrollbar(620, 50, 282, 25, 10);
+			}
+
+			void draw()
+			{
+				background(255); 
+
+				warnared = hs1.getPos();
+				hs1.update();
+				hs1.display();
+				stroke(0);
+				fill(warnared-20,0,0);
+				rect(110,100,100,100);
+				textSize(14);
+				text("Nilai Red (R) :", 20,75);
+				text(round(warnared-21),120,75);
+ 
+				 warnagreen = hs2.getPos();
+				 hs2.update();
+				 hs2.display();
+				 stroke(0);
+				 fill(0, warnagreen-321,0);
+				 rect(410,100,100,100);
+				 textSize(14);
+				 text("Nilai Green (G) :", 320,75);
+				 text(round(warnagreen-321),440,75);
+ 
+				 warnablue = hs3.getPos();
+				 hs3.update();
+				 hs3.display();
+				 stroke(0);
+				 fill(0,0,warnablue-621);
+				 rect(710,100,100,100);
+				 textSize(14);
+				 text("Nilai Blue (B):", 620,75);
+				 text(round(warnablue-621),720,75);
+  
+				 stroke(0);
+				 fill(warnared-21,warnagreen-321,warnablue-621);
+				 rect(360,300,200,200);
+				 fill(0);
+				 textSize(14);
+				 text("Pencampuran Warna RGB menjadi", 360,275);
+			}
+			</script>
+			<canvas></canvas>
+		</div>	
+	</div>
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

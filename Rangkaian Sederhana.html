@@ -1,0 +1,598 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Listrik & Magnet</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> Rangkaian Listrik Sederhana </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="file/RSLevel1.windows64.rar" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="file/RSLevel1.rar" target="_blank">Download Source Code</a></li>
+				</ul>
+			</li>
+			<li><i class="fa fa-bolt" aria-hidden="true"></i><b> Listrik & Magnet</b>
+				<ul>
+					<li><a href="sel_Volta.html">Sel Volta</a></li>
+					<li><a href="hukum_Ohm.html">Hukum Ohm</a></li>
+					<li><a href="resistor.html">Hambatan Resistor</a></li>
+					<li><a href="Rangkaian Sederhana.html">Rangkaian Sederhana</a></li>
+					<li><a href="seri_paralel.html">Rangkaian Lampu Seri & Paralel</a></li>
+					<li><a href="lampu_seri.html">Simulasi Rangkaian Lampu Seri</a></li>
+					<li><a href="lampu_paralel.html">Simulasi Rangkaian Lampu Paralel</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+		
+<div class="kotak3">
+<h1> Rangkaian Listrik Sederhana </h1>
+<script type="text/processing" >
+boolean t1, t2, t3, t4, t5, t6;
+boolean s1, s2, s3, s4, s5;
+
+void setup() {
+  size(1100, 680); 
+  frameRate(30);
+  ellipseMode(RADIUS);
+}
+
+void draw() {
+  background(230);
+  //rangkaian 4
+  fill(0);
+  textSize(16);
+  text("Rangkaian 4", 50, 360);
+  fill(0);
+  text("V", 350, 495);
+  bateraiV(350, 500);
+  line(50, 470, 50, 400);
+  line(50, 400, 115, 400);
+  line(115, 400, 115, 550);
+  line(115, 550, 175, 550);
+  line(175, 550, 175, 530);
+  line(175, 470, 175, 400);
+  line(255, 400, 255, 470);
+  line(255, 530, 255, 575);
+  line(255, 575, 280, 575);
+  line(50, 470, 50, 575);
+  line(50, 575, 280, 575);
+  line(350, 575, 375, 575);
+  line(375, 575, 375, 550);
+  line(375, 470, 375, 400);
+  line(375, 400, 255, 400);
+  line(375, 575, 400, 575);
+  line(470, 575, 550, 575);
+  line(620, 575, 750, 575);
+  line(750, 575, 750, 535);
+  line(650, 575, 650, 535);
+  line(500, 575, 500, 535);
+  line(375, 400, 535, 400);
+  line(600, 400, 750, 400);
+  line(750, 400, 750, 470);
+  line(650, 400, 650, 470);
+  line(500, 400, 500, 470);
+  fill(0);
+  text("L1", 10, 505);
+  text("L2", 135, 505);
+  text("L3", 215, 505);
+  text("S1", 195, 380);
+  text("S2", 300, 560);
+  text("L5", 565, 375);
+  text("L4", 460, 505);
+  text("L6", 610, 505);
+  text("S3", 420, 560);
+  text("S4", 560, 560);
+  text("S5", 725, 505);
+  //1
+  if (!s3 && !s4 && !s5) {
+    lampuVOFF(500, 500, 20);
+    lampuVOFF(650, 500, 20);
+    lampuHOFF(575, 400, 20);
+    saklarHOFF(420, 575);//s3
+    saklarHOFF(560, 575);//s4
+    saklarVOFF(750, 520);//s5
+  }
+  //2
+  if (!s3 && !s4 && s5) {
+    lampuVOFF(500, 500, 20);//L4
+    lampuVOFF(650, 500, 20);//L6
+    lampuHOFF(575, 400, 20);//L5
+    saklarHOFF(420, 575);//s3
+    saklarHOFF(560, 575);//s4
+    saklarVON(750, 520);//s5
+  }
+  //3
+  if (!s3 && s4 && !s5) {
+    lampuVOFF(500, 500, 20);//L4
+    lampuVOFF(650, 500, 20);//L6
+    lampuHOFF(575, 400, 20);//L5
+    saklarHOFF(420, 575);//s3
+    saklarHON(560, 575);//s4
+    saklarVOFF(750, 520);//s5
+  }
+  //4
+  if (!s3 && s4 && s5) {
+    lampuVOFF(500, 500, 20);//L4
+    lampuVOFF(650, 500, 20);//L6
+    lampuHOFF(575, 400, 20);//L5
+    saklarHOFF(420, 575);//s3
+    saklarHON(560, 575);//s4
+    saklarVON(750, 520);//s5
+  }
+  //5
+  if (s3 && !s4 && !s5) {
+    lampuVON(500, 500, 20);//L4
+    lampuVOFF(650, 500, 20);//L6
+    lampuHOFF(575, 400, 20);//L5
+    saklarHON(420, 575);//s3
+    saklarHOFF(560, 575);//s4
+    saklarVOFF(750, 520);//s5
+  }
+  //6
+  if (s3 && !s4 && s5) {
+    lampuVON(500, 500, 20);//L4
+    lampuVOFF(650, 500, 20);//L6
+    lampuHOFF(575, 400, 20);//L5
+    saklarHON(420, 575);//s3
+    saklarHOFF(560, 575);//s4
+    saklarVON(750, 520);//s5
+  }
+  //7
+  if (s3 && s4 && !s5) {
+    lampuVON(500, 500, 20);//L4
+    lampuVON(650, 500, 20);//L6
+    lampuHON(575, 400, 20);//L5
+    saklarHON(420, 575);//s3
+    saklarHON(560, 575);//s4
+    saklarVOFF(750, 520);//s5
+  }
+  //8
+  if (s3 && s4 && s5) {
+    lampuVON(500, 500, 20);//L4
+    lampuVOFF(650, 500, 20);//L6
+    lampuHON(575, 400, 20);//L5
+    saklarHON(420, 575);//s3
+    saklarHON(560, 575);//s4
+    saklarVON(750, 520);//s5
+  }
+  if (!s1 && !s2) {
+    lampuVOFF(50, 500, 20);
+    lampuVOFF(175, 500, 20);
+    lampuVOFF(255, 500, 20);
+    saklarHOFF(195, 400);//s1
+    saklarHOFF(300, 575);//s2
+  }
+  if (!s1 && s2) {
+    lampuVOFF(50, 500, 20);
+    lampuVOFF(175, 500, 20);
+    lampuVON(255, 500, 20);
+    saklarHOFF(195, 400);//s1
+    saklarHON(300, 575);//s2
+  }
+  if (s1 && !s2) {
+    lampuVOFF(50, 500, 20);
+    lampuVOFF(175, 500, 20);
+    lampuVOFF(255, 500, 20);
+    saklarHON(195, 400);//s1
+    saklarHOFF(300, 575);//s2
+  }
+  if (s1 && s2) {
+    lampuVON(50, 500, 20);
+    lampuVON(175, 500, 20);
+    lampuVON(255, 500, 20);
+    saklarHON(195, 400);//s1
+    saklarHON(300, 575);//s2
+  }
+  //rangkaian 3 
+  fill(0);
+  textSize(16);
+  text("Rangkaian 3", 820, 50);
+  fill(0);
+  text("V", 950, 495);
+  bateraiH(950, 500);
+  line(1050, 160, 1050, 525);
+  line(1050, 525, 965, 525);
+  line(910, 525, 850, 525);
+  line(850, 525, 850, 470);
+  line(850, 400, 850, 300);
+  line(850, 250, 850, 200);
+  line(850, 140, 850, 100);
+  line(850, 100, 910, 100);
+  line(970, 100, 1050, 100);
+  line(1050, 100, 1050, 110);
+  line(850, 225, 920, 225);
+  line(970, 225, 1050, 225);
+  line(850, 350, 920, 350);
+  line(970, 350, 1050, 350);
+  fill(0);
+  text("S1", 820, 440);
+  text("S3", 820, 170);
+  text("S2", 940, 200);
+  text("L1", 940, 320);
+  text("L4", 940, 75);
+  text("L3", 1010, 155);
+  text("L2", 810, 285);
+  //kom1
+  if (!t4 && !t5 && !t6) {
+    saklarVOFF(850, 450);
+    saklarVOFF(850, 180);
+    saklarHOFF(940, 225);
+    lampuHOFF(950, 350, 20);
+    lampuHOFF(950, 100, 20);
+    lampuVOFF(1050, 150, 20);
+    lampuVOFF(850, 280, 20);
+  }
+  //kom2
+  if (!t4 && !t5 && t6) {
+    saklarVOFF(850, 450);
+    saklarVOFF(850, 180);
+    saklarHON(940, 225);
+    lampuHOFF(950, 350, 20);
+    lampuHOFF(950, 100, 20);
+    lampuVOFF(1050, 150, 20);
+    lampuVOFF(850, 280, 20);
+  }
+  //kom3
+  if (!t4 && t5 && !t6) {
+    saklarVOFF(850, 450);
+    saklarVON(850, 180);
+    saklarHOFF(940, 225);
+    lampuHOFF(950, 350, 20);
+    lampuHOFF(950, 100, 20);
+    lampuVOFF(1050, 150, 20);
+    lampuVOFF(850, 280, 20);
+  }
+  //kom4
+  if (!t4 && t5 && t6) {
+    saklarVOFF(850, 450);
+    saklarVON(850, 180);
+    saklarHON(940, 225);
+    lampuHOFF(950, 350, 20);
+    lampuHOFF(950, 100, 20);
+    lampuVOFF(1050, 150, 20);
+    lampuVOFF(850, 280, 20);
+  }
+  //kom5
+  if (t4 && !t5 && !t6) {
+    saklarVON(850, 450);
+    saklarVOFF(850, 180);
+    saklarHOFF(940, 225);
+    lampuHON(950, 350, 20);
+    lampuHOFF(950, 100, 20);
+    lampuVOFF(1050, 150, 20);
+    lampuVOFF(850, 280, 20);
+  }
+  //kom6
+  if (t4 && !t5 && t6) {
+    saklarVON(850, 450);
+    saklarVOFF(850, 180);
+    saklarHON(940, 225);
+    lampuHON(950, 350, 20);
+    lampuHOFF(950, 100, 20);
+    lampuVOFF(1050, 150, 20);
+    lampuVON(850, 280, 20);
+  }
+  //kom7
+  if (t4 && t5 && !t6) {
+    saklarVON(850, 450);
+    saklarVON(850, 180);
+    saklarHOFF(940, 225);
+    lampuHON(950, 350, 20);
+    lampuHON(950, 100, 20);
+    lampuVON(1050, 150, 20);
+    lampuVON(850, 280, 20);
+  }
+  //kom8
+  if (t4 && t5 && t6) {
+    saklarVON(850, 450);
+    saklarVON(850, 180);
+    saklarHON(940, 225);
+    lampuHON(950, 350, 20);
+    lampuHOFF(950, 100, 20);
+    lampuVOFF(1050, 150, 20);
+    lampuVON(850, 280, 20);
+  }
+  //rangkaian 1 
+  fill(0);
+  textSize(16);
+  text("Rangkaian 1", 50, 50);
+  fill(0);
+  text("V", 30, 200);
+  bateraiV(50, 200);
+  line(75, 100, 155, 100);
+  line(75, 100, 75, 160);
+  line(220, 100, 300, 100);
+  line(300, 100, 300, 165);
+  line(300, 240, 300, 300);
+  line(300, 300, 75, 300);
+  line(75, 300, 75, 250);
+  fill(0);
+  text("S1", 155, 80);
+  text("L1", 260, 210);
+  if (!t1) {
+    saklarHOFF(160, 100);
+    lampuVOFF(300, 205, 20);
+  }
+  if (t1) {
+    saklarHON(160, 100);
+    lampuVON(300, 205, 20);
+  }
+  //rangkaian 2 
+  fill(0);
+  textSize(16);
+  text("Rangkaian 2", 400, 50);
+  fill(0);
+  text("V", 380, 200);
+  bateraiV(400, 200);
+  line(425, 100, 505, 100);
+  line(425, 100, 425, 160);
+  line(570, 100, 660, 100);
+  line(740, 100, 750, 100);
+  line(750, 100, 750, 165);
+  line(650, 100, 650, 165);
+  line(650, 240, 650, 300);
+  line(750, 300, 425, 300);
+  line(425, 300, 425, 250);
+  line(750, 240, 750, 300);
+  fill(0);
+  text("S1", 505, 80);
+  text("S2", 675, 80);
+  text("L1", 610, 210);
+  text("L2", 710, 210);
+  if (!t2) {
+    saklarHOFF(510, 100);
+    lampuVOFF(650, 205, 20);
+  }
+  if (t2) {
+    saklarHON(510, 100);
+    lampuVON(650, 205, 20);
+  }
+  if (!t3) {
+    saklarHOFF(680, 100);
+    lampuVOFF(750, 205, 20);
+  } 
+  if (t3) {
+    saklarHON(680, 100);
+    lampuVOFF(750, 205, 20);
+  }
+  if (t2 && t3) {
+    saklarHON(680, 100);
+    lampuVON(750, 205, 20);
+  }
+}
+
+//class
+public void bateraiV(int x, int y) {
+  //baterai vertikal "bateraiV(posisi X, posisiY)"
+  strokeWeight(2);
+  line(x, y, x+50, y);
+  int x2, y2, x3;
+  x2 = x+10;
+  y2 = y+10;
+  x3 = x+40;
+  line(x2, y2, x3, y2);
+  line(x2+((x3-x2)/2), y2, x2+((x3-x2)/2), y2+40);
+  line(x2+((x3-x2)/2), y, x2+((x3-x2)/2), y-40);
+  textSize(14);
+  fill(255, 0, 0);
+  text("+", x2+((x3-x2)/2)+5, y-5);
+}
+public void bateraiH(int x, int y) {
+  //baterai vertikal "bateraiV(posisi X, posisiY)"
+  strokeWeight(2);
+  line(x, y+50, x, y);
+  int y2, x2, y3;
+  y2 = y+10;
+  x2 = x+10;
+  y3 = y+40;
+  line(x2, y2, x2, y3);
+  line(x2, y2+((y3-y2)/2), x2+40, y2+((y3-y2)/2));
+  line(x, y2+((y3-y2)/2), x-40, y2+((y3-y2)/2));
+  textSize(14);
+  fill(255, 0, 0);
+  text("+", x-15, y2+((y3-y2)/2)-5);
+}
+public void lampuVOFF(int x, int y, int r) {
+  //Lampu OFF
+  fill(255);
+  ellipse(x, y, r, r);
+  line(x, y+r, x, y+(2*r));
+  line(x, y-r, x, y-(2*r));
+  fill(0);
+  text("Off", x-(r/2), y+(r/3));
+}
+public void lampuHOFF(int x, int y, int r) {
+  //Lampu OFF
+  fill(255);
+  ellipse(x, y, r, r);
+  line(x+r, y, x+(2*r), y);
+  line(x-r, y, x-(2*r), y);
+  fill(0);
+  text("Off", x-(r/2), y+(r/3));
+}
+public void lampuVON(int x, int y, int r) {
+  //Lampu OFF vertikal (posisi X, posisi Y, Jari-jari r)
+  fill(255, 255, 0);
+  ellipse(x, y, r, r);
+  line(x, y+r, x, y+(2*r));
+  line(x, y-r, x, y-(2*r));
+  fill(0);
+  text("ON", x-(r/2), y+(r/3));
+}
+public void lampuHON(int x, int y, int r) {
+  //Lampu OFF vertikal (posisi X, posisi Y, Jari-jari r)
+  fill(255, 255, 0);
+  ellipse(x, y, r, r);
+  line(x+r, y, x+(2*r), y);
+  line(x-r, y, x-(2*r), y);
+  fill(0);
+  text("ON", x-(r/2), y+(r/3));
+}
+public void saklarHOFF(int x1, int y1) {
+  //saklar OFF (posisi X1, posisi y1)
+  line(x1, y1, x1-20, y1);
+  line(x1+30, y1, x1+60, y1);
+  line(x1, y1, x1+25, y1-15);
+  fill(255, 0, 0);
+  ellipse(x1+30, y1, 3, 3);
+  ellipse(x1+25, y1-15, 3, 3);
+  ellipse(x1, y1, 3, 3);
+}
+public void saklarVOFF(int x1, int y1) {
+  //saklar OFF (posisi X1, posisi y1)
+  line(x1, y1+20, x1, y1);
+  line(x1, y1-60, x1, y1-30);
+  line(x1+15, y1-25, x1, y1);
+  fill(255, 0, 0);
+  ellipse(x1, y1-30, 3, 3);
+  ellipse(x1+15, y1-25, 3, 3);
+  ellipse(x1, y1, 3, 3);
+}
+public void saklarHON(int x1, int y1) {
+  //saklar OFF (posisi X1, posisi y1)
+  line(x1, y1, x1-20, y1);
+  line(x1+30, y1, x1+60, y1);
+  line(x1, y1, x1+25, y1);
+  fill(255, 0, 0);
+  ellipse(x1+30, y1, 3, 3);
+  ellipse(x1+25, y1, 3, 3);
+  ellipse(x1, y1, 3, 3);
+}
+public void saklarVON(int x1, int y1) {
+  //saklar OFF (posisi X1, posisi y1)
+  line(x1, y1+20, x1, y1);
+  line(x1, y1-60, x1, y1-30);
+  line(x1, y1-25, x1, y1);
+  fill(255, 0, 0);
+  ellipse(x1, y1-30, 3, 3);
+  ellipse(x1, y1-25, 3, 3);
+  ellipse(x1, y1, 3, 3);
+}
+void mousePressed() {
+  if (mouseX >150 && mouseX < 200 && mouseY>80 && mouseY<100) {
+    if (t1==false) {
+      t1 = true;
+    } else {
+      t1 = false;
+    }
+  }
+  if (mouseX >500 && mouseX < 550 && mouseY> 80 && mouseY<100) {
+    if (t2==false) {
+      t2 = true;
+    } else {
+      t2 = false;
+    }
+  }
+  if (mouseX >670 && mouseX < 720 && mouseY> 80 && mouseY<100) {
+    if (t3==false) {
+      t3 = true;
+    } else {
+      t3 = false;
+    }
+  }
+  if (mouseX >840 && mouseX < 890 && mouseY> 400 && mouseY<460) {
+    if (t4==false) {
+      t4 = true;
+    } else {
+      t4 = false;
+    }
+  }
+  if (mouseX >840 && mouseX < 890 && mouseY> 120 && mouseY<180) {
+    if (t5==false) {
+      t5 = true;
+    } else {
+      t5 = false;
+    }
+  }
+  if (mouseX >900 && mouseX < 970 && mouseY> 210 && mouseY<230) {
+    if (t6==false) {
+      t6 = true;
+    } else {
+      t6 = false;
+    }
+  }
+  if (mouseX >185 && mouseX < 225 && mouseY> 380 && mouseY<410) {
+    if (s1==false) {
+      s1 = true;
+    } else {
+      s1 = false;
+    }
+  }
+  if (mouseX >280 && mouseX < 330 && mouseY> 560 && mouseY<580) {
+    if (s2==false) {
+      s2 = true;
+    } else {
+      s2 = false;
+    }
+  }
+  if (mouseX >410 && mouseX < 460 && mouseY> 560 && mouseY<580) {
+    if (s3==false) {
+      s3 = true;
+    } else {
+      s3 = false;
+    }
+  }
+  if (mouseX >535 && mouseX < 585 && mouseY> 560 && mouseY<580) {
+    if (s4==false) {
+      s4 = true;
+    } else {
+      s4 = false;
+    }
+  }
+  if (mouseX >740 && mouseX < 770 && mouseY> 480 && mouseY<550) {
+    if (s5==false) {
+      s5 = true;
+    } else {
+      s5 = false;
+    }
+  }
+}
+	
+</script>
+<canvas></canvas>
+</div>	
+</div>
+
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

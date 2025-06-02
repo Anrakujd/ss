@@ -1,0 +1,474 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen matematika bebas diakses oleh guru dan siswa untuk membantu memahami matematika di sekolah">
+<meta name="Keywords" content="matematika, eksperimen, praktikum online, webbase praktikum, matematika online, pengubinan, tiling, tile, gasing">
+<meta name="author" content="Djukarna">
+<title>Geometri</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> PUZZLE ANGKA SATU	 </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-square-o" aria-hidden="true"></i><b>Geometri</b>
+				<ul>
+					<li><a href="tile1.html">Pengubinan Segitiga Sama Sisi (Polyamonds)</a></li>
+					<li><a href="tile2.html">Pengubinan Persegi (Polyominos)</a></li>
+					<li><a href="tile3.html">Pengubinan Polyamonds & Polyominos </a></li>
+					<li><a href="tile4.html">Tangram</a></li>
+					<li><a href="tile5.html">Puzzle Two and Half</a></li>
+					<li><a href="tile6.html">Puzzle Angka Satu</a></li>
+					<li><a href="tile7.html">Kubus Iluminasi (Polyrhomb)</a></li>
+					<li><a href="tile8.html">Heptomino</a></li>
+					<li><a href="tile9.html">Pentomino</a></li>
+					<li><a href="tile10.html">Menara Hanoi</a></li>
+				</ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1> Puzzle Angka Satu </h1>
+<script type="text/processing" >
+ArrayList<S1> Tiga1 = new ArrayList<S1>();
+ArrayList<S2> Tiga2 = new ArrayList<S2>();
+ArrayList<S3> Kotak = new ArrayList<S3>();
+ArrayList<S4> Tiga3 = new ArrayList<S4>();
+ArrayList<S5> Tiga4 = new ArrayList<S5>();
+ArrayList<S6> Tiga5 = new ArrayList<S6>();
+ArrayList<S7> Tupat = new ArrayList<S7>();
+float a = 850;//
+float b = 340;
+float d = 850;//
+float e = 550;
+float g = 150;//
+float n = 560;
+float p = 150;//
+float q = 400;
+float u = 150;//
+float v = 275;
+float w = 150;//
+float z = 85;
+float j = 800;//
+float k = 75;
+float h = 40;
+int X = 340;
+int Y = 550;
+
+void setup() {
+  size(1000, 700);
+  Tiga1.add(new S1(a, b, h, #0000FF));
+  Tiga2.add(new S2(d, e, h, #FF0000));
+  Kotak.add(new S3(g, n, h, #00FF00));
+  Tiga3.add(new S4(p, q, h, #00FFFF));
+  Tiga4.add(new S5(u, v, h, #FFFF00));
+  Tiga5.add(new S6(w, z, h, #FF00FF));
+  Tupat.add(new S7(j, k, h, #120012));
+ }
+
+void draw() {
+  background(0,255,255);
+  fill(0);
+  textSize(16);
+  text("Susun puzzle berikut ini ke dalam persegi-panjang",300,50);
+  text("Tiap puzzle tidak boleh tumpang tindih !", 300, 70);
+  text("klik kiri untuk geser & klik kanan untuk memutar", 300, 90);
+  fill(255);
+  beginShape();
+  vertex(X,Y);
+  vertex(X, Y-h);
+  vertex(X+2*h, Y-3*h);
+  vertex(X+2*h, Y-6*h);
+  vertex(X, Y-6*h);
+  vertex(X, Y-7*h);
+  vertex(X+3*h, Y-10*h);
+  vertex(X+6*h, Y-10*h);
+  vertex(X+6*h, Y-3*h);
+  vertex(X+8*h, Y-h);
+  vertex(X+8*h, Y);  
+  endShape(CLOSE);
+  stroke(0);
+  strokeWeight(1);
+  
+   // puzzle 1
+  for (S1 tangram : Tiga1) {
+    tangram.display();
+  }
+  // puzzle 2
+  for (S2 tangram2 : Tiga2) {
+    tangram2.display();
+  }
+  // puzzle 3
+  for (S3 tangram : Kotak) {
+    tangram.display();
+  } 
+  // puzzle 4
+  for (S4 tangram : Tiga3) {
+    tangram.display();
+  } 
+  // puzzle 5
+  for (S5 tangram : Tiga4) {
+    tangram.display();
+  } 
+  // puzzle 6
+  for (S6 tangram : Tiga5) {
+    tangram.display();
+  }
+  // puzzle 7
+  for (S7 tangram : Tupat) {
+    tangram.display();
+  }
+}
+//---------------------class S1 (puzzle no 1)--------------------
+class S1 {
+  float x1;
+  float y1;
+  float h1;
+  color c1;
+  float angle1 = 0;
+   S1(float x0, float y0, float h0, color warna) {
+   x1 = x0; 
+   y1 = y0;
+   c1 = warna;
+   h1 = h0;
+  }
+  void display() {
+    fill(c1);
+    if (dist(mouseX, mouseY, x1, y1) < h1) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x1 = mouseX;
+        y1 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle1 = angle1 + 45;
+    for(int i = 0;  i <= 100000000; i+=1){
+    i= i + 1;}
+        //delay(100);
+        return;
+      }  else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(0, 0, 255);
+    }
+    pushMatrix();
+    translate(x1, y1);
+    rotate(radians(angle1));
+    beginShape();
+    vertex(0, -2*h1);
+    vertex(+2*h1, 0);
+    vertex(+2*h1, h1);
+    vertex(-3*h1, h1);
+    endShape(CLOSE);
+    popMatrix();
+  }
+}
+//--------------------class S2 (puzzle no 2)----------------------
+class S2 {
+  float x2;
+  float y2;
+  float h2;
+  color c2;
+  float angle2 = 0;
+  public S2(float x0, float y0, float h0, color warna) {
+    this.x2 = x0; 
+    this.y2 = y0;
+    this.c2 = warna;
+    this.h2 = h0;
+  }
+  void display() {
+    fill(c2);
+    if (dist(mouseX, mouseY, x2, y2) < h2) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x2 = mouseX;
+        y2 = mouseY;
+      }  else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle2 = angle2 + 45;
+    for(int i = 0;  i <= 100000000; i+=1){
+    i= i + 1;}
+       //delay(100);
+        return;
+      }else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(155, 0, 0);
+    }
+    pushMatrix();
+    translate(x2, y2);
+    rotate(radians(angle2));
+    beginShape();
+    vertex(-3.5*h2, -1.5*h2);
+    vertex(0.5*h2, -1.5*h2);
+    vertex(3.5*h2, 1.5*h2);
+    vertex(-0.5*h2, 1.5*h2);
+    endShape(CLOSE);
+    popMatrix();
+  }
+}
+//--------------------class S3 (puzzle no 3)----------------------
+class S3 {
+  float x3;
+  float y3;
+  float h3;
+  color c3;
+  float angle3 = 0;
+  S3(float x0, float y0, float h0, color warna) {
+    x3 = x0; 
+    y3 = y0;
+    c3 = warna;
+    h3 = h0;
+  }
+  void display() {
+    fill(c3);
+    if (dist(mouseX, mouseY, x3, y3) < h3) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x3 = mouseX;
+        y3 = mouseY;
+        } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle3 = angle3 + 45; 
+        for(int i = 0;  i <= 100000000; i+=1){
+       i= i + 1;}
+       //delay(100);
+       return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(0, 100, 0);
+    }
+    pushMatrix();
+    translate(x3, y3);
+    rotate(radians(angle3));
+    beginShape();
+    vertex(-2*h3, -h3);
+    vertex(h3, -h3);
+    vertex(h3, 2*h3);
+    endShape(CLOSE);
+    popMatrix();
+  }
+}
+//--------------------class S4 (puzzle no 4)----------------------
+class S4 {
+  float x4;
+  float y4;
+  float h4;
+  color c4;
+  float angle4 = 0;
+  S4(float x0, float y0, float h0, color warna) {
+    x4 = x0; 
+    y4 = y0;
+    c4 = warna;
+    h4 = h0;
+  }
+ void display() {
+    fill(c4);
+    if (dist(mouseX, mouseY, x4, y4) < h4) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x4 = mouseX;
+        y4 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle4 = angle4 + 45;
+       for(int i = 0;  i <= 100000000; i+=1){
+       i= i + 1;} 
+      //delay(100);
+      return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(255, 155, 255);
+    }
+    pushMatrix();
+    translate(x4, y4);
+    rotate(radians(angle4));
+    beginShape();
+    vertex(-h4, -h4);
+    vertex(2*h4, -h4);
+    vertex(-h4, 2*h4);
+    endShape(CLOSE);
+    popMatrix();
+  }
+}
+//--------------------class S5 (puzzle no 5)----------------------
+class S5 {
+  float x5;
+  float y5;
+  float h5;
+  color c5;
+  float angle5 = 0;
+  S5(float x0, float y0, float h0, color warna) {
+    x5 = x0; 
+    y5 = y0;
+    c5 = warna;
+    h5 = h0;
+  }
+  void display() {
+    fill(c5);
+    if (dist(mouseX, mouseY, x5, y5) < h5) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x5 = mouseX;
+        y5 = mouseY;
+      }else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle5 = angle5 + 45; 
+    for(int i = 0;  i <= 100000000; i+=1){
+    i= i + 1;}
+    //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(255, 255, 0);
+    }
+    pushMatrix();
+    translate(x5, y5);
+    rotate(radians(angle5));
+    beginShape();
+    vertex(-2*h5, 0);
+    vertex(h5, -3*h5);
+    vertex(h5, h5);
+    vertex(-2*h5, h5);
+    endShape(CLOSE);
+    popMatrix();
+  }
+}
+//--------------------class S6 (puzzle no 6)----------------------
+class S6 {
+  float x6;
+  float y6;
+  float h6;
+  color c6;
+  float angle6 = 0;
+  S6(float x0, float y0, float h0, color warna) {
+    x6 = x0; 
+    y6 = y0;
+    c6 = warna;
+    h6 = h0;
+  }
+  void display() {
+    fill(c6);
+    if (dist(mouseX, mouseY, x6, y6) < h6) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x6 = mouseX;
+        y6 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle6 = angle6 + 45; 
+    for(int i = 0;  i <= 100000000; i+=1){
+    i= i + 1;}
+    //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(255, 0, 255);
+    }
+    pushMatrix();
+    translate(x6, y6);
+    rotate(radians(angle6));
+    beginShape();
+    vertex(-h6, -h6);
+    vertex(3*h6, -h6);
+    vertex(0, 2*h6);
+    vertex(-h6, h6);
+    endShape(CLOSE);
+    popMatrix();
+  }
+}
+//--------------------class S7 (puzzle no 7)----------------------
+class S7 {
+  float x7;
+  float y7;
+  float h7;
+  color c7;
+  float angle7 = 0;
+  S7(float x0, float y0, float h0, color warna) {
+    x7 = x0; 
+    y7 = y0;
+    c7 = warna;
+    h7 = h0;
+  }
+  void display() {
+    fill(c7);
+    if (dist(mouseX, mouseY, x7, y7) < h7) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x7 = mouseX;
+        y7 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle7 = angle7 + 45;
+    for(int i = 0;  i <= 100000000; i+=1){
+    i= i + 1;}
+    //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(100, 0, 105);
+    }
+    pushMatrix();
+    translate(x7, y7);
+    rotate(radians(angle7));
+    beginShape();
+    vertex(2*h7, 0);
+    vertex(-h7, 3*h7);
+    vertex(-h7, -h7);
+    vertex(2*h7, -h7);
+    endShape(CLOSE);
+    popMatrix();
+  }
+}
+//------------------------------------------------------------------------------------------------------- 
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+</body>
+<footer>
+<b>Didukung Oleh :</b> 
+<li>
+<a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+</li>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

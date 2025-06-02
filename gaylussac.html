@@ -1,0 +1,291 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Energi & Kalor</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> HUKUM GAS VOLUME KONSTAN (GAY LUSSAC) </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="file/gaylussac.windows64.rar" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="file/gaylussac.rar" target="_blank">Download Source Code</a></li>
+					
+				</ul>
+			</li>
+				<li><i class="fa fa-thermometer-half" aria-hidden="true"></i><b> Energi & Kalor</b>
+				<ul>
+					<li><a href="termometer.html">Skala Termometer</a></li>
+					<li><a href="gaylussac.html">Proses Isokhorik</a></li>
+					<li><a href="isothermal.html">Proses Isotermal</a></li>
+					<li><a href="isentropis.html">Proses Isentropis</a></li>
+					<li><a href="isobar.html">Proses Isobar</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1> Hukum Gas Volume Konstan (Gay Lussac)</h1>
+<script type="text/processing" >
+boolean s1;
+Kompor K;
+float N;
+float i;
+String A="";
+float k=273;
+float k0=0;
+float p0=0;
+float p=1;
+
+void setup() {
+  size(900, 600); 
+  frameRate(10);
+  K = new Kompor(275, 475, 252, 25, 7);
+}
+
+void draw() {
+  background(230);
+  stroke(0);
+  strokeWeight(2);
+  K.update();
+  K.display();
+  fill(255);
+  rect(340, 530, 100, 30, 10, 10, 10, 10);
+  textSize(14);
+  fill(0);
+  text("RESTART", 360, 550);
+  i = N/100;
+  if (!s1) {
+    if (k <= 0.5) {
+      k = 0;
+      p = 0;
+      TermometerK(k, 100, 150);
+      Tekanan(p, 300, 150);
+      fill(0, 0, 255);
+      textSize(16);
+      text("Anda mencapai suhu Titik Nol Mutlak !", 125, 100);
+      fill(k/5, 128-k/5, 255-k/5);
+      rect(385, 250, 10, 15, 5, 5, 0, 0);
+      rect(290, 265, 200, 200, 100, 100, 10, 10);
+    } else if (k >= 2273) {
+      k = 2273;
+      p = 8.33;
+      TermometerK(k, 100, 150);
+      Tekanan(p, 300, 150);
+      fill(255, 0, 0);
+      textSize(16);
+      text("Anda mencapai suhu tertinggi simulasi !", 125, 100);
+      fill(k/5, 128-k/5, 255-k/5);
+      rect(385, 250, 10, 15, 5, 5, 0, 0);
+      rect(290, 265, 200, 200, 100, 100, 10, 10);
+    } else {
+      k = k + i;
+      p = (k/(k-i))*p;
+      TermometerK(k, 100, 150);
+      Tekanan(p, 300, 150);
+      fill(k/5, 128-k/5, 255-k/5);
+      rect(385, 250, 10, 15, 5, 5, 0, 0);
+      rect(290, 265, 200, 200, 100, 100, 10, 10);
+    }
+  }
+  if (s1) {
+    setup(); 
+    s1 = false;
+    k=273;
+    p = 1;
+  }
+  fill(0);
+  textSize(14);
+  text("Termometer", 100, 130);
+  text("Pressure Gauge", 300, 130);
+  stroke(k/5, 128-k/5, 255-k/5);
+  strokeWeight(3);
+  line(620, 380, 600+p*20, 400-k/13.65);
+  stroke(0);
+  strokeWeight(2);
+  line(600, 400, 850, 400);
+  line(850, 400, 840, 395);
+  line(850, 400, 840, 405);
+  line(600, 400, 600, 150);
+  line(600, 150, 595, 155);
+  line(600, 150, 605, 155);
+  line(390, 250, 390, 200);
+  line(390, 225, 180, 225);
+  line(180, 225, 180, 200);
+  stroke(0);
+  strokeWeight(2);
+  textSize(40);
+  fill(255);
+  text("GAS", 350, 365);
+  textSize(24);
+  fill(0);
+  text("p-T Diagram", 625, 50);
+  text("Alat Simulasi", 150, 50);
+  textSize(12);
+  fill(0);
+  text("Tekanan (bar)", 550, 140);
+  text("Temperatur (K)", 800, 425);
+  
+}
+
+public void TermometerK(float A, int x, int y) {
+  fill(100);
+  rect(x-10, y-10, 120+(2*20), (80+(2*20))/2);
+  fill(150, 0, 0);
+  rect(x, y, 110, 40);
+  fill(255);
+  textSize(18);
+  text("", x+115, y+20);
+  textSize(25);
+  text("K", x+125, y+30);
+  text(nf(A, 0, 2), x+5, y+30);
+}
+public void Tekanan(float p, int x, int y) {
+  fill(100);
+  rect(x-10, y-10, 140+(2*20), (80+(2*20))/2);
+  fill(150, 0, 0);
+  rect(x, y, 110, 40);
+  fill(255);
+  textSize(18);
+  text("", x+115, y+20);
+  textSize(25);
+  text("bar", x+120, y+30);
+  text(nf(p, 0, 3), x+5, y+30);
+}
+
+class Kompor {
+  int swidth, sheight;    // width and height of bar
+  float xpos, ypos;       // x and y position of bar
+  float spos, newspos;    // x position of slider
+  float sposMin, sposMax; // max and min values of slider
+  int loose;              // how loose/heavy
+  boolean over;           // is the mouse over the slider?
+  boolean locked;
+  float ratio;
+  Kompor (float xp, float yp, int sw, int sh, int l) {
+    swidth = sw;
+    sheight = sh;
+    xpos = xp;
+    ypos = yp-sheight/2;
+    spos = xpos + swidth/2 - sheight/2;
+    newspos = spos;
+    sposMin = xpos;
+    sposMax = xpos + swidth - sheight;
+    loose = l;
+  }
+  void update() {
+    if (overEvent()) {
+      over = true;
+    } else {
+      over = false;
+    }
+    if (mousePressed && over) {
+      locked = true;
+    }
+    if (!mousePressed) {
+      locked = false;
+    }
+    if (locked) {
+      newspos = constrain(mouseX-sheight/2, sposMin, sposMax);
+    }
+    if (abs(newspos - spos) > 1) {
+      spos = spos + (newspos-spos)/loose;
+    }
+  }
+  float constrain(float val, float minv, float maxv) {
+    return min(max(val, minv), maxv);
+  }
+  boolean overEvent() {
+    if (mouseX > xpos && mouseX < xpos+swidth &&
+      mouseY > ypos-10 && mouseY < ypos+sheight) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  void display() {
+    strokeWeight(2);
+    fill(N, 0, 255-N);
+    rect(xpos-13, ypos, swidth, sheight);
+    N = spos-388.5;
+    if (N >= -200 && N <= 0) {
+      A = "Pendinginan";
+    }
+    if (N <=355 && N >=0) {
+      A ="Pemanasan";
+    }
+    if (N == 0) {
+      A = "OFF";
+    }
+    fill(0);
+    textSize(14);
+    text(A, xpos-50+(swidth/2), ypos-sheight+80);
+    text("MAX", xpos+120+(swidth/2), ypos-sheight+45);
+    text("MIN", xpos-170+(swidth/2), ypos-sheight+45);
+    if (over || locked) {
+      fill(255, 0, 0);
+    } else {
+      fill(100, 100, 100);
+    }
+    ellipse(spos, ypos+20, sheight, sheight);
+  }
+  float getPos() {
+    return spos;
+  }
+}
+
+void mousePressed() {
+  if (mouseX >340 && mouseX < 440 && mouseY> 530 && mouseY<560) {
+    if (s1==false) {
+      s1 = true;
+    } else {
+      s1 = false;
+    }
+  }
+}
+
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

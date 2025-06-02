@@ -1,0 +1,366 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Energi & Kalor</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> SKALA TEMPERATUR </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="file/termometer.windows64.rar" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="file/termometer.rar" target="_blank">Download Source Code</a></li>
+					
+				</ul>
+			</li>
+				<li><i class="fa fa-thermometer-half" aria-hidden="true"></i><b> Energi & Kalor</b>
+				<ul>
+					<li><a href="termometer.html">Skala Termometer</a></li>
+					<li><a href="gaylussac.html">Proses Isokhorik</a></li>
+					<li><a href="isothermal.html">Proses Isotermal</a></li>
+					<li><a href="isentropis.html">Proses Isentropis</a></li>
+					<li><a href="isobar.html">Proses Isobar</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1>Skala Termometer </h1>
+<script type="text/processing" >
+Kompor K;
+float N;
+float i;
+float w;
+float Tair = 20;
+float T = 20;
+float f;
+float r;
+float k;
+String A="";
+
+void setup() {
+  size(1000, 700);
+  K = new Kompor(375, 575, 252, 25, 10);
+}
+
+void draw() {
+  background(230);
+  strokeWeight(2);
+  stroke(0);
+  fill(0);
+  text("Temperatur Kompor", 800, 480);
+  text("Temperatur Air", 800, 380);
+  text("Temperatur Air", 800, 280);
+  text("Temperatur Air", 800, 180);
+  text("Temperatur Air", 800, 80);
+  i = N-114;
+  Tair = Tair +i/10000;
+  T = Tair*2;
+  f = ((1.8)*Tair)+32;
+  r = 0.8*Tair;
+  k = Tair+273;
+  if (Tair>=100) {
+    Tair=100;
+  }
+  if (Tair<=0) {
+    Tair=0;
+  }
+  Termometer(i, 800, 500);
+  Termometer(Tair, 800, 400);
+  TermometerF(f, 800, 300);
+  TermometerR(r, 800, 200);
+  TermometerK(k, 800, 100);
+  fill(128, 64, 64);
+  rect(250, 550, 500, 50);
+  K.update();
+  K.display();
+  stroke(0);
+  fill(230);
+  rect(260, 350, 480, 200, 0, 0, 10, 10);
+  stroke(230);
+  line(262, 350, 738, 350);
+  stroke(0);
+  fill(Tair+100, 100, 150);
+  rect(260, 450, 480, 100, 0, 0, 10, 10);
+  stroke(Tair+100, 100, 150);
+  fill(255);
+  line(262, 450, 738, 450);
+  stroke(0);
+  fill(0);
+  line(790, 415, 710, 415);
+  line(710, 415, 710, 490);
+  strokeWeight(1);
+  fill(255);
+  rect(343, 50, 14, 490, 10, 10, 10, 10);
+  rect(443, 50, 14, 490, 10, 10, 10, 10);
+  rect(543, 50, 14, 490, 10, 10, 10, 10);
+  rect(643, 50, 14, 490, 10, 10, 10, 10);
+  strokeWeight(2);
+  fill(255, 0, 0);
+  ellipse(710, 490, 5, 5);
+  ellipse(700, 590, 5, 5);
+  line(880, 550, 880, 590);
+  line(880, 590, 700, 590);
+  line(750, 415, 750, 120);
+  line(750, 120, 790, 120);
+  line(750, 220, 790, 220);
+  line(750, 320, 790, 320);
+  stroke(255, 0, 0);
+  line(350, 520, 350, 300-T);
+  ellipse(350, 520, 10, 30);
+  line(450, 520, 450, 300-T);
+  ellipse(450, 520, 10, 30);
+  line(550, 520, 550, 300-T);
+  ellipse(550, 520, 10, 30);
+  line(650, 520, 650, 300-T);
+  ellipse(650, 520, 10, 30);
+  fill(0);
+  textSize(12);
+  text("Skala Celsius", 300, 40);
+  text("Skala Fahrenheit", 400, 40);
+  text("Skala Reamur", 520, 40);
+  text("Skala Kelvin", 620, 40);
+  text("Konversi Skala Temperatur", 50, 100);
+  text("T", 50, 130);
+  text("T", 100, 130);
+  text("- 32", 115, 132.5);
+  text("- 273", 210, 132.5);
+  text("T", 160, 130);
+  text("T", 195, 130);
+  text("C", 55, 135);
+  text("F", 105, 135);
+  text("R", 165, 135);
+  text("K", 200, 135);
+  text("=", 78, 145);
+  text("=", 145, 145);
+  text("=", 185, 145);
+  text("5", 55, 155);
+  text("9", 115, 155);
+  text("4", 165, 155);
+  text("5", 215, 155);
+  strokeWeight(1);
+  stroke(0);
+  line(45, 140, 70, 140);
+  line(95, 140, 140, 140);
+  line(160, 140, 180, 140);
+  line(200, 140, 250, 140);
+  strokeWeight(1);
+  stroke(0);
+  for (int i = 0; i<=200; i=i+20) {
+    line(330, 100+i, 340, 100+i);
+    text(100-i/2, 308, 105+i);
+  }
+  for (int i = 0; i<=200; i=i+20) {
+    line(430, 100+i, 440, 100+i);
+  }
+  text("212", 405, 103);
+  text("194", 405, 123);
+  text("176", 405, 143);
+  text("158", 405, 163);
+  text("140", 405, 183);
+  text("122", 405, 203);
+  text("104", 405, 223);
+  text("86", 405, 243);
+  text("68", 405, 263);
+  text("50", 405, 283);
+  text("32", 405, 303);
+  for (int i = 0; i<=200; i=i+20) {
+    line(530, 100+i, 540, 100+i);
+  }
+  text("80", 505, 103);
+  text("72", 505, 123);
+  text("64", 505, 143);
+  text("56", 505, 163);
+  text("48", 505, 183);
+  text("40", 505, 203);
+  text("32", 505, 223);
+  text("24", 505, 243);
+  text("16", 505, 263);
+  text("8", 505, 283);
+  text("0", 505, 303);
+  for (int i = 0; i<=200; i=i+20) {
+    line(630, 100+i, 640, 100+i);
+    text(373-i/2, 608, 105+i);
+  }
+  strokeWeight(2);
+  textSize(14);
+}
+
+class Kompor {
+  int swidth, sheight;    // width and height of bar
+  float xpos, ypos;       // x and y position of bar
+  float spos, newspos;    // x position of slider
+  float sposMin, sposMax; // max and min values of slider
+  int loose;              // how loose/heavy
+  boolean over;           // is the mouse over the slider?
+  boolean locked;
+  float ratio;
+  Kompor (float xp, float yp, int sw, int sh, int l) {
+    swidth = sw;
+    sheight = sh;
+    xpos = xp;
+    ypos = yp-sheight/2;
+    spos = xpos + swidth/2 - sheight/2;
+    newspos = spos;
+    sposMin = xpos;
+    sposMax = xpos + swidth - sheight;
+    loose = l;
+  }
+  void update() {
+    if (overEvent()) {
+      over = true;
+    } else {
+      over = false;
+    }
+    if (mousePressed && over) {
+      locked = true;
+    }
+    if (!mousePressed) {
+      locked = false;
+    }
+    if (locked) {
+      newspos = constrain(mouseX-sheight/2, sposMin, sposMax);
+    }
+    if (abs(newspos - spos) > 1) {
+      spos = spos + (newspos-spos)/loose;
+    }
+  }
+  float constrain(float val, float minv, float maxv) {
+    return min(max(val, minv), maxv);
+  }
+  boolean overEvent() {
+    if (mouseX > xpos && mouseX < xpos+swidth &&
+      mouseY > ypos-10 && mouseY < ypos+sheight) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  void display() {
+    strokeWeight(2);
+    fill(N, 0, 255-N);
+    rect(xpos-13, ypos, swidth, sheight);
+    //rect(xpos, ypos+sheight, swidth/10, sheight/2);
+    //rect(xpos+swidth -50, ypos+sheight, swidth/10, sheight/2);
+
+    N = spos-375;
+    if (N >= 0 && N <= 110) {
+      A = "Pendinginan";
+    }
+    if (N <=255 && N >=120) {
+      A ="Pemanasan";
+    }
+    if (N == 114) {
+      A = "OFF";
+    }
+    fill(0);
+    textSize(14);
+    text(A, xpos-50+(swidth/2), ypos-sheight+80);
+    text("MAX", xpos+120+(swidth/2), ypos-sheight+45);
+    text("MIN", xpos-170+(swidth/2), ypos-sheight+45);
+    if (over || locked) {
+      fill(255, 0, 0);
+    } else {
+      fill(100, 100, 100);
+    }
+    ellipse(spos, ypos+20, sheight, sheight);
+  }
+  float getPos() {
+    return spos;
+  }
+}
+
+public void Termometer(float A, int x, int y) {
+  fill(100);
+  rect(x-10, y-10, 120+(2*20), (80+(2*20))/2);
+  fill(150, 0, 0);
+  rect(x, y, 110, 40);
+  fill(255);
+  textSize(18);
+  text("o", x+115, y+20);
+  textSize(25);
+  text("C", x+125, y+30);
+  text(nf(A, 0, 2), x+5, y+30);
+}
+public void TermometerR(float A, int x, int y) {
+  fill(100);
+  rect(x-10, y-10, 120+(2*20), (80+(2*20))/2);
+  fill(150, 0, 0);
+  rect(x, y, 110, 40);
+  fill(255);
+  textSize(18);
+  text("o", x+115, y+20);
+  textSize(25);
+  text("R", x+125, y+30);
+  text(nf(A, 0, 2), x+5, y+30);
+}
+public void TermometerK(float A, int x, int y) {
+  fill(100);
+  rect(x-10, y-10, 120+(2*20), (80+(2*20))/2);
+  fill(150, 0, 0);
+  rect(x, y, 110, 40);
+  fill(255);
+  textSize(18);
+  text("", x+115, y+20);
+  textSize(25);
+  text("K", x+125, y+30);
+  text(nf(A, 0, 2), x+5, y+30);
+}
+public void TermometerF(float A, int x, int y) {
+  fill(100);
+  rect(x-10, y-10, 120+(2*20), (80+(2*20))/2);
+  fill(150, 0, 0);
+  rect(x, y, 110, 40);
+  fill(255);
+  textSize(18);
+  text("o", x+115, y+20);
+  textSize(25);
+  text("F", x+125, y+30);
+  text(nf(A, 0, 2), x+5, y+30);
+}
+
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

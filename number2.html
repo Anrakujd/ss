@@ -1,0 +1,753 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen matematika bebas diakses oleh guru dan siswa untuk membantu memahami matematika di sekolah">
+<meta name="Keywords" content="matematika, eksperimen, praktikum online, webbase praktikum, matematika online, bilangan, konkret, bilangan konkret, gasing">
+<meta name="author" content="Djukarna">
+<title>Batang Bilangan</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> Ayo Bermain Matematika</h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-square-o" aria-hidden="true"></i><b> Aljabar </b>
+				<ul>
+					<li><a href="number.html">Kubus Bilangan</a></li>
+					<li><a href="number2.html">Batang Bilangan</a></li>
+					<li><a href="number3.html">Batang Pecahan</a></li>
+					<li><a href="simulasi jam.html">Simulasi Jam</a></li>
+				</ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak3">
+<h1> Batang Bilangan</h1>
+<p> Klik dan drag Batang Bilangan, dan susun menjadi bilangan sesuka mu, untuk menghapus tekan DEL. Ikuti petunjuk gurumu!</p>
+<script type="text/processing" >
+ArrayList<Node> nodes = new ArrayList();
+final int A=30;
+final int B=80;
+final int rectWidth = 20;
+final int rectHeight = 20;
+final int DRAG_NONE = 0; 
+final int DRAG_RECT1 = 1;
+final int DRAG_RECT2 = 2;
+final int DRAG_RECT3 = 3;
+final int DRAG_RECT4 = 4;
+final int DRAG_RECT5 = 5;
+final int DRAG_RECT6 = 6;
+final int DRAG_RECT7 = 7;
+final int DRAG_RECT8 = 8;
+final int DRAG_RECT9 = 9;
+final int DRAG_RECT10 = 10;
+
+
+int dragging = DRAG_NONE; 
+
+final int EDIT = 0; // dragging 
+final int RUN  = 1; // run the result
+int state = EDIT;
+
+final int UNDEFINED = -1; 
+int draggingAnExistingRectClass = UNDEFINED; 
+
+final PVector pvRect = new PVector(40, 110); 
+
+void setup() {
+  size(1250, 800);
+} 
+
+void draw() {
+  background(0,200,200);
+  
+  for (int i = 0; i < nodes.size ()-1; i++) { 
+    Node currentNode = nodes.get(i);
+    currentNode.display();
+  }
+  
+  if (nodes.size()>0) {
+    Node currentNode = nodes.get(nodes.size()-1);
+    currentNode.display();
+  }
+  
+  fill(25);
+  rect(10, 20, 280, 270,20,20,20,20);
+  fill(230)
+  textSize(14);
+  text("Batang Bilangan",100,55);
+    
+  //kotak 1
+  strokeWeight(1);
+  stroke(230);
+  fill(255, 0, 0);
+  rect(A, B, 20, 20);
+  fill(255);
+  textSize(14);
+  text("1", 36, 95);
+  
+  //kotak 2
+  strokeWeight(1);
+  stroke(230);
+  fill(215, 215, 0);
+  rect(A, B+40, 40, 20);
+  fill(255);
+  textSize(14);
+  text("2", 46, 135);
+  
+  //kotak 3
+  strokeWeight(1);
+  stroke(230);
+  fill(0, 0, 255);
+  rect(A, B+80, 60, 20);
+  fill(255);
+  textSize(14);
+  text("3", 56, 175);
+  
+  //kotak 4
+  strokeWeight(1);
+  stroke(230);
+  fill(143, 0, 255);
+  rect(A, B+120, 80, 20);
+  fill(255);
+  textSize(14);
+  text("4", 66, 215);
+  
+  //kotak 5
+  strokeWeight(1);
+  stroke(230);
+  fill(32, 22, 91);
+  rect(A, B+160, 100, 20);
+  fill(255);
+  textSize(14);
+  text("5", 76, 255);
+  
+  //kotak 6
+  strokeWeight(1);
+  stroke(230);
+  fill(61, 153, 121);
+  rect(A+120, B+160, 120, 20);
+  fill(255);
+  textSize(14);
+  text("6", 210, 255);
+  
+  //kotak 7
+  strokeWeight(1);
+  stroke(230);
+  fill(143, 100, 255);
+  rect(A+100, B+120, 140, 20);
+  fill(255);
+  textSize(14);
+  text("7", 190, 215);
+  
+  //kotak 8
+  strokeWeight(1);
+  stroke(230);
+  fill(75, 0, 130);
+  rect(A+80, B+80, 160, 20);
+  fill(255);
+  textSize(14);
+  text("8", 190, 175);
+  
+  //kotak 9
+  strokeWeight(1);
+  stroke(230);
+  fill(0, 210, 0);
+  rect(A+60, B+40, 180, 20);
+  fill(255);
+  textSize(14);
+  text("9", 175, 135);
+  
+  //kotak 10
+  strokeWeight(1);
+  stroke(230);
+  fill(255, 127, 0);
+  rect(A+40, B, 200, 20);
+  fill(255);
+  textSize(14);
+  text("10", 160, 95);
+    
+  if (dragging==DRAG_RECT1) {
+    // dragging kotak1 
+    strokeWeight(1);
+	stroke(230);
+	fill(255, 0, 0);
+	rect(mouseX, mouseY, 20, 20);
+	fill(255);
+	textSize(14);
+	text("1", mouseX+8, mouseY+16);
+    } 
+    else if (dragging==DRAG_RECT2) {
+    // dragging kotak2
+	strokeWeight(1);
+	stroke(230);
+	fill(215, 215, 0);
+	rect(mouseX, mouseY, 40, 20);
+	fill(255);
+	textSize(14);
+	text("2", mouseX+18, mouseY+16);
+	} 
+    else if (dragging==DRAG_RECT3) {
+    // dragging kotak3
+    strokeWeight(1);
+	stroke(230);
+	fill(0, 0, 255);
+	rect(mouseX, mouseY, 60, 20);
+	fill(255);
+	textSize(14);
+	text("3",mouseX+25, mouseY+16);
+	} 
+	else if (dragging==DRAG_RECT4) {
+    // dragging kotak4
+	strokeWeight(1);
+	stroke(230);
+	fill(143, 0, 255);
+	rect(mouseX, mouseY, 80, 20);
+	fill(255);
+	textSize(14);
+	text("4", mouseX+35, mouseY+16);
+	} 
+    else if (dragging==DRAG_RECT5) {
+    // dragging kotak5
+    strokeWeight(1);
+	stroke(230);
+	fill(32, 22, 91);
+	rect(mouseX, mouseY, 100, 20);
+	fill(255);
+	textSize(14);
+	text("5", mouseX+40, mouseY+16);
+	} 
+	else if (dragging==DRAG_RECT6) {
+    // dragging kotak6
+    strokeWeight(1);
+	stroke(230);
+	fill(61, 153, 121);
+	rect(mouseX, mouseY, 120, 20);
+	fill(255);
+	textSize(14);
+	text("6", mouseX+65, mouseY+16);
+	} 
+	else if (dragging==DRAG_RECT7) {
+    // dragging kotak7
+	strokeWeight(1);
+	stroke(230);
+	fill(143, 100, 255);
+	rect(mouseX, mouseY, 140, 20);
+	fill(255);
+	textSize(14);
+	text("7", mouseX+70, mouseY+16);
+	} 
+    else if (dragging==DRAG_RECT8) {
+    // dragging kotak8
+    strokeWeight(1);
+	stroke(230);
+	fill(75, 0, 130);
+	rect(mouseX, mouseY, 160, 20);
+	fill(255);
+	textSize(14);
+	text("8", mouseX+75, mouseY+16);
+	} 
+	else if (dragging==DRAG_RECT9) {
+    // dragging kotak9
+	strokeWeight(1);
+	stroke(230);
+	fill(0, 210, 0);
+	rect(mouseX, mouseY, 180, 20);
+	fill(255);
+	textSize(14);
+	text("9", mouseX+85, mouseY+16);
+	} 
+   else if (dragging==DRAG_RECT10) {
+    // dragging kotak10
+    strokeWeight(1);
+	stroke(230);
+	fill(255, 127, 0);
+	rect(mouseX, mouseY, 200, 20);
+	fill(255);
+	textSize(14);
+	text("10", mouseX+95, mouseY+16);
+	} 
+    else if (draggingAnExistingRectClass!=UNDEFINED) {
+    // menggeser bagunan yang sudah ada
+    Node RectClass = nodes.get(draggingAnExistingRectClass);
+    RectClass.incrementXY( mouseX-pmouseX, mouseY-pmouseY );
+   }
+}  
+
+void mousePressed() {
+     draggingAnExistingRectClass=UNDEFINED; // reset 
+	  if (mouseX >= 30 && mouseX <= 50 && mouseY >= 80 && mouseY <= 100 ) {
+      dragging=DRAG_RECT1;
+      return;
+      } 
+      else if (mouseX >= 30 && mouseX<= 70 && mouseY >= 120 && mouseY <= 140 ) {
+      dragging=DRAG_RECT2;
+      return;
+      } 
+      else if (mouseX >= 30 && mouseX <= 90 && mouseY >= 160 && mouseY <= 180) {
+      dragging=DRAG_RECT3;
+      return;
+      } 
+	  else if (mouseX >= 30 && mouseX<= 110 && mouseY >= 200 && mouseY <= 220 ) {
+      dragging=DRAG_RECT4;
+      return;
+      } 
+      else if (mouseX >= 30 && mouseX <= 130 && mouseY >= 240 && mouseY <= 260) {
+      dragging=DRAG_RECT5;
+      return;
+      } 
+	  else if (mouseX >= 150 && mouseX<= 270 && mouseY >= 240 && mouseY <= 260 ) {
+      dragging=DRAG_RECT6;
+      return;
+      } 
+      else if (mouseX >= 130 && mouseX <= 270 && mouseY >= 200 && mouseY <= 220) {
+      dragging=DRAG_RECT7;
+      return;
+      } 
+	  else if (mouseX >= 110 && mouseX <= 270 && mouseY >= 160 && mouseY <= 180) {
+      dragging=DRAG_RECT8;
+      return;
+      } 
+	  else if (mouseX >= 90 && mouseX<= 270 && mouseY >= 120 && mouseY <= 140 ) {
+      dragging=DRAG_RECT9;
+      return;
+      } 
+      else if (mouseX >= 70 && mouseX <= 270 && mouseY >= 80 && mouseY <= 100) {
+      dragging=DRAG_RECT10;
+      return;
+      } 
+      else {
+      for (int i = 0; i < nodes.size (); i++) { 
+        Node RectClass = nodes.get(i);
+          if (RectClass.over()) {
+             draggingAnExistingRectClass = i; 
+              return;        
+				}	
+			}
+		}    
+}
+
+void mouseReleased() {
+      if (dragging==DRAG_RECT1) {
+      dragging = DRAG_NONE;   
+      nodes.add (new Kotak1(mouseX, mouseY));
+      } 
+      else if (dragging==DRAG_RECT2) {
+      dragging = DRAG_NONE; // reset
+      nodes.add (new Kotak2(mouseX, mouseY));
+      } 
+      else if (dragging==DRAG_RECT3) {
+      dragging = DRAG_NONE; // reset 
+      nodes.add (new Kotak3(mouseX, mouseY));
+      } 
+	  else if (dragging==DRAG_RECT4) {
+      dragging = DRAG_NONE; // reset
+      nodes.add (new Kotak4(mouseX, mouseY));
+      } 
+      else if (dragging==DRAG_RECT5) {
+      dragging = DRAG_NONE; // reset 
+      nodes.add (new Kotak5(mouseX, mouseY));
+      } 
+	  else if (dragging==DRAG_RECT6) {
+      dragging = DRAG_NONE; // reset
+      nodes.add (new Kotak6(mouseX, mouseY));
+      } 
+      else if (dragging==DRAG_RECT7) {
+      dragging = DRAG_NONE; // reset 
+      nodes.add (new Kotak7(mouseX, mouseY));
+      } 
+	  else if (dragging==DRAG_RECT8) {
+      dragging = DRAG_NONE; // reset 
+      nodes.add (new Kotak8(mouseX, mouseY));
+      } 
+	  else if (dragging==DRAG_RECT9) {
+      dragging = DRAG_NONE; // reset
+      nodes.add (new Kotak9(mouseX, mouseY));
+      } 
+      else if (dragging==DRAG_RECT10) {
+      dragging = DRAG_NONE; // reset 
+      nodes.add (new Kotak10(mouseX, mouseY));
+      } 
+    draggingAnExistingRectClass=UNDEFINED; // reset
+}
+
+interface Node {
+  void display();
+  void incrementXY(float x_, float y_);
+  PVector getPos();
+  boolean over();
+}
+// menghapus broooo
+void keyPressed() {
+  // only in state EDIT: 
+  if (state==EDIT) {
+    if (key==' ') {
+      state=RUN;
+      frameRate(2);
+    } else if (key==DELETE) {
+      if (nodes.size()>0) { 
+        nodes.remove(nodes.size()-1);
+      }
+    }
+  }
+}
+
+class Kotak1 implements Node {  
+  float x=0;
+  float y=0;
+  Kotak1(float tempX, float tempY) {
+    x = tempX;
+    y = tempY;
+  } 
+  void display() {    
+   strokeWeight(1);
+	stroke(230);
+	fill(255, 0, 0);
+	rect(x, y, 20, 20);
+	fill(255);
+	textSize(14);
+	text("1", x+6, y+16);
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x+w/2, y+h/2);
+  }
+  boolean over() {
+    return mouseX>x && mouseX<x+20 && mouseY>y && mouseY<y+20;
+  }
+} 
+
+class Kotak2 implements Node {  
+  float x=0;
+  float y=0;
+  Kotak2(float tempX, float tempY) {
+    x = tempX;
+    y = tempY;
+  } 
+  void display() {    
+   strokeWeight(1);
+	stroke(230);
+	fill(255, 255, 0);
+	rect(x, y, 40, 20);
+	fill(255);
+	textSize(14);
+	text("2", x+16, y+16);
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x+w/2, y+h/2);
+  }
+  boolean over() {
+    return mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+20;
+  }
+} 
+
+class Kotak3 implements Node {  
+  float x=0;
+  float y=0;
+  Kotak3(float tempX, float tempY) {
+    x = tempX;
+    y = tempY;
+  } 
+  void display() {    
+   strokeWeight(1);
+	stroke(230);
+	fill(0, 0, 255);
+	rect(x, y, 60, 20);
+	fill(255);
+	textSize(14);
+	text("3", x+26, y+16);
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x+w/2, y+h/2);
+  }
+  boolean over() {
+    return mouseX>x && mouseX<x+60 && mouseY>y && mouseY<y+20;
+  }
+} 
+
+class Kotak4 implements Node {  
+  float x=0;
+  float y=0;
+  Kotak4(float tempX, float tempY) {
+    x = tempX;
+    y = tempY;
+  } 
+  void display() {    
+   strokeWeight(1);
+	stroke(230);
+	fill(143, 0, 255);
+	rect(x, y, 80, 20);
+	fill(255);
+	textSize(14);
+	text("4", x+36, y+16);
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x+w/2, y+h/2);
+  }
+  boolean over() {
+    return mouseX>x && mouseX<x+80 && mouseY>y && mouseY<y+20;
+  }
+} 
+
+class Kotak5 implements Node {  
+  float x=0;
+  float y=0;
+  Kotak5(float tempX, float tempY) {
+    x = tempX;
+    y = tempY;
+  } 
+  void display() {    
+   strokeWeight(1);
+	stroke(230);
+	fill(32, 22, 91);
+	rect(x, y, 100, 20);
+	fill(255);
+	textSize(14);
+	text("5", x+46, y+16);
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x+w/2, y+h/2);
+  }
+  boolean over() {
+    return mouseX>x && mouseX<x+100 && mouseY>y && mouseY<y+20;
+  }
+}
+ 
+class Kotak6 implements Node {  
+  float x=0;
+  float y=0;
+  Kotak6(float tempX, float tempY) {
+    x = tempX;
+    y = tempY;
+  } 
+  void display() {    
+	strokeWeight(1);
+	stroke(230);
+	fill(61, 153, 121);
+	rect(x, y, 120, 20);
+	fill(255);
+	textSize(14);
+	text("6", x+56, y+16);
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x+w/2, y+h/2);
+  }
+  boolean over() {
+    return mouseX>x && mouseX<x+120 && mouseY>y && mouseY<y+20;
+  }
+} 
+
+class Kotak7 implements Node {  
+  float x=0;
+  float y=0;
+  Kotak7(float tempX, float tempY) {
+    x = tempX;
+    y = tempY;
+  } 
+  void display() {    
+	strokeWeight(1);
+	stroke(230);
+	fill(143, 100, 255);
+	rect(x, y, 140, 20);
+	fill(255);
+	textSize(14);
+	text("7", x+66, y+16);
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x+w/2, y+h/2);
+  }
+  boolean over() {
+    return mouseX>x && mouseX<x+140 && mouseY>y && mouseY<y+20;
+  }
+} 
+
+class Kotak8 implements Node {  
+  float x=0;
+  float y=0;
+  Kotak8(float tempX, float tempY) {
+    x = tempX;
+    y = tempY;
+  } 
+  void display() {    
+	strokeWeight(1);
+	stroke(230);
+	fill(75, 0, 130);
+	rect(x, y, 160, 20);
+	fill(255);
+	textSize(14);
+	text("8", x+76, y+16);
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x+w/2, y+h/2);
+  }
+  boolean over() {
+    return mouseX>x && mouseX<x+160 && mouseY>y && mouseY<y+20;
+  }
+} 
+
+class Kotak9 implements Node {  
+  float x=0;
+  float y=0;
+  Kotak9(float tempX, float tempY) {
+    x = tempX;
+    y = tempY;
+  } 
+  void display() {    
+	strokeWeight(1);
+	stroke(230);
+	fill(0, 210, 0);
+	rect(x, y, 180, 20);
+	fill(255);
+	textSize(14);
+	text("9", x+86, y+16);
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x+w/2, y+h/2);
+  }
+  boolean over() {
+    return mouseX>x && mouseX<x+180 && mouseY>y && mouseY<y+20;
+  }
+} 
+
+class Kotak10 implements Node {  
+  float x=0;
+  float y=0;
+  Kotak10(float tempX, float tempY) {
+    x = tempX;
+    y = tempY;
+  } 
+  void display() {    
+	strokeWeight(1);
+	stroke(230);
+	fill(255, 127, 0);
+	rect(x, y, 200, 20);
+	fill(255);
+	textSize(14);
+	text("10", x+96, y+16);
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x+w/2, y+h/2);
+  }
+  boolean over() {
+    return mouseX>x && mouseX<x+200 && mouseY>y && mouseY<y+20;
+  }
+} 
+//------------------------------------------------------------------------------------------------------- 
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+</body>
+<footer>
+<b>Didukung Oleh :</b> 
+<li>
+<a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+</li>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

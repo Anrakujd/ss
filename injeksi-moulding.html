@@ -1,0 +1,601 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Simulasi Mesin</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> SIMULASI MESIN INJEKSI MOULDING </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="" target="_blank">Download Source Code</a></li>
+					
+				</ul>
+			</li>
+				<li><i class="fa fa-gear" aria-hidden="true"></i><b> Mesin Produksi</b>
+				<ul>
+					<li><a href="injeksi-moulding.html">Injeksi Moulding</a></li>
+					
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1> Proses Kerja Mesin Injeksi Moulding</h1>
+<script type="text/processing" >
+//variabel dan konstanta
+float x;
+float y=22;
+float z;
+float a;
+float t;
+float tc;
+float ti;
+float w=230;
+float w1;
+float b;
+float d;
+float e;
+boolean t1,t2,t3,t4,t5,t6,t7;
+boolean auto=false;
+float wt1,wt2,wt3,wt4,wt6,wt7;
+
+void setup(){
+size(1000,600);
+}
+
+void draw(){
+background(230);
+//fungsi matematika auto
+fill(0);
+text("Heater",535,200);
+text("cooler",630,200);
+text("Hidrolik Motor & Silinder",800,200);
+text("Hooper",700,90);
+text("Clamping",30,190);
+text("Silinder",30,210);
+//bagian mesin yang diam
+strokeCap(ROUND);
+stroke(0,100,0);
+strokeWeight(2);
+fill(0,155,0);
+rect(150,500,700,50);
+rect(100,450,800,50);
+rect(100,400,100,50);
+rect(400,400,500,50);
+strokeWeight(4);
+stroke(50);
+line(101,500,898,500);
+stroke(0,155,0);
+line(103,450,197,450);
+line(403,450,896,450);
+fill(50);
+stroke(50);
+rect(100,150,75,250);
+rect(400,150,40,250);
+rect(400,380,500,20);
+rect(780,300,50,100);
+fill(180);
+stroke(180);
+rect(178,160,218,25);
+rect(178,360,218,25);
+fill(255,94,19);
+strokeWeight(2);
+stroke(0);
+rect(20,240,78,70);
+fill(50);
+stroke(50);
+rect(200,150,15,250);
+rect(100,400,115,25);
+stroke(0);
+fill(100);
+rect(370,200,30,140);
+rect(330,200,40,15);
+rect(330,325,40,15);
+rect(350,215,20,10);
+rect(350,315,20,10);
+//----
+line(330,200,330,340);
+line(350,215,350,315);
+stroke(100);
+line(370,202,370,223);
+line(370,215,352,215);
+line(370,317,370,338);
+line(370,325,352,325);
+line(400,270,800,270);
+//lubang injektor
+stroke(230);
+fill(230);
+rect(370,267,10,6);
+ellipse(390,270,20,20);
+rect(390,250,60,40);
+//barrel
+stroke(0);
+fill(200);
+rect(440,240,350,60);
+//hooper
+stroke(0);
+fill(200);
+rect(700,100,30,140);
+triangle(700,100,700,240,650,100);
+triangle(730,100,780,100,730,240);
+triangle(700,100,705,240,655,100);
+triangle(730,100,775,100,725,240);
+stroke(200);
+rect(400,250,40,40);
+line(700,100,700,238);
+line(730,100,730,238);
+line(702,240,728,240);
+line(700,242,732,242);
+line(700,244,732,244);
+line(440,252,440,288);
+line(400,252,400,287);
+stroke(0);
+fill(255,0,255);
+rect(400,255,390,30);
+fill(200);
+triangle(400,250,385,265,400,265);
+triangle(400,275,385,275,400,290);
+triangle(400,255,440,255,400,265);
+triangle(400,275,440,285,400,285);
+fill(255,0,255);
+rect(370,267,30,6);
+fill(200);
+stroke(200);
+line(400,255,433,255);
+line(400,285,433,285);
+line(400,287,400,277);
+line(400,253,400,263);
+stroke(255,0,255);
+line(400,267,400,273);
+stroke(0);
+line(700,100,780,100);
+stroke(200);
+strokeWeight(3);
+line(724,103,724,240);
+line(727,103,727,227);
+line(705,103,705,240);
+line(702,103,702,227);
+line(700,240,730,240);
+line(705,255,723,255);
+stroke(0)
+strokeWeight(2);
+line(705,255,705,240);
+line(725,255,725,240);
+line(705,240,655,100);
+line(725,240,775,100);
+line(730,240,780,100);
+line(700,240,650,100);
+line(730,240,740,240);
+stroke(200,0,0);
+fill(255,0,0);
+rect(470,230,35,8);
+rect(470,300,35,8);
+rect(535,230,35,8);
+rect(535,300,35,8);
+rect(600,230,35,8);
+rect(600,300,35,8);
+stroke(0,0,200);
+fill(0,0,255);
+rect(655,230,25,8);
+rect(655,300,25,8);
+fill(255,0,255);
+strokeWeight(1);
+stroke(255,0,255);
+rect(706,119,18,138);
+//bagian mesin yang bergerak
+//----benda
+stroke(255-w1,w,255-w1);
+fill(255-w1,w,255-w1);
+strokeCap(SQUARE);
+strokeWeight(4);
+rect(263+d+x,220+b,12,100);
+rect(278+d+x,230+b,17,80);
+//---
+fill(255,94,19);
+strokeWeight(1);
+strokeCap(ROUND);
+stroke(0);
+rect(175,250,52+x,50);
+fill(50);
+stroke(50);
+rect(220+x,150,10,250);
+rect(230+x,150,10,50);
+rect(230+x,340,10,60);
+rect(230+x,235,d,10);
+strokeWeight(2);
+stroke(0);
+fill(100);
+rect(230+x,200,30,140);
+rect(260+x,220,15,100);
+rect(275+x,230,20,80);
+stroke(100);
+line(260+x,222,260+x,316);
+line(275+x,232,275+x,308);
+// no return valve
+stroke(0);
+fill(10);
+rect(470+y,255,20,30);
+rect(780,255,10,30);
+stroke(100);
+fill(100);
+rect(460+y-a,265,400,10);
+strokeCap(SQUARE);
+stroke(255,0,255);
+strokeWeight(4);
+line(468+y,261,500+y,261);
+line(468+y,279,500+y,279);
+//ulir feeder
+strokeCap(ROUND);
+stroke(0);
+fill(10);
+//ulir 0
+triangle(530+y+z,255,535+y+z,255,530+y+z,285);
+triangle(525+y+z,285,530+y+z,285,530+y+z,255);
+//ulir 1
+triangle(550+y+z,255,555+y+z,255,550+y+z,285);
+triangle(545+y+z,285,540+y+z,277,550+y+z,277);
+triangle(545+y+z,285,550+y+z,285,550+y+z,255);
+triangle(535+y+z,255,540+y+z,263,530+y+z,263);
+//ulir 2
+triangle(570+y+z,255,575+y+z,255,570+y+z,285);
+triangle(565+y+z,285,560+y+z,277,570+y+z,277);
+triangle(565+y+z,285,570+y+z,285,570+y+z,255);
+triangle(555+y+z,255,560+y+z,263,550+y+z,263);
+//ulir 3
+triangle(590+y+z,255,595+y+z,255,590+y+z,285);
+triangle(585+y+z,285,580+y+z,277,590+y+z,277);
+triangle(585+y+z,285,590+y+z,285,590+y+z,255);
+triangle(575+y+z,255,580+y+z,263,570+y+z,263);
+//ulir 4
+triangle(610+y+z,255,615+y+z,255,610+y+z,285);
+triangle(605+y+z,285,600+y+z,277,610+y+z,277);
+triangle(605+y+z,285,610+y+z,285,610+y+z,255);
+triangle(595+y+z,255,600+y+z,263,590+y+z,263);
+//ulir 5
+triangle(630+y+z,255,635+y+z,255,630+y+z,285);
+triangle(625+y+z,285,620+y+z,277,630+y+z,277);
+triangle(625+y+z,285,630+y+z,285,630+y+z,255);
+triangle(615+y+z,255,620+y+z,263,610+y+z,263);
+//ulir 6
+triangle(650+y+z,255,655+y+z,255,650+y+z,285);
+triangle(645+y+z,285,640+y+z,277,650+y+z,277);
+triangle(645+y+z,285,650+y+z,285,650+y+z,255);
+triangle(635+y+z,255,640+y+z,263,630+y+z,263);
+//ulir 7
+triangle(670+y+z,255,675+y+z,255,670+y+z,285);
+triangle(665+y+z,285,660+y+z,277,670+y+z,277);
+triangle(665+y+z,285,670+y+z,285,670+y+z,255);
+triangle(655+y+z,255,660+y+z,263,650+y+z,263);
+//ulir 8
+triangle(690+y+z,255,695+y+z,255,690+y+z,285);
+triangle(685+y+z,285,680+y+z,277,690+y+z,277);
+triangle(685+y+z,285,690+y+z,285,690+y+z,255);
+triangle(675+y+z,255,680+y+z,263,670+y+z,263);
+//ulir 9
+triangle(710+y+z,255,715+y+z,255,710+y+z,285);
+triangle(705+y+z,285,700+y+z,277,710+y+z,277);
+triangle(705+y+z,285,710+y+z,285,710+y+z,255);
+triangle(695+y+z,255,700+y+z,263,690+y+z,263);
+//ulir 10
+triangle(730+y+z,255,735+y+z,255,730+y+z,285);
+triangle(725+y+z,285,720+y+z,277,730+y+z,277);
+triangle(725+y+z,285,730+y+z,285,730+y+z,255);
+triangle(715+y+z,255,720+y+z,263,710+y+z,263);
+//ulir 11
+triangle(750+y+z,255,755+y+z,255,750+y+z,285);
+triangle(745+y+z,285,740+y+z,277,750+y+z,277);
+triangle(745+y+z,285,750+y+z,285,750+y+z,255);
+triangle(735+y+z,255,740+y+z,263,730+y+z,263);
+rect(500+y-a,260,5,20);
+rect(460+y-a,262.5,5,15);
+triangle(460+y-a,263,460+y-a,277,440+y-a,270);
+rect(800,230,50,70);
+strokeWeight(1);
+fill(255,94,19);
+rect(850,240,60,50);
+//biji plastik dihooper
+fill(255,0,255);
+strokeWeight(1);
+stroke(255,0,255);
+triangle(665,120,710,120,707,240);
+triangle(765,120,723,120,723,240);
+//bendanya
+stroke(230-w1,w,230-w1);
+strokeCap(SQUARE);
+strokeWeight(4);
+line(261+x+d,217+b,278+x+d,217+b);
+line(278+x+d,216+b,278+x+d,225+b);
+line(276+x+d,227+b,296+x+d,227+b);
+line(298+x+d,226+b,298+x+d,313+b);
+line(298+x+d,313+b,276+x+d,313+b);
+line(278+x+d,313+b,278+x+d,323+b);
+line(278+x+d,323+b,261+x+d,323+b);
+strokeWeight(1);
+stroke(0);
+fill(255);
+rect(295+x,235,d+e,3);
+rect(295+x,250,d+e,3);
+rect(295+x,285,d+e,3);
+rect(295+x,300,d+e,3);
+//tombol dan tulisan
+fill(0);
+textSize(16);
+text("Auto",475,420);
+text("RUN",475,440);
+text("Clamp",575,420);
+text("Test",580,440);
+text("Feed",680,420);
+text("Test",683,440);
+text("Inject", 780,420);
+text("Test",785,440);
+text("biji Plastik",680,150);
+text("Machine Bed",450,530);
+text("Injection Unit", 600,50);
+text("Clamping Unit", 200,50);
+text("Moulding",315,190);
+stroke(0);
+strokeWeight(2);
+fill(wt1);
+ellipse(490,460,20,20);
+fill(wt2);
+ellipse(575,460,20,20);
+fill(wt3);
+ellipse(625,460,20,20);
+fill(wt4);
+ellipse(700,460,20,20);
+fill(wt6);
+ellipse(775,460,20,20);
+fill(wt7);
+ellipse(825,460,20,20);
+stroke(0,0,255);
+strokeWeight(1);
+fill(0,0,255);
+line(120,150,120,40);
+line(410,150,410,40);
+line(900,150,900,40);
+line(120,60,900,60);
+triangle(120,60,130,58,130,62);
+triangle(900,60,890,58,890,62);
+triangle(410,60,400,58,400,62);
+triangle(410,60,420,58,420,62);
+line(20,195,20,240);
+line(20,195,30,195);
+triangle(20,240,18,230,22,230);
+line(390,185,390,200);
+line(380,185,390,185);
+triangle(390,200,388,190,392,190)
+line(530,195,490,195);
+line(490,195,490,225);
+triangle(490,225,488,215,492,215);
+line(550,205,550,225);
+triangle(550,225,548,215,552,215);
+line(580,195,615,195);
+line(615,195,615,225);
+triangle(615,225,613,215,618,215);
+line(665,195,670,195);
+line(670,195,670,225);
+triangle(670,225,668,215,672,215);
+line(820,200,820,225);
+triangle(820,225,818,215,822,215);
+line(900,200,900,235);
+triangle(900,235,898,225,902,225);
+text("Reset = Click Reload !",30,30);
+
+if(t1){
+t2 = false;
+t3 = false;
+t4 = false;
+t6 = false;
+t7 = false;
+	text("STATUS: RUNNING......", 400,490);
+    wt1=(#00FF00);
+	if(t >= -1 && t <= 70 && x >= 0 && x <= 70){
+		x = x + 1;
+		t = t + 1;
+	}
+	if(t >= 70 && t <= 94){
+		t = t + 1;
+		y = y - 1;
+		a = a + 0.5;
+		w = w - 10;
+	}
+	if(t >= 90 && t <= 150){
+	t = t + 1;
+	w1 = w1 + 2;
+	}
+	if(t >= 150 && t <= 170){
+		y = y + 1;
+		a = a - 0.5;
+		t = t + 1;
+	}
+	if(t >= 170 && t <= 290){
+		t = t + 1;
+		if(z >= -10 && z <= 0){z = z -1;
+			if(z<=-10){z = 0;}
+			}
+	}
+	if(t >= 290 && t <= 360 && x >= 0 && x <= 71){
+		x = x - 1;
+		t = t + 1;
+	}
+	if(t >= 360 && t <= 390){
+	t = t + 1;
+	d = d + 1;
+	}
+	if(t >= 390 && t <= 420){
+	t = t + 1;
+	e = e - 1;
+	}
+	if(t >= 420 && t <= 425){
+	b = b + 20;
+	t = t + 1;
+	}
+	if(t >=426){
+	t = 0;
+	x = 0;
+	b = 0;
+	y = 22;
+	z = 0;
+    a = 0;
+	t = 0;
+    w =230;
+    w1 = 0;
+	d = 0;
+	e = 0;
+	tc = 0;
+	ti = 0;
+	}
+}
+if(!t1){
+wt1 = #FF0000;
+text("STATUS: PAUSE !", 400,490);
+}
+//clamp test
+if(t2){ 
+wt2 = (#00FF00);
+if(tc >= -1 && tc <= 70){
+		x = x + 1;
+		tc = tc + 1;
+	}
+}
+if(!t2){
+wt2 = #FF0000;
+}
+if(t3){ 
+wt3 = (#00FF00);
+if(tc <= 71 && tc >= 0){
+		x = x - 1;
+		tc = tc - 1;
+	}
+}
+if(!t3){
+wt3 = #FF0000;
+}
+//feed test
+if(t4){ 
+wt4 = (#00FF00);
+	if(z >= -10 && z <= 0){z = z - 1;
+		if(z<=-10){z = 0;}
+		}
+}
+if(!t4){
+wt4 = #FF0000;
+}
+//inject test
+if(t6){ 
+wt6 = (#00FF00);
+if(ti >= -1 && ti <= 24){
+		ti = ti + 1;
+		y = y - 1;
+		a = a + 0.5;
+		//w = w - 10;
+	}
+}
+if(!t6){
+wt6 = #FF0000;
+}
+if(t7){ 
+wt7 = (#00FF00);
+if(ti >= 0 && ti <= 25){
+		ti = ti - 1;
+		y = y + 1;
+		a = a - 0.5;
+		//w = w + 10;
+	}
+}
+if(!t7){
+wt7 = #FF0000;
+}
+
+}
+void mousePressed() {
+  if (mouseX >480 && mouseX < 500 && mouseY>450 && mouseY<470) {
+    if (t1==false) {
+      t1 = true;
+    } else {
+      t1 = false;
+    }
+  }
+  if (mouseX >565 && mouseX < 585 && mouseY>450 && mouseY<470) {
+    if (t2==false) {
+      t2 = true;
+    } else {
+      t2 = false;
+    }
+  }
+  if (mouseX >615 && mouseX < 635 && mouseY>450 && mouseY<470) {
+    if (t3==false) {
+      t3 = true;
+    } else {
+      t3 = false;
+    }
+  }
+  if (mouseX >690 && mouseX < 710 && mouseY>450 && mouseY<470) {
+    if (t4==false) {
+      t4 = true;
+    } else {
+      t4 = false;
+    }
+  }
+  if (mouseX >765 && mouseX < 785 && mouseY>450 && mouseY<470) {
+    if (t6==false) {
+      t6 = true;
+    } else {
+      t6 = false;
+    }
+  }
+  if (mouseX >815 && mouseX < 835 && mouseY>450 && mouseY<470) {
+    if (t7==false) {
+      t7 = true;
+    } else {
+      t7 = false;
+    }
+  }
+}
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

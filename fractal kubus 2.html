@@ -1,0 +1,220 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen matematika bebas diakses oleh guru dan siswa untuk membantu memahami matematika di sekolah">
+<meta name="Keywords" content="matematika, eksperimen, praktikum online, webbase praktikum, matematika online, pengubinan, tiling, tile, gasing">
+<meta name="author" content="Djukarna">
+<title>Fractal</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+<style>
+#tulisan {
+	font-family: Consolas,"courier new";
+	color: black;
+	background-color: #f1f1f1;
+	padding: 2px;
+	font-size: 100%;
+	padding-left: 120px;
+	display: grid;
+	grid-template-columns: 180px auto ;
+	gap: 10px;
+}
+</style>
+</head>
+
+<header>
+	<div class="container">
+	<h1> Fractral Kubus </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-square-o" aria-hidden="true"></i><b> Fracktal </b>
+				<ul>
+					<li><a href="Fractal kubus.html">Fracktal Kubus 1</a></li>
+					<li><a href="fractal kubus 2.html">Fracktal Kubus 2</a></li>
+					<li><a href="mandelblub.html">fractral 3D Mandelbulb</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1> Fractal Kubus Tipe 2</h1>
+<script type="text/processing" >
+Box b;
+ArrayList<Box> sponge;
+
+void setup() {
+  size(800, 600, P3D);
+  sponge = new ArrayList<Box>();
+  Box b = new Box(0, 0, 0, 200);
+  sponge.add(b);
+}
+
+void mousePressed() {
+  ArrayList<Box> next = new ArrayList<Box>();
+  for (Box b : sponge) {
+    ArrayList<Box> newBoxes = b.generate();
+    next.addAll(newBoxes);
+  }
+  sponge = next;
+}
+
+void draw() {
+  background(0);
+  noFill();
+  stroke(0);
+  lights();
+  camera(mouseX, mouseY, (height/2) / tan(PI/4), width/2, height/2, 0, 0, 1, 0);
+  translate(width/2, height/2);
+  rotateX(0);
+  rotateY(-30);
+  rotateZ(0);
+  for (Box b : sponge) {
+    b.show();
+  }
+}
+
+
+class Box {
+  PVector pos;
+  float r;
+
+  Box(float x, float y, float z, float r_) {
+    pos = new PVector(x, y, z);
+    r = r_;
+  }
+
+  void show() {
+    pushMatrix();
+    translate(pos.x, pos.y, pos.z);
+    fill(0,255,255);
+    box(r);
+    popMatrix();
+  }
+
+  ArrayList<Box> generate() {
+    ArrayList<Box> boxes = new ArrayList<Box>();
+    for (int i=-1; i<2; i++) {
+      for (int j=-1; j<2; j++) {
+        for (int k=-1; k<2; k++) {
+          int sum = abs(i) + abs(j) + abs(k);
+          float newR = r/3;
+          if (sum <= 1) {
+            Box b = new Box(pos.x+i*newR, pos.y+j*newR, pos.z+k*newR, newR);
+            boxes.add(b);
+          }
+        }
+      }
+    }
+    return boxes;
+  }
+}
+
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+<div id="tulisan">
+		<h2>Kode Program Processing</h1>
+		<p>
+			Box b;<br>
+			ArrayList<Box> sponge;<br>
+			<br>
+			void setup() {<br>
+				<span style="padding-left: 20px; display:block">size(800, 600, P3D);<br>
+				sponge = new ArrayList<Box>();<br>
+				Box b = new Box(0, 0, 0, 150);<br>
+				sponge.add(b);<br></span>
+				}<br>
+<br>
+			void mousePressed() {<br>
+				<span style="padding-left: 20px; display:block">ArrayList<Box> next = new ArrayList<Box>();<br>
+				for (Box b : sponge) {<br>
+					<span style="padding-left: 40px; display:block">ArrayList<Box> newBoxes = b.generate();<br>
+					next.addAll(newBoxes);<br></span>
+				}<br>
+				sponge = next;<br>></span>
+			}<br>
+<br>
+			void draw() {<br>
+			<span style="padding-left: 20px; display:block">background(0);<br>
+				noFill();<br>
+				stroke(0);<br>
+				lights();<br>
+				camera(mouseX, mouseY, (height/2) / tan(PI/4), width/2, height/2, 0, 0, 1, 0);<br>
+				translate(width/2, height/2);<br>
+				rotateX(0);<br>
+				rotateY(-30);<br>
+				rotateZ(0);<br>
+				for (Box b : sponge) {<br></span>
+				<span style="padding-left: 40px; display:block">b.show();<br></span>
+			<span style="padding-left: 20px; display:block">}<br></span>
+			}<br>
+<br>
+			class Box {<br>
+				<span style="padding-left: 20px; display:block">PVector pos;<br>
+				float r;<br>
+
+				Box(float x, float y, float z, float r_) {<br></span>
+					<span style="padding-left: 40px; display:block">pos = new PVector(x, y, z);<br>
+					r = r_;<br></span>
+				<span style="padding-left: 20px; display:block">}<br>
+<br>
+				void show() {<br>
+					<span style="padding-left: 20px; display:block">pushMatrix();<br>
+					translate(pos.x, pos.y, pos.z);<br>
+					fill(0,255,255);<br>
+					box(r);<br>
+					popMatrix();<br></span>
+				}<br>
+<br>
+				ArrayList<Box> generate() { <br>
+					ArrayList<Box> boxes = new ArrayList<Box>();<br>
+					for (int i=-1; i<2; i++) {<br>
+						<span style="padding-left: 40px; display:block">for (int j=-1; j<2; j++) {<br></span>
+							<span style="padding-left: 60px; display:block">for (int k=-1; k<2; k++) {<br></span>
+								<span style="padding-left: 80px; display:block">int sum = abs(i) + abs(j) + abs(k);<br>
+								float newR = r/3;<br>
+							if (sum <= 1) {<br>
+									<span style="padding-left: 20px; display:block">Box b = new Box(pos.x+i*newR, pos.y+j*newR, pos.z+k*newR, newR);<br>
+									boxes.add(b);<br></span>
+								}<br></span>
+							<span style="padding-left: 60px; display:block">}<br></span>
+						<span style="padding-left: 40px; display:block">}<br></span>
+					}<br>
+					return boxes;<br></span>
+				}<br>
+		</p>
+</div>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2022</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

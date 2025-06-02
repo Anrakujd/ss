@@ -1,0 +1,294 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen matematika bebas diakses oleh guru dan siswa untuk membantu memahami matematika di sekolah">
+<meta name="Keywords" content="matematika, eksperimen, praktikum online, webbase praktikum, matematika online, pengubinan, tiling, tile, gasing">
+<meta name="author" content="Djukarna">
+<title>Sinus & cosinus</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+<style>
+#tulisan {
+	font-family: Consolas,"courier new";
+	color: black;
+	background-color: #f1f1f1;
+	padding: 2px;
+	font-size: 100%;
+	padding-left: 120px;
+	display: grid;
+	grid-template-columns: 180px auto ;
+	gap: 10px;
+}
+</style>
+</head>
+
+<header>
+	<div class="container">
+	<h1> Visualisasi Sinus dan Cosinus </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-square-o" aria-hidden="true"></i><b> Trigonometri </b>
+				<ul>
+					<li><a href="sincos.html">Sinus dan Cosinus</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1> Gelombang sinus dan cosinus </h1>
+<script type="text/processing" >
+float time = 0;
+float radius = 50;
+float x;
+float y;
+ArrayList<Wave> wave = new ArrayList<Wave>();
+ArrayList<Wave2> wave2 = new ArrayList<Wave2>();
+
+void setup() {
+  size(800, 700);
+}
+
+void draw() {
+  background(0); 
+	text("Gelombang Sinus",400, 75);
+	text("Gelombang Cosinus",75, 230);
+	text("Jika digambar dalam satu sumbu",450, 350);
+	text("Gelombang sinus dan cosinus berbeda fase 90 derajat",450, 370);
+	
+	
+  translate(150, 150);
+
+  stroke(255);
+  noFill();
+  ellipse(0, 0, radius*2, radius*2);
+  time -= 0.04;
+  x = radius*cos(time);
+  y = radius*sin(time);
+  
+  fill(255);
+  strokeWeight(1);
+  ellipse(x, y, 8, 8);
+  strokeWeight(0.7);
+  line(0, 0, x, y);
+  
+  wave.add(0,y);
+  wave2.add(0,x);
+  
+  //kurva sinus
+  translate(100,0);
+  stroke(150,150,150);
+  strokeWeight(0.7);
+  line(-20, 0, 700, 0);
+  line(0,-radius, 0, radius);
+  line(x-100, y, 0, wave.get(0));
+  beginShape();
+  noFill();
+  stroke(255,0,0);
+  strokeWeight(2);
+  for (int i =0; i < wave.size(); i++) {
+    vertex(i,wave.get(i));
+  }
+  endShape();
+  
+  //kurva cosinus
+  translate(-100,100);
+  stroke(150,150,150);
+  strokeWeight(0.7);
+  line(x, y-100, wave2.get(0),0);
+  line(0, -20, 0, 700);
+  line(-radius, 0, radius, 0);
+  beginShape();
+  noFill();
+  stroke(0,0,255);
+  strokeWeight(2);
+  for (int i =0; i < wave2.size(); i++) {
+    vertex(wave2.get(i),i);
+  }
+  endShape();
+   
+  //kurva gabungan
+  //kurva gabungan
+  translate(300,200);
+  stroke(255);
+  noFill();
+  ellipse(-100, 0, radius*2, radius*2);
+  time -= 0.04;
+  x = radius*cos(time);
+  y = radius*sin(time);
+  
+  fill(255);
+  strokeWeight(1);
+  ellipse(x-100, y, 8, 8);
+  strokeWeight(0.7);
+  line(-100, 0, x-100, y);
+  
+  stroke(150,150,150);
+  strokeWeight(0.7);
+  line(-20, 0, 700, 0);
+  line(0,-radius, 0, radius);
+  line(x-100, y, 0, wave.get(0));
+  beginShape();
+  noFill();
+  stroke(255,0,0);
+  strokeWeight(2);
+  for (int i =0; i < wave.size(); i++) {
+    vertex(i,wave.get(i));
+  }
+  endShape();
+  
+  stroke(150,150,150);
+  strokeWeight(0.7);
+  line(x-100, y, 0, wave2.get(0));
+   beginShape();
+  noFill();
+  stroke(0,0,255);
+  strokeWeight(2);
+  for (int i =0; i < wave2.size(); i++) {
+    vertex(i, wave2.get(i));
+  }
+  endShape();
+}
+
+
+</script>
+<canvas></canvas>
+</div>	
+</div>
+<div id="tulisan">
+		<h2>Kode Program Processing</h1>
+		<p>float time = 0;<br>
+float radius = 50;<br>
+float x;<br>
+float y;<br>
+ArrayList<Wave> wave = new ArrayList<Wave>();<br>
+ArrayList<Wave2> wave2 = new ArrayList<Wave2>();<br>
+<br>
+void setup() {<br>
+  <span style="padding-left: 20px; display:block">size(800, 700);</span>
+}<br>
+<br>
+void draw() {<br>
+  <span style="padding-left: 20px; display:block">background(0);<br>
+	text("Gelombang Sinus",400, 75);<br>
+	text("Gelombang Cosinus",75, 230);<br>
+	text("Jika digambar dalam satu sumbu",450, 350);<br>
+	text("Gelombang sinus dan cosinus berbeda fase 90 derajat",450, 370);<br>
+	translate(150, 150);<br>
+    stroke(255);<br>
+    noFill();<br>
+    ellipse(0, 0, radius*2, radius*2);<br>
+    time -= 0.04;<br>
+    x = radius*cos(time);<br>
+    y = radius*sin(time);<br>
+    fill(255);<br>
+    strokeWeight(1);<br>
+   ellipse(x, y, 8, 8);<br>
+   strokeWeight(0.7);<br>
+   line(0, 0, x, y);<br>
+  wave.add(0,y);<br>
+  wave2.add(0,x);<br>
+  translate(100,0);<br>
+  stroke(150,150,150);<br>
+  strokeWeight(0.7);<br>
+  line(-20, 0, 700, 0);<br>
+  line(0,-radius, 0, radius);<br>
+  line(x-100, y, 0, wave.get(0));<br>
+  <br>
+  beginShape();<br>
+  noFill();<br>
+  stroke(255,0,0);<br>
+  strokeWeight(2);<br>
+   for (int i =0; i < wave.size(); i++) {<br>
+    <span style="padding-left: 20px; display:block">vertex(i,wave.get(i));<br>
+  }</span>
+  endShape();<br>
+  <br>
+  translate(-100,100);<br>
+  stroke(150,150,150);<br>
+  strokeWeight(0.7);<br>
+  line(x, y-100, wave2.get(0),0);<br>
+  line(0, -20, 0, 700);<br>
+  line(-radius, 0, radius, 0);<br>
+  <br>
+  beginShape();<br>
+  noFill();<br>
+  stroke(0,0,255);<br>
+  strokeWeight(2);<br>
+  for (int i =0; i < wave2.size(); i++) {<br>
+    <span style="padding-left: 20px; display:block">vertex(wave2.get(i),i);<br>
+  }</span>
+  endShape();<br>
+   <br>
+  translate(300,200);<br>
+  stroke(255);<br>
+  noFill();<br>
+  ellipse(-100, 0, radius*2, radius*2);<br>
+  time -= 0.04;<br>
+  x = radius*cos(time);<br>
+  y = radius*sin(time);<br>
+  fill(255);<br>
+  strokeWeight(1);<br>
+  ellipse(x-100, y, 8, 8);<br>
+  strokeWeight(0.7);<br>
+  line(-100, 0, x-100, y);<br>
+  stroke(150,150,150);<br>
+  strokeWeight(0.7);<br>
+  line(-20, 0, 700, 0);<br>
+  line(0,-radius, 0, radius);<br>
+  line(x-100, y, 0, wave.get(0));<br>
+  beginShape();<br>
+  noFill();<br>
+  stroke(255,0,0);<br>
+  strokeWeight(2);<br>
+  for (int i =0; i < wave.size(); i++) {<br>
+    <span style="padding-left: 20px; display:block">vertex(i,wave.get(i));<br>
+  }</span>
+  endShape();<br>
+  <br>
+  stroke(150,150,150);<br>
+  strokeWeight(0.7);<br>
+  line(x-100, y, 0, wave2.get(0));<br>
+   beginShape();<br>
+  noFill();<br>
+  stroke(0,0,255);<br>
+  strokeWeight(2);<br>
+  for (int i =0; i < wave2.size(); i++) {<br>
+    <span style="padding-left: 20px; display:block">vertex(i, wave2.get(i));<br>
+  }</span>
+  endShape();</span>
+}<br>
+</p>
+</div>
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2022</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

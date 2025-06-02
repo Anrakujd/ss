@@ -1,0 +1,211 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen matematika bebas diakses oleh guru dan siswa untuk membantu memahami matematika di sekolah">
+<meta name="Keywords" content="matematika, eksperimen, praktikum online, webbase praktikum, matematika online, pengubinan, tiling, tile, gasing">
+<meta name="author" content="Djukarna">
+<title>Fractal</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+<style>
+#tulisan {
+	font-family: Consolas,"courier new";
+	color: black;
+	background-color: #f1f1f1;
+	padding: 2px;
+	font-size: 100%;
+	padding-left: 120px;
+	display: grid;
+	grid-template-columns: 180px auto ;
+	gap: 10px;
+}
+</style>
+</head>
+
+<header>
+	<div class="container">
+	<h1> Fractral Bintang (Axiom Method) </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-square-o" aria-hidden="true"></i><b> Fracktal </b>
+				<ul>
+					<li><a href="Fractal kubus.html">Fracktal Kubus 1</a></li>
+					<li><a href="fractal kubus 2.html">Fracktal Kubus 2</a></li>
+					<li><a href="mandelblub.html">fractral 3D Mandelbulb</a></li>
+					<li><a href="mandelblub.html">fractral bintang (Axiom Method)</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1> Fractal Bintang (Axiom Method)</h1>
+<script type="text/processing" >
+Fraktal fraktal;
+
+void setup() {
+  size(1000, 700);
+  fraktal = new Fraktal();
+  fraktal.simulate(4);
+}
+
+void draw() {
+  background(0);
+  fraktal.render();
+}
+
+
+class Fraktal {
+  int step = 0;
+  float somestep = 0.1;
+  String rule;
+  String ruleW;
+  String ruleX;
+  String ruleY;
+  String ruleZ;
+  String axiom;
+  float startlength;
+  float drawlength;
+  float theta;
+  String production;
+  int generation;
+
+  Fraktal() {
+    //axiom = "[X]++[X]++[X]++[X]++[X]";
+    axiom = "[X]++[X]++[X]++[X]++[X]";   // ganti axiom ini untuk memciptakan bentuk-bentuk fraktal yang lain
+    //rule = "F+F-F";
+    ruleW = "YF++ZF4-XF[-YF4-WF]++";
+    ruleX = "+YF--ZF[3-WF--XF]+";
+    ruleY = "-WF++XF[+++YF++ZF]-";
+    ruleZ = "--YF++++WF[+ZF++++XF]--XF";
+    startlength = 300.0;  //panjang (ukuran bintang)
+    theta = radians(36);   // 360 dibagi 10 segment 
+    reset();
+  }
+
+  void simulate(int gen) {
+    while (getAge() < gen) {
+      production = iterate(production, rule);
+    }
+  }
+
+  void reset() {
+    production = axiom;
+    drawlength = startlength;
+    generation = 0;
+  }
+
+  int getAge() {
+    return generation;
+  }
+
+  void render() {
+    translate(width/2, height/2);
+    int pushes = 0;
+    int repeats = 1;
+    step += 12;
+    if (step > production.length()) {
+      step = production.length();
+    }
+
+    for (int i = 0; i < step; i++) {
+      char step = production.charAt(i);
+      if (step == 'F') {
+        stroke(255, 255, 255, 75);
+        for (int j = 0; j < repeats; j++) {
+          line(0, 0, 0, -drawlength);
+          noFill();
+          translate(0, -drawlength);
+        }
+        repeats = 1;
+      } else if (step == '+') {
+        for (int k = 0; k < repeats; k++) {
+          rotate(theta);
+        }
+        repeats = 1;
+      } else if (step == '-') {
+        for (int k = 0; k < repeats; k++) {
+          rotate(-theta);
+        }
+        repeats = 1;
+      } else if (step == '[') {
+        pushes ++;
+        pushMatrix();
+      } else if (step ==']') {
+        pushes --;
+        popMatrix();
+      } else if ((step >= 48) && (step <= 57)) {
+        repeats = (int)step - 48;
+      }
+    }
+    while (pushes >0) {
+      popMatrix();
+      pushes--;
+    }
+  }
+
+  String iterate(String prod_, String rule_) {
+    String newProduction = "";
+    for (int i = 0; i < prod_.length(); i++) {
+      char step = production.charAt(i);
+      if (step == 'W') {
+        newProduction = newProduction + ruleW;
+      } else if (step == 'X') {
+        newProduction = newProduction + ruleX;
+      } else if (step == 'Y') {
+        newProduction = newProduction + ruleY;
+      } else if (step == 'Z') {
+        newProduction = newProduction + ruleZ;
+      } else {
+        if (step != 'F') {
+          newProduction = newProduction + step;
+        }
+      }
+    }
+    drawlength = drawlength*0.5;
+    generation++;
+    return newProduction;
+  }
+}
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section >
+
+<div id="tulisan">
+		<h2>Kode Program Processing</h1>
+		
+</div>
+
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2022</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

@@ -1,0 +1,1413 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen matematika bebas diakses oleh guru dan siswa untuk membantu memahami matematika di sekolah">
+<meta name="Keywords" content="matematika, eksperimen, praktikum online, webbase praktikum, matematika online, pengubinan, tiling, tile, gasing">
+<meta name="author" content="Djukarna">
+<title>Geometri</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> PENTOMINO </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-square-o" aria-hidden="true"></i><b> Geometri </b>
+				<ul>
+					<li><a href="tile1.html">Pengubinan Segitiga Sama Sisi (Polyamonds)</a></li>
+					<li><a href="tile2.html">Pengubinan Persegi (Polyominos)</a></li>
+					<li><a href="tile3.html">Pengubinan Polyamonds & Polyominos </a></li>
+					<li><a href="tile4.html">Tangram</a></li>
+					<li><a href="tile5.html">Puzzle Two and Half</a></li>
+					<li><a href="tile6.html">Puzzle Angka Satu</a></li>
+					<li><a href="tile7.html">Kubus Iluminasi (Polyrhomb)</a></li>
+					<li><a href="tile8.html">Heptomino</a></li>
+					<li><a href="tile8.html">Pentomino</a></li>
+					<li><a href="tile10.html">Menara Hanoi</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1> Pentomino </h1>
+<p>klik kiri untuk menggeser & klik kanan untuk memutar 90 derajat</p>
+<script type="text/processing" >
+ArrayList<S1> cube1 = new ArrayList<S1>();
+ArrayList<S2> cube2 = new ArrayList<S2>();
+ArrayList<S3> cube3 = new ArrayList<S3>();
+ArrayList<S4> cube4 = new ArrayList<S4>();
+ArrayList<S5> cube5 = new ArrayList<S5>();
+ArrayList<S6> cube6 = new ArrayList<S6>();
+ArrayList<S7> cube7 = new ArrayList<S7>();
+ArrayList<S8> cube8 = new ArrayList<S8>();
+ArrayList<S9> cube9 = new ArrayList<S9>();
+ArrayList<S10> cube10 = new ArrayList<S10>();
+ArrayList<S11> cube11 = new ArrayList<S11>();
+ArrayList<S12> cube12 = new ArrayList<S12>();
+ArrayList<S13> cube13 = new ArrayList<S13>();
+ArrayList<S14> cube14 = new ArrayList<S14>();
+ArrayList<S15> cube15 = new ArrayList<S15>();
+ArrayList<S16> cube16 = new ArrayList<S16>();
+ArrayList<S17> cube17 = new ArrayList<S17>();
+ArrayList<S18> cube18 = new ArrayList<S18>();
+P1 pattern1;
+P2 pattern2;
+P3 pattern3;
+P4 pattern4;
+float a = 900;//S1
+float b = 50;
+float d = 900;//S2
+float e = 150;
+float g = 900;//S3
+float n = 275;
+float p = 900;//S4
+float q = 350;
+float u = 90;//S5
+float v = 570;
+float w = 700;//S6
+float z = 550;
+float j = 70;//S7
+float k = 100;
+float f = 90;//S8
+float l = 275;
+float m = 90; //S9
+float o = 440;
+float r = 900;//S10
+float s = 500;
+float t = 520;//S11
+float y = 100;
+float aa = 375;//S12
+float ab = 100;
+float ac = 250;//S13
+float ad = 100;
+float ae = 250;//S14
+float af = 520;
+float ag = 630;//S15
+float ah = 100;
+float ai = 750;//S16
+float aj = 100;
+float ak = 550;//S17
+float al = 500;
+float am = 400;//S18
+float an = 500;
+float h = 30;
+int X = 0;
+int Y = 0;
+int N = 0;
+boolean t1, t2;
+
+void setup() {
+  size(1000, 700);
+  cube1.add(new S1(a, b, h, #0000FF));
+  cube2.add(new S2(d, e, h, #FF0000));
+  cube3.add(new S3(g, n, h, #00FF00));
+  cube4.add(new S4(p, q, h, #00FFFF));
+  cube5.add(new S5(u, v, h, #FFFF00));
+  cube6.add(new S6(w, z, h, #FF00FF));
+  cube7.add(new S7(j, k, h, #120012));
+  cube8.add(new S8(f, l, h, #121500));
+  cube9.add(new S9(m, o, h, #121500));
+  cube10.add(new S10(r, s, h, #121500));
+  cube11.add(new S11(t, y, h, #121500));
+  cube12.add(new S12(aa, ab, h, #121500));
+  cube13.add(new S13(ac, ad, h, #121500));
+  cube14.add(new S14(ae, af, h, #121500));
+  cube15.add(new S15(ag, ah, h, #121500));
+  cube16.add(new S16(ai, aj, h, #121500));
+  cube17.add(new S17(ak, al, h, #121500));
+  cube18.add(new S18(am, an, h, #121500));
+  pattern1 = new P1(X, Y, h, 255);
+  pattern2 = new P2(X, Y, h, 255);
+  pattern3 = new P3(X, Y, h, 255);
+  pattern4 = new P4(X, Y, h, 255);
+}
+
+void draw() {
+  background(0, 255, 255);
+  fill(0);
+  textSize(16);
+  fill(255);
+  strokeWeight(1);
+  stroke(200);
+  if (N==0) {
+    pattern1.display();
+  } else if (N==1) {
+    pattern2.display();
+  } else if (N==2) {
+    pattern3.display();
+  } else if (N==3) {
+    pattern4.display();
+  } 
+  stroke(0);
+  strokeWeight(1);
+  //----- navigasi ----
+  if (mouseX>600 && mouseX<650 && mouseY>600 && mouseY<640) {
+    fill(0);
+    triangle(600, 600, 650, 620, 600, 640);
+  } else {
+    fill(0, 255, 0);
+    triangle(600, 600, 650, 620, 600, 640);
+  }
+
+  if (mouseX>400 && mouseX<450 && mouseY>600 && mouseY<640) {
+    fill(0);
+    triangle(450, 600, 400, 620, 450, 640);
+  } else {
+    fill(0, 255, 0);
+    triangle(450, 600, 400, 620, 450, 640);
+  }
+  if (t1) {
+    N = N + 1;
+    t1 = false;
+    if (N>3) {
+      N=0;
+    }
+  }  
+  if (t2) {
+    N = N - 1;
+    t2 = false;
+    if (N<0) {
+      N=3;
+    }
+  }
+
+  // puzzle 1
+  for (S1 kubus : cube1) {
+    kubus.display();
+  }
+  // puzzle 2
+  for (S2 kubus : cube2) {
+    kubus.display();
+  }
+  // puzzle 3
+  for (S3 kubus : cube3) {
+    kubus.display();
+  } 
+  // puzzle 4
+  for (S4 kubus : cube4) {
+    kubus.display();
+  } 
+  // puzzle 5
+  for (S5 kubus : cube5) {
+    kubus.display();
+  } 
+  // puzzle 6
+  for (S6 kubus : cube6) {
+    kubus.display();
+  }
+  // puzzle 7
+  for (S7 kubus : cube7) {
+    kubus.display();
+  }
+  // puzzle 8
+  for (S8 kubus : cube8) {
+    kubus.display();
+  }
+  // puzzle 9
+  for (S9 kubus : cube9) {
+    kubus.display();
+  }
+  // puzzle 10
+  for (S10 kubus : cube10) {
+    kubus.display();
+  }
+  // puzzle 11
+  for (S11 kubus : cube11) {
+    kubus.display();
+  }
+  // puzzle 12
+  for (S12 kubus : cube12) {
+    kubus.display();
+  }
+  // puzzle 13
+  for (S13 kubus : cube13) {
+    kubus.display();
+  }
+  // puzzle 14
+  for (S14 kubus : cube14) {
+    kubus.display();
+  }
+  // puzzle 15
+  for (S15 kubus : cube15) {
+    kubus.display();
+  }
+  // puzzle 16
+  for (S16 kubus : cube16) {
+    kubus.display();
+  }
+  // puzzle 17
+  for (S17 kubus : cube17) {
+    kubus.display();
+  }
+  // puzzle 18
+  for (S18 kubus : cube18) {
+    kubus.display();
+  }
+}
+
+void mouseClicked() {
+  if (mouseX>600 && mouseX<650 && mouseY>600 && mouseY<640) {
+    if (!t1) {
+      t1 = true;
+    } else {
+      t1=false;
+    }
+  }
+
+  if (mouseX>400 && mouseX<450 && mouseY>600 && mouseY<640) {
+    if (!t2) {
+      t2 = true;
+    } else {
+      t2=false;
+    }
+  }
+}
+
+//---------------------class S1 (Pentonimo no 1)--------------------
+class S1 {
+  float x1;
+  float y1;
+  float h1;
+  color c1;
+  float angle1 = 0;
+  S1(float x0, float y0, float h0, color warna) {
+    x1 = x0; 
+    y1 = y0;
+    c1 = warna;
+    h1 = h0;
+  }
+  void display() {
+    fill(c1);
+    if (dist(mouseX, mouseY, x1, y1) < h1) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x1 = mouseX;
+        y1 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle1 = angle1 + 90;
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#8281A7);
+    }
+    pushMatrix();
+    translate(x1, y1);
+    rotate(radians(angle1));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-2.5*h, -0.5*h);
+    vertex(2.5*h, -0.5*h);
+    vertex(2.5*h, 0.5*h);
+    vertex(-2.5*h, 0.5*h);
+    endShape(CLOSE);
+    line(0.5*h, -0.5*h, 0.5*h, 0.5*h);
+    line(1.5*h, -0.5*h, 1.5*h, 0.5*h);
+    line(-0.5*h, -0.5*h, -0.5*h, 0.5*h);
+    line(-1.5*h, -0.5*h, -1.5*h, 0.5*h);
+    popMatrix();
+  }
+}
+//--------------------class S2 (Pentomino no 2)----------------------
+class S2 {
+  float x2;
+  float y2;
+  float h2;
+  color c2;
+  float angle2 = 0;
+  public S2(float x0, float y0, float h0, color warna) {
+    this.x2 = x0; 
+    this.y2 = y0;
+    this.c2 = warna;
+    this.h2 = h0;
+  }
+  void display() {
+    fill(c2);
+    if (dist(mouseX, mouseY, x2, y2) < h2) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x2 = mouseX;
+        y2 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle2 = angle2 + 90;
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#F52CC6);
+    }
+    pushMatrix();
+    translate(x2, y2);
+    rotate(radians(angle2));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-1.5*h2, -0.5*h2);
+    vertex(-0.5*h2, -0.5*h2);
+    vertex(-0.5*h2, -1.5*h2);
+    vertex(0.5*h2, -1.5*h2);
+    vertex(0.5*h2, -0.5*h2);
+    vertex(1.5*h2, -0.5*h2);
+    vertex(1.5*h2, 0.5*h2);
+    vertex(0.5*h2, 0.5*h2);
+    vertex(0.5*h2, 1.5*h2);
+    vertex(-0.5*h2, 1.5*h2);
+    vertex(-0.5*h2, 0.5*h2);
+    vertex(-1.5*h2, 0.5*h2);
+    endShape(CLOSE);
+    line(-0.5*h2, -0.5*h2, 0.5*h2, -0.5*h2);
+    line(-0.5*h2, -0.5*h2, -0.5*h2, 0.5*h2);
+    line(-0.5*h2, 0.5*h2, 0.5*h2, 0.5*h2);
+    line(0.5*h2, 0.5*h2, 0.5*h2, -0.5*h2);
+    popMatrix();
+  }
+}
+//--------------------class S3 (Pentomino no 3)----------------------
+class S3 {
+  float x3;
+  float y3;
+  float h3;
+  color c3;
+  float angle3 = 0;
+  S3(float x0, float y0, float h0, color warna) {
+    x3 = x0; 
+    y3 = y0;
+    c3 = warna;
+    h3 = h0;
+  }
+  void display() {
+    fill(c3);
+    if (dist(mouseX, mouseY, x3, y3) < h3) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x3 = mouseX;
+        y3 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle3 = angle3 + 90; 
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#BB2CF5);
+    }
+    pushMatrix();
+    translate(x3, y3);
+    rotate(radians(angle3));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-1.5*h3, -1.5*h3);
+    vertex(-0.5*h3, -1.5*h3);
+    vertex(-0.5*h3, -0.5*h3);
+    vertex(0.5*h3, -0.5*h3);
+    vertex(0.5*h3, -1.5*h3);
+    vertex(1.5*h3, -1.5*h3);
+    vertex(1.5*h3, 0.5*h3);
+    vertex(-1.5*h3, 0.5*h3);
+    endShape(CLOSE);
+    line(-1.5*h3, -0.5*h3, -0.5*h3, -0.5*h3);
+    line(-0.5*h3, -0.5*h3, -0.5*h3, 0.5*h3);
+    line(0.5*h3, -0.5*h3, 1.5*h3, -0.5*h3);
+    line(0.5*h3, -0.5*h3, 0.5*h3, 0.5*h3);
+    popMatrix();
+  }
+}
+//--------------------class S4 (Pentomino no 4)----------------------
+class S4 {
+  float x4;
+  float y4;
+  float h4;
+  color c4;
+  float angle4 = 0;
+  S4(float x0, float y0, float h0, color warna) {
+    x4 = x0; 
+    y4 = y0;
+    c4 = warna;
+    h4 = h0;
+  }
+  void display() {
+    fill(c4);
+    if (dist(mouseX, mouseY, x4, y4) < h4) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x4 = mouseX;
+        y4 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle4 = angle4 + 90;
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;} 
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#822CF5);
+    }
+    pushMatrix();
+    translate(x4, y4);
+    rotate(radians(angle4));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-1.5*h4, 0);
+    vertex(-1.5*h4, -h4);
+    vertex(1.5*h4, -h4);
+    vertex(1.5*h4, 0);//
+    vertex(0.5*h4, 0);
+    vertex(0.5*h4, 2*h4);
+    vertex(-0.5*h4, 2*h4);
+    vertex(-0.5*h4, 0);
+    endShape(CLOSE);
+    line(-0.5*h4, 0, -0.5*h4, -h4);
+    line(0.5*h4, 0, 0.5*h4, -h4);
+    line(-0.5*h4, 0, 0.5*h4, 0);
+    line(-0.5*h4, h4, 0.5*h4, h4);
+    popMatrix();
+  }
+}
+//--------------------class S5 (Pentomino no 5)----------------------
+class S5 {
+  float x5;
+  float y5;
+  float h5;
+  color c5;
+  float angle5 = 0;
+  S5(float x0, float y0, float h0, color warna) {
+    x5 = x0; 
+    y5 = y0;
+    c5 = warna;
+    h5 = h0;
+  }
+  void display() {
+    fill(c5);
+    if (dist(mouseX, mouseY, x5, y5) < h5) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x5 = mouseX;
+        y5 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle5 = angle5 + 90; 
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#822CF5);
+    }
+    pushMatrix();
+    translate(x5, y5);
+    rotate(radians(angle5));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-h5, -h5);
+    vertex(0, -h5);
+    vertex(0, -2*h5);
+    vertex(h5, -2*h5);
+    vertex(h5, h5);
+    vertex(-h5, h5);
+    endShape(CLOSE);
+    line(-h5, 0, h5, 0);
+    line(0, -h5, 0, h5);
+    line(0, -h5, h5, -h5);
+    popMatrix();
+  }
+}
+//--------------------class S6 (Pentomino no 6)----------------------
+class S6 {
+  float x6;
+  float y6;
+  float h6;
+  color c6;
+  float angle6 = 0;
+  S6(float x0, float y0, float h0, color warna) {
+    x6 = x0; 
+    y6 = y0;
+    c6 = warna;
+    h6 = h0;
+  }
+  void display() {
+    fill(c6);
+    if (dist(mouseX, mouseY, x6, y6) < h6) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x6 = mouseX;
+        y6 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle6 = angle6 + 90; 
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#2C81F5);
+    }
+    pushMatrix();
+    translate(x6, y6);
+    rotate(radians(angle6));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-0.5*h6, 0.5*h6);
+    vertex(-0.5*h6, -2.5*h6);
+    vertex(0.5*h6, -2.5*h6);
+    vertex(0.5*h6, -0.5*h6);
+    vertex(2.5*h6, -0.5*h6);
+    vertex(2.5*h6, 0.5*h6);
+    endShape(CLOSE);
+    line(-0.5*h6, -1.5*h6, 0.5*h6, -1.5*h6);
+    line(-0.5*h6, -0.5*h6, 0.5*h6, -0.5*h6);
+    line(0.5*h6, -0.5*h6, 0.5*h6, 0.5*h6);
+    line(1.5*h6, -0.5*h6, 1.5*h6, 0.5*h6);
+    popMatrix();
+  }
+}
+//--------------------class S7 (Pentomino no 7)----------------------
+class S7 {
+  float x7;
+  float y7;
+  float h7;
+  color c7;
+  float angle7 = 0;
+  S7(float x0, float y0, float h0, color warna) {
+    x7 = x0; 
+    y7 = y0;
+    c7 = warna;
+    h7 = h0;
+  }
+  void display() {
+    fill(c7);
+    if (dist(mouseX, mouseY, x7, y7) < h7) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x7 = mouseX;
+        y7 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle7 = angle7 + 90;
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#2CF5A9);
+    }
+    pushMatrix();
+    translate(x7, y7);
+    rotate(radians(angle7));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-0.5*h7, -2*h7);
+    vertex(0.5*h7, -2*h7);
+    vertex(0.5*h7, h7);
+    vertex(1.5*h7, h7);
+    vertex(1.5*h7, 2*h7);
+    vertex(-0.5*h7, 2*h7);
+    endShape(CLOSE);
+    line(-0.5*h7, -h7, 0.5*h7, -h7);
+    line(-0.5*h7, 0, 0.5*h7, 0);
+    line(-0.5*h7, h7, 0.5*h7, h7);
+    line(0.5*h7, h7, 0.5*h7, 2*h7);
+    popMatrix();
+  }
+}
+//--------------------class S8 (Pentomino no 8)----------------------
+class S8 {
+  float x8;
+  float y8;
+  float h8;
+  color c8;
+  float angle8 = 0;
+  S8(float x0, float y0, float h0, color warna) {
+    x8 = x0; 
+    y8 = y0;
+    c8 = warna;
+    h8 = h0;
+  }
+  void display() {
+    fill(c8);
+    if (dist(mouseX, mouseY, x8, y8) < h8) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x8 = mouseX;
+        y8 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle8 = angle8 + 90;
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#EDC32B);
+    }
+    pushMatrix();
+    translate(x8, y8);
+    rotate(radians(angle8));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-0.5*h8, -2*h8);
+    vertex(0.5*h8, -2*h8);
+    vertex(0.5*h8, 2*h8);
+    vertex(-1.5*h8, 2*h8);
+    vertex(-1.5*h8, h8);
+    vertex(-0.5*h8, h8);
+    endShape(CLOSE);
+    line(-0.5*h8, -h8, 0.5*h8, -h8);
+    line(-0.5*h8, 0, 0.5*h8, 0);
+    line(-0.5*h8, h8, 0.5*h8, h8);
+    line(-0.5*h8, h8, -0.5*h8, 2*h8);
+    popMatrix();
+  }
+}
+//--------------------class S9 (Pentomino no 9)----------------------
+class S9 {
+  float x9;
+  float y9;
+  float h9;
+  color c9;
+  float angle9 = 0;
+  S9(float x0, float y0, float h0, color warna) {
+    x9 = x0; 
+    y9 = y0;
+    c9 = warna;
+    h9 = h0;
+  }
+  void display() {
+    fill(c9);
+    if (dist(mouseX, mouseY, x9, y9) < h9) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x9 = mouseX;
+        y9 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle9 = angle9 + 90; 
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#ED902B);
+    }
+    pushMatrix();
+    translate(x9, y9);
+    rotate(radians(angle9));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-h9, -2*h9);
+    vertex(0, -2*h9);
+    vertex(0, -h9);
+    vertex(h9, -h9);
+    vertex(h9, h9);
+    vertex(-h9, h9);
+    endShape(CLOSE);
+    line(-h9, 0, h9, 0);
+    line(0, -h9, 0, h9);
+    line(0, -h9, -h9, -h9);
+    popMatrix();
+  }
+}
+//--------------------class S10 (Pentomino no 10)----------------------
+class S10 {
+  float x10;
+  float y10;
+  float h10;
+  color c10;
+  float angle10 = 0;
+  S10(float x0, float y0, float h0, color warna) {
+    x10 = x0; 
+    y10 = y0;
+    c10 = warna;
+    h10 = h0;
+  }
+  void display() {
+    fill(c10);
+    if (dist(mouseX, mouseY, x10, y10) < h10) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x10 = mouseX;
+        y10 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle10 = angle10 + 90; 
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#5E0998);
+    }
+    pushMatrix();
+    translate(x10, y10);
+    rotate(radians(angle10));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-1.5*h10, 0.5*h10);
+    vertex(-0.5*h10, 0.5*h10);
+    vertex(-0.5*h10, -0.5*h10);
+    vertex(0.5*h10, -0.5*h10);
+    vertex(0.5*h10, -1.5*h10);
+    vertex(1.5*h10, -1.5*h10);
+    vertex(1.5*h10, 0.5*h10);
+    vertex(0.5*h10, 0.5*h10);
+    vertex(0.5*h10, 1.5*h10);
+    vertex(-1.5*h10, 1.5*h10);
+    endShape(CLOSE);
+    line(-0.5*h10, 0.5*h10, 0.5*h10, 0.5*h10);
+    line(-0.5*h10, 0.5*h10, -0.5*h10, 1.5*h10);
+    line(0.5*h10, -0.5*h10, 1.5*h10, -0.5*h10);
+    line(0.5*h10, -0.5*h10, 0.5*h10, 0.5*h10);
+    popMatrix();
+  }
+}
+//--------------------class S11 (Pentomino no 11)----------------------
+class S11 {
+  float x11;
+  float y11;
+  float h11;
+  color c11;
+  float angle11 = 0;
+  S11(float x0, float y0, float h0, color warna) {
+    x11 = x0; 
+    y11 = y0;
+    c11 = warna;
+    h11 = h0;
+  }
+  void display() {
+    fill(c11);
+    if (dist(mouseX, mouseY, x11, y11) < h11) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x11 = mouseX;
+        y11 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle11 = angle11 + 90; 
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#0A0FF2);
+    }
+    pushMatrix();
+    translate(x11, y11);
+    rotate(radians(angle11));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-0.5*h11, 0);
+    vertex(-1.5*h11, 0);
+    vertex(-1.5*h11, -h11);
+    vertex(-0.5*h11, -h11);
+    vertex(-0.5*h11, -2*h11);
+    vertex(0.5*h11, -2*h11);
+    vertex(0.5*h11, 2*h11);
+    vertex(-0.5*h11, 2*h11);
+    endShape(CLOSE);
+    line(-0.5*h11, 0, -0.5*h11, -h11);
+    line(-0.5*h11, -h11, 0.5*h11, - h11);
+    line(-0.5*h11, 0, 0.5*h11, 0);
+    line(-0.5*h11, h11, 0.5*h11, h11);
+    popMatrix();
+  }
+}
+//--------------------class S12 (Pentomino no 12)----------------------
+class S12 {
+  float x12;
+  float y12;
+  float h12;
+  color c12;
+  float angle12 = 0;
+  S12(float x0, float y0, float h0, color warna) {
+    x12 = x0; 
+    y12 = y0;
+    c12 = warna;
+    h12 = h0;
+  }
+  void display() {
+    fill(c12);
+    if (dist(mouseX, mouseY, x12, y12) < h12) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x12 = mouseX;
+        y12 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle12 = angle12 + 90; 
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#F2150A);
+    }
+    pushMatrix();
+    translate(x12, y12);
+    rotate(radians(angle12));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-0.5*h12, 2*h12);
+    vertex(-0.5*h12, -2*h12);
+    vertex(0.5*h12, -2*h12);
+    vertex(0.5*h12, -h12);
+    vertex(1.5*h12, -h12);
+    vertex(1.5*h12, 0);
+    vertex(0.5*h12, 0);
+    vertex(0.5*h12, 2*h12);
+    endShape(CLOSE);
+    line(0.5*h12, 0, 0.5*h12, -h12);
+    line(-0.5*h12, -h12, 0.5*h12, - h12);
+    line(-0.5*h12, 0, 0.5*h12, 0);
+    line(-0.5*h12, h12, 0.5*h12, h12);
+    popMatrix();
+  }
+}
+//--------------------class S13 (Pentomino no 13)----------------------
+class S13 {
+  float x13;
+  float y13;
+  float h13;
+  color c13;
+  float angle13 = 0;
+  S13(float x0, float y0, float h0, color warna) {
+    x13 = x0; 
+    y13 = y0;
+    c13 = warna;
+    h13 = h0;
+  }
+  void display() {
+    fill(c13);
+    if (dist(mouseX, mouseY, x13, y13) < h13) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x13 = mouseX;
+        y13 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle13 = angle13 + 90; 
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#6A3330);
+    }
+    pushMatrix();
+    translate(x13, y13);
+    rotate(radians(angle13));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-1.5*h13, 1.5*h13);
+    vertex(-1.5*h13, 0.5*h13);
+    vertex(-0.5*h13, 0.5*h13);
+    vertex(-0.5*h13, -1.5*h13);
+    vertex(1.5*h13, -1.5*h13);
+    vertex(1.5*h13, -0.5*h13);
+    vertex(0.5*h13, -0.5*h13);
+    vertex(0.5*h13, 1.5*h13);
+    endShape(CLOSE);
+    line(-0.5*h13, 0.5*h13, -0.5*h13, 1.5*h13);
+    line(-0.5*h13, 0.5*h13, 0.5*h13, 0.5*h13);
+    line(-0.5*h13, -0.5*h13, 0.5*h13, -0.5*h13);
+    line(0.5*h13, -0.5*h13, 0.5*h13, -1.5*h13);
+    popMatrix();
+  }
+}
+//--------------------class S14 (Pentomino no 14)----------------------
+class S14 {
+  float x14;
+  float y14;
+  float h14;
+  color c14;
+  float angle14 = 0;
+  S14(float x0, float y0, float h0, color warna) {
+    x14 = x0; 
+    y14 = y0;
+    c14 = warna;
+    h14 = h0;
+  }
+  void display() {
+    fill(c14);
+    if (dist(mouseX, mouseY, x14, y14) < h14) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x14 = mouseX;
+        y14 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle14 = angle14 + 90; 
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#E38C87);
+    }
+    pushMatrix();
+    translate(x14, y14);
+    rotate(radians(angle14));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(1.5*h14, 1.5*h14);
+    vertex(1.5*h14, 0.5*h14);
+    vertex(0.5*h14, 0.5*h14);
+    vertex(0.5*h14, -1.5*h14);
+    vertex(-1.5*h14, -1.5*h14);
+    vertex(-1.5*h14, -0.5*h14);
+    vertex(-0.5*h14, -0.5*h14);
+    vertex(-0.5*h14, 1.5*h14);
+    endShape(CLOSE);
+    line(0.5*h14, 0.5*h14, 0.5*h14, 1.5*h14);
+    line(0.5*h14, 0.5*h14, -0.5*h14, 0.5*h14);
+    line(0.5*h14, -0.5*h14, -0.5*h14, -0.5*h14);
+    line(-0.5*h14, -0.5*h14, -0.5*h14, -1.5*h14);
+    popMatrix();
+  }
+}
+//--------------------class S15 (Pentomino no 15)----------------------
+class S15 {
+  float x15;
+  float y15;
+  float h15;
+  color c15;
+  float angle15 = 0;
+  S15(float x0, float y0, float h0, color warna) {
+    x15 = x0; 
+    y15 = y0;
+    c15 = warna;
+    h15 = h0;
+  }
+  void display() {
+    fill(c15);
+    if (dist(mouseX, mouseY, x15, y15) < h15) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x15 = mouseX;
+        y15 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle15 = angle15 + 90; 
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#133D67);
+    }
+    pushMatrix();
+    translate(x15, y15);
+    rotate(radians(angle15));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-h15, 1.5*h15);
+    vertex(-h15, -0.5*h15);
+    vertex(0, -0.5*h15);
+    vertex(0, -2.5*h15);
+    vertex(h15, -2.5*h15);
+    vertex(h15, 0.5*h15);
+    vertex(0, 0.5*h15);
+    vertex(0, 1.5*h15);
+    endShape(CLOSE);
+    line(-h15, 0.5*h15, 0, 0.5*h15);
+    line(0, 0.5*h15, 0, -0.5*h15);
+    line(0, -0.5*h15, h15, -0.5*h15);
+    line(0, -1.5*h15, h15, -1.5*h15);
+    popMatrix();
+  }
+}
+//--------------------class S16 (Pentomino no 16)----------------------
+class S16 {
+  float x16;
+  float y16;
+  float h16;
+  color c16;
+  float angle16 = 0;
+  S16(float x0, float y0, float h0, color warna) {
+    x16 = x0; 
+    y16 = y0;
+    c16 = warna;
+    h16 = h0;
+  }
+  void display() {
+    fill(c16);
+    if (dist(mouseX, mouseY, x16, y16) < h16) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x16 = mouseX;
+        y16 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle16 = angle16 + 90; 
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#6CA208);
+    }
+    pushMatrix();
+    translate(x16, y16);
+    rotate(radians(angle16));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(h16, 1.5*h16);
+    vertex(h16, -0.5*h16);
+    vertex(0, -0.5*h16);
+    vertex(0, -2.5*h16);
+    vertex(-h16, -2.5*h16);
+    vertex(-h16, 0.5*h16);
+    vertex(0, 0.5*h16);
+    vertex(0, 1.5*h16);
+    endShape(CLOSE);
+    line(h16, 0.5*h16, 0, 0.5*h16);
+    line(0, 0.5*h16, 0, -0.5*h16);
+    line(0, -0.5*h16, -h16, -0.5*h16);
+    line(0, -1.5*h16, -h16, -1.5*h16);
+    popMatrix();
+  }
+}
+//--------------------class S17 (Pentomino no 17)----------------------
+class S17 {
+  float x17;
+  float y17;
+  float h17;
+  color c17;
+  float angle17 = 0;
+  S17(float x0, float y0, float h0, color warna) {
+    x17 = x0; 
+    y17 = y0;
+    c17 = warna;
+    h17 = h0;
+  }
+  void display() {
+    fill(c17);
+    if (dist(mouseX, mouseY, x17, y17) < h17) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x17 = mouseX;
+        y17 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle17 = angle17 + 90; 
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#FF03E6);
+    }
+    pushMatrix();
+    translate(x17, y17);
+    rotate(radians(angle17));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(-0.5*h17, 2*h17);
+    vertex(-0.5*h17, h17);
+    vertex(-1.5*h17, h17);
+    vertex(-1.5*h17, 0);
+    vertex(-0.5*h17, 0);
+    vertex(-0.5*h17, -h17);
+    vertex(1.5*h17, -h17);
+    vertex(1.5*h17, 0);
+    vertex(0.5*h17, 0);
+    vertex(0.5*h17, 2*h17);
+    endShape(CLOSE);
+    line(-0.5*h17, 0, 0.5*h17, 0);
+    line(-0.5*h17, 0, -0.5*h17, h17);
+    line(-0.5*h17, h17, 0.5*h17, h17);
+    line(0.5*h17, 0, 0.5*h17, -h17);
+    popMatrix();
+  }
+}
+//--------------------class S17 (Pentomino no 17)----------------------
+class S18 {
+  float x18;
+  float y18;
+  float h18;
+  color c18;
+  float angle18 = 0;
+  S18(float x0, float y0, float h0, color warna) {
+    x18 = x0; 
+    y18 = y0;
+    c18 = warna;
+    h18 = h0;
+  }
+  void display() {
+    fill(c18);
+    if (dist(mouseX, mouseY, x18, y18) < h18) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x18 = mouseX;
+        y18 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle18 = angle18 + 90; 
+        for(int i = 0;  i <= 100000000; i+=1){
+        i= i + 1;}
+        //delay(100);
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(#14641D);
+    }
+    pushMatrix();
+    translate(x18, y18);
+    rotate(radians(angle18));
+    strokeWeight(2);
+    stroke(0);
+    beginShape();
+    vertex(0.5*h18, 2*h18);
+    vertex(0.5*h18, h18);
+    vertex(1.5*h18, h18);
+    vertex(1.5*h18, 0);
+    vertex(0.5*h18, 0);
+    vertex(0.5*h18, -h18);
+    vertex(-1.5*h18, -h18);
+    vertex(-1.5*h18, 0);
+    vertex(-0.5*h18, 0);
+    vertex(-0.5*h18, 2*h18);
+    endShape(CLOSE);
+    line(0.5*h18, 0, -0.5*h18, 0);
+    line(0.5*h18, 0, 0.5*h18, h18);
+    line(0.5*h18, h18, -0.5*h18, h18);
+    line(-0.5*h18, 0, -0.5*h18, -h18);
+    popMatrix();
+  }
+}
+//-------------------------- pattern 6 x 10 ------------------------------------------------
+class P1 {
+  float x;
+  float y;
+  float h;
+  color c;
+  P1(float x0, float y0, float h0, color warna) {
+    x = x0; 
+    y = y0;
+    c = warna;
+    h = h0;
+  }
+  void display() {
+    fill(0);
+    pushMatrix();
+    translate((width/2) - 150, (height/2)-100 );
+    strokeWeight(1);
+    stroke(0);
+    text("Pentomino 6 x 10", 3*h+10, -10);
+    fill(c);
+    rect(0, 0, 10*h, 6*h);
+    stroke(175);
+    for (int i=1; i<=9; i +=1) {
+      line(h*i, 0, h*i, 6*h);
+    }
+    for (int n=1; n<=5; n+=1) {
+      line(0, h*n, 10*h, h*n);
+    }
+    popMatrix();
+  }
+}
+//-------------------------- pattern 5 x 12 ------------------------------------
+class P2 {
+  float x;
+  float y;
+  float h;
+  color c;
+  P2(float x0, float y0, float h0, color warna) {
+    x = x0; 
+    y = y0;
+    c = warna;
+    h = h0;
+  }
+  void display() {
+    fill(0);
+    pushMatrix();
+    translate((width/2) - 180, (height/2)-100);
+    strokeWeight(1);
+    stroke(0);
+    text("Pentomino 5 x 12", 4*h+10, -10);
+    fill(c);
+    rect(0, 0, 12*h, 5*h);
+    stroke(175);
+    for (int i=1; i<=11; i +=1) {
+      line(h*i, 0, h*i, 5*h);
+    }
+    for (int n=1; n<=4; n+=1) {
+      line(0, h*n, 12*h, h*n);
+    }
+    popMatrix();
+  }
+}
+//-------------------------- pattern 4 x 15 ------------------------------------
+class P3 {
+  float x;
+  float y;
+  float h;
+  color c;
+  P3(float x0, float y0, float h0, color warna) {
+    x = x0; 
+    y = y0;
+    c = warna;
+    h = h0;
+  }
+  void display() {
+    fill(0);
+    pushMatrix();
+    translate((width/2) - 225, (height/2)-100 );
+    strokeWeight(1);
+    stroke(0);
+    text("Pentomino 4 x 15", 5*h+10, -10);
+    fill(c);
+    rect(0, 0, 15*h, 4*h);
+    stroke(175);
+    for (int i=1; i<=14; i +=1) {
+      line(h*i, 0, h*i, 4*h);
+    }
+    for (int n=1; n<=3; n+=1) {
+      line(0, h*n, 15*h, h*n);
+    }
+    popMatrix();
+  }
+}
+//-------------------------- pattern 3 x 20 ------------------------------------
+class P4 {
+  float x;
+  float y;
+  float h;
+  color c;
+  P4(float x0, float y0, float h0, color warna) {
+    x = x0; 
+    y = y0;
+    c = warna;
+    h = h0;
+  }
+  void display() {
+    fill(0);
+    pushMatrix();
+    translate((width/2) - 300, (height/2)-100 );
+    strokeWeight(1);
+    stroke(0);
+    text("Pentomino 3 x 20", 6*h+10, -10);
+    fill(c);
+    rect(0, 0, 20*h, 3*h);
+    stroke(175);
+    for (int i=1; i<=19; i +=1) {
+      line(h*i, 0, h*i, 3*h);
+    }
+    for (int n=1; n<=2; n+=1) {
+      line(0, h*n, 20*h, h*n);
+    }
+    popMatrix();
+  }
+}
+
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

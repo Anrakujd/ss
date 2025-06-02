@@ -1,0 +1,274 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen matematika bebas diakses oleh guru dan siswa untuk membantu memahami matematika di sekolah">
+<meta name="Keywords" content="matematika, eksperimen, praktikum online, webbase praktikum, matematika online, pengubinan, tiling, tile, gasing">
+<meta name="author" content="Djukarna">
+<title>Jam</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> AYO BERMAIN SIMULASI JAM </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-square-o" aria-hidden="true"></i><b> Aljabar </b>
+				<ul>
+					<li><a href="number.html">Kubus Bilangan</a></li>
+					<li><a href="number2.html">Batang Bilangan</a></li>
+					<li><a href="number3.html">Batang Pecahan</a></li>
+					<li><a href="simulasi jam.html">Simulasi Jam</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1> Ayo Bermain Simulasi Jam </h1>
+<p>Pilihlah dengan meng-klik simulasi jam kemudian klik kiri dan putar perlahan jarum panjang untuk mengubah posisi jarum jam </p>
+<script type="text/processing" >
+Jam jam;
+
+float x = 500;
+float y = 350;
+float d = 400;
+color w = #FFFFFF;
+float angle;
+float angle2=0;
+float h = 12;
+float secondsRadius;
+float minutesRadius;
+float hoursRadius;
+float r = 180;
+boolean t1, t2;
+color w1 = 100;
+color w2 = 100;
+
+void setup() {
+  size(1000, 700);
+  jam = new Jam(x, y, d);
+  secondsRadius = r * 0.8;
+  minutesRadius = r * 0.75;
+  hoursRadius = r * 0.6;
+}
+
+void draw() {
+  background(0, 255, 255);
+  strokeWeight(2);
+  stroke(0);
+  fill(w1);
+  rect(600, 600, 110, 30, 10, 10, 10, 10);
+  fill(w2);
+  rect(320, 600, 100, 30, 10, 10, 10, 10);
+  fill(255);
+  textSize(14);
+  text("Simulasi Jam", 370, 613);
+  fill(255);
+  textSize(14);
+  text("Waktu saat ini", 655, 613);
+  fill(0);
+  textSize(20);
+  text("Silakan pilih simulasi jam atau melihat waktu saat ini", 500, 550);
+  if (mouseX>600 && mouseX<700 && mouseY>600 && mouseY<630) {
+    w1 = #005000;
+  } else {
+    w1=100;
+  }
+  if (mouseX>320 && mouseX<420 && mouseY>600 && mouseY<630) {
+    w2 = #005000;
+  } else {
+    w2=100;
+  }
+
+  jam.display();
+  if (t1) {
+    float s = map(second(), 0, 60, 0, TWO_PI) - HALF_PI;
+    float m = map(minute() + norm(second(), 0, 60), 0, 60, 0, TWO_PI) - HALF_PI; 
+    float h1 = map(hour() + norm(minute(), 0, 60), 0, 24, 0, TWO_PI * 2) - HALF_PI;
+    fill(0);
+    textSize(25);
+    text("Waktu Saat ini", 0, -240);
+    stroke(0);
+    strokeWeight(1);
+    line(0, 0, 0+ cos(s) * secondsRadius, sin(s) * secondsRadius);
+    strokeWeight(2);
+    line(0, 0, 0 + cos(m) * minutesRadius, sin(m) * minutesRadius);
+    strokeWeight(4);
+    line(0, 0, 0 + cos(h1) * hoursRadius, sin(h) * hoursRadius);
+    stroke(1);
+  }
+  //-----------------------------------------------------------------------------
+  if (t2) {
+    fill(0);
+    textSize(25);
+    text("Simulasi Jam", 0, -240);
+    pushMatrix();
+    fill(0);
+    rotate(angle);
+    beginShape();
+    vertex(0, -0.5*h);
+    vertex(12*h, -0.25*h);
+    vertex(13*h, 0);
+    vertex(12*h, 0.25*h);
+    vertex(0, 0.5*h);
+    vertex(-h, 0.3*h);
+    vertex(-h, 0);
+    vertex(-h, -0.3*h);
+    endShape(CLOSE);
+    fill(255);
+    ellipse(0, 0, 5, 5);
+    popMatrix();
+
+    pushMatrix();
+    fill(0);
+    rotate(angle2);
+    beginShape();
+    vertex(0, -0.5*h);
+    vertex(-7*h, -0.25*h);
+    vertex(-9*h, 0);
+    vertex(-7*h, 0.25*h);
+    vertex(0, 0.5*h);
+    vertex(h, 0.3*h);
+    vertex(h, 0);
+    vertex(h, -0.3*h);
+    endShape(CLOSE);
+    fill(255);
+    ellipse(0, 0, 5, 5);
+    popMatrix();
+    stroke(1);
+  }
+}
+void mousePressed() {
+  if (mouseX>600 && mouseX<700 && mouseY>600 && mouseY<630) {
+    if (!t1) {
+      t1=true;
+      t2=false;
+    }
+  }
+  if (mouseX>320 && mouseX<420 && mouseY>600 && mouseY<630) {
+    if (!t2) {
+      t2=true;
+      t1=false;
+    }
+  }
+}
+
+void mouseDragged() { 
+  if (dist(x, y-50, mouseX, mouseY)<r) {
+    float m_angle = atan2(mouseY-y, mouseX-x );
+    angle =  ((PI) + m_angle);
+    if (angle == 1.5*PI) {
+      angle2 = angle2 +PI/6;
+    }
+  }
+}
+
+class Jam {
+  PFont font;
+  float d;
+  float x;
+  float y;
+  float r = 180;
+  float r3 = 190;
+  float r1 = 170;
+  float r2 = 178;
+  float r4 = 150;
+  float h = 20;
+  float angle;
+  Jam(float tempx, float tempy, float tempd) {
+    d = tempd;
+    x = tempx;
+    y = tempy;
+  }  
+
+  void display() {
+    strokeWeight(2);
+    stroke(0);
+    ellipseMode(CENTER);
+    translate(x, y-50);
+    fill(#4E00FA);
+    ellipse(0, 0, d+10, d+10);
+    fill(#FFFFFF);
+    ellipse(0, 0, d, d);
+    fill(0);
+    ellipse(0, 0, 10, 10);
+
+    for (int i = 6; i <=360; i = i + 6) {
+      noStroke();
+      fill(#E309C6);
+      ellipseMode(CENTER);
+      ellipse((r3)*cos(radians(i)), (r3)*sin(radians(i)), 5, 5);
+    }
+
+    for (int i = 0; i <=360; i = i + 30) {
+      noStroke();
+      fill(0);
+      ellipse(r1*cos(radians(i)), r1*sin(radians(i)), 10, 10);
+      fill(255);
+      noStroke();
+      ellipse((r3)*cos(radians(i)), (r3)*sin(radians(i)), 6, 6);
+    }
+
+    for (int i = 1; i <= 12; i = i + 1) {
+      fill(#0C24A7);
+      textAlign(CENTER, CENTER);
+      textSize(24);
+      text(i, r4*cos(radians((i*30)-90)), r4*sin(radians((i*30)-90)));
+    }
+
+    textAlign(CENTER, CENTER);
+    textSize(12);
+    fill(#E309C6);
+    text("20", r3*cos(radians(30)), r3*sin(radians(30)));
+    text("25", r3*cos(radians(60)), r3*sin(radians(60)));
+    text("30", r3*cos(radians(90)), r3*sin(radians(90)));
+    text("35", r3*cos(radians(120)), r3*sin(radians(120)));
+    text("40", r3*cos(radians(150)), r3*sin(radians(150)));
+    text("45", r3*cos(radians(180)), r3*sin(radians(180)));
+    text("50", r3*cos(radians(210)), r3*sin(radians(210)));
+    text("55", r3*cos(radians(240)), r3*sin(radians(240)));
+    text("60", r3*cos(radians(270)), r3*sin(radians(270)));
+    text("5", r3*cos(radians(300)), r3*sin(radians(300)));
+    text("10", r3*cos(radians(330)), r3*sin(radians(330)));
+    text("15", r3*cos(radians(360)), r3*sin(radians(360)));
+  }
+}
+
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

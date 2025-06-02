@@ -1,0 +1,475 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen matematika bebas diakses oleh guru dan siswa untuk membantu memahami matematika di sekolah">
+<meta name="Keywords" content="matematika, eksperimen, praktikum online, webbase praktikum, matematika online, bilangan, konkret, bilangan konkret, gasing">
+<meta name="author" content="Djukarna">
+<title>Batang Bilangan</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> Ayo Bermain Matematika </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-square-o" aria-hidden="true"></i><b> Aljabar </b>
+				<ul>
+					<li><a href="number.html">Kubus Bilangan</a></li>
+					<li><a href="number2.html">Batang Bilangan</a></li>
+					<li><a href="number3.html">Batang Pecahan</a></li>
+					<li><a href="simulasi jam.html">Simulasi Jam</a></li>
+				</ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak3">
+<h1> Kubus Satuan, Puluhan dan Ratusan</h1>
+<p> Klik dan drag Kubus Bilangan, dan susun menjadi bilangan sesuka mu, untuk menghapus tekan DEL. Ikuti petunjuk gurumu!</p>
+<script type="text/processing" >
+ArrayList<Node> nodes = new ArrayList();
+final int A=30;
+final int B=80;
+final int rectWidth = 20;
+final int rectHeight = 20;
+final int DRAG_NONE = 0; 
+final int DRAG_RECT1 = 1;
+final int DRAG_RECT2 = 2;
+final int DRAG_RECT3 = 3;
+
+int dragging = DRAG_NONE; 
+
+final int EDIT = 0; // dragging 
+final int RUN  = 1; // run the result
+int state = EDIT;
+
+final int UNDEFINED = -1; 
+int draggingAnExistingRectClass = UNDEFINED; 
+
+final PVector pvRect = new PVector(40, 110); 
+
+void setup() {
+  size(1250, 800);
+} 
+
+void draw() {
+  background(0,200,200);
+  stroke(0);
+  fill(255);
+  rect(10, 20, 250, 600);
+  rect(300, 20, 300, 750);
+  rect(620, 20, 300, 750);
+  rect(940, 20, 250, 750);
+  fill(0)
+  textSize(14);
+  text("Kubus satuan", A-5, B-25);
+  text("Kubus puluhan", A+95, B-25);
+  text("Kubus ratusan", A+60, B+260);
+  textSize(20);
+  text("Tempat Ratusan", 370, B-25);
+  text("Tempat Puluhan", 690, B-25);
+  text("Tempat Satuan", 990, B-25);
+    
+   for (int i = 0; i < nodes.size ()-1; i++) { 
+    Node currentNode = nodes.get(i);
+    currentNode.display();
+  }
+  
+  if (nodes.size()>0) {
+    Node currentNode = nodes.get(nodes.size()-1);
+    currentNode.display();
+  }
+  //kubus satuan
+  strokeWeight(1);
+  stroke(230);
+  fill(255,0,0);
+  rect(A,B,20,20);
+  fill(150,0,0);
+  beginShape();
+  vertex(A,B);
+  vertex(A+10*cos(PI/6), B-10*sin(PI/6));
+  vertex(A+10*cos(PI/6)+20, B-10*sin(PI/6));
+  vertex(A+20,B);
+  endShape(CLOSE);
+  beginShape();
+  vertex(A+20,B);
+  vertex(A+10*cos(PI/6)+20, B-10*sin(PI/6));
+  vertex(A+10*cos(PI/6)+20, B-10*sin(PI/6) + 20);
+  vertex(A+20,B+20);
+  endShape(CLOSE);
+  
+  //kubus puluhan
+  fill(0,0,255);
+  rect(A+100,B,20,200);
+  fill(0,0,150);
+  beginShape();
+  vertex(A+100,B);
+  vertex(A+100+10*cos(PI/6), B-10*sin(PI/6));
+  vertex(A+10*cos(PI/6)+120, B-10*sin(PI/6));
+  vertex(A+120,B);
+  endShape(CLOSE);
+  beginShape();
+  vertex(A+120,B);
+  vertex(A+10*cos(PI/6)+120, B-10*sin(PI/6));
+  vertex(A+10*cos(PI/6)+120, B-10*sin(PI/6) + 200);
+  vertex(A+120,B+200);
+  endShape(CLOSE);
+  for(int i=20; i<=200;  i=i+20){
+    line(A+100,B+i, A+120, B+i);
+  }
+  for(int i=20; i<=200;  i=i+20){
+    line(A+120, B+i, A+10*cos(PI/6)+120, B-10*sin(PI/6) + i);
+  }
+  
+  //kubus ratusan
+  fill(0,255,0);
+  rect(A, B + 280, 200, 200);
+  fill(0,150,0);
+  beginShape();
+  vertex(A, B + 280);
+  vertex(A + 10*cos(PI/6), B-10*sin(PI/6) + 280);
+  vertex(A + 10*cos(PI/6) + 200, B-10*sin(PI/6)+ 280);
+  vertex(A + 200, B + 280);
+  endShape(CLOSE);
+  beginShape();
+  vertex(A + 200,B + 280);
+  vertex(A + 10*cos(PI/6) + 200, B - 10*sin(PI/6) + 280);
+  vertex(A + 10*cos(PI/6) + 200, B - 10*sin(PI/6) + 480);
+  vertex(A + 200, B + 480);
+  endShape(CLOSE);
+  for(int i=20; i<=200;  i=i+20){
+    line(A, B + 280 + i, A + 200, B + 280+i);
+  }
+   for(int i=20; i<=200;  i=i+20){
+    line(A + i, B + 280, A + i, B + 480);
+  }
+  for(int i=20; i<=200;  i=i+20){
+    line(A + i, B + 280, A + 10*cos(PI/6) + i, B - 10*sin(PI/6) + 280 );
+  }
+  for(int i=20; i<=200;  i=i+20){
+    line(A + 200, B + i + 280, A + 10*cos(PI/6)+200, B - 10*sin(PI/6) + i + 280);
+  }
+  
+  if (dragging==DRAG_RECT1) {
+    // dragging kubus satuan
+    strokeWeight(1);
+	stroke(230);
+	fill(255,0,0);
+	rect(mouseX, mouseY,20,20);
+	fill(150,0,0);
+	beginShape();
+		vertex(mouseX, mouseY);
+		vertex(mouseX+10*cos(PI/6), mouseY-10*sin(PI/6));
+		vertex(mouseX+10*cos(PI/6)+20, mouseY-10*sin(PI/6));
+		vertex(mouseX+20,mouseY);
+	endShape(CLOSE);
+	beginShape();
+		vertex(mouseX+20,mouseY);
+		vertex(mouseX+10*cos(PI/6)+20, mouseY-10*sin(PI/6));
+		vertex(mouseX+10*cos(PI/6)+20, mouseY-10*sin(PI/6) + 20);
+		vertex(mouseX+20,mouseY+20);
+	endShape(CLOSE);
+    } 
+    else if (dragging==DRAG_RECT2) {
+    // dragging kubus puluhan
+	fill(0,0,255);
+	rect(mouseX,mouseY,20,200);
+	fill(0,0,150);
+	beginShape();
+		vertex(mouseX,mouseY);
+		vertex(mouseX+10*cos(PI/6), mouseY-10*sin(PI/6));
+		vertex(mouseX+10*cos(PI/6)+20, mouseY-10*sin(PI/6));
+		vertex(mouseX+20,mouseY);
+	endShape(CLOSE);
+	beginShape();
+		vertex(mouseX+20,mouseY);
+		vertex(mouseX+10*cos(PI/6)+20, mouseY-10*sin(PI/6));
+		vertex(mouseX+10*cos(PI/6)+20, mouseY-10*sin(PI/6) + 200);
+		vertex(mouseX+20,mouseY+200);
+	endShape(CLOSE);
+	for(int i=20; i<=200;  i=i+20){
+		line(mouseX, mouseY+i, mouseX+20, mouseY+i);
+	}
+	for(int i=20; i<=200;  i=i+20){
+		line(mouseX+20, mouseY + i, mouseX + 10*cos(PI/6) + 20, mouseY - 10*sin(PI/6) + i);
+	}
+	} 
+    else if (dragging==DRAG_RECT3) {
+    // dragging kubus ratusan
+    fill(0,255,0);
+	rect(mouseX, mouseY, 200, 200);
+	fill(0,150,0);
+	beginShape();
+		vertex(mouseX, mouseY);
+		vertex(mouseX + 10*cos(PI/6), mouseY-10*sin(PI/6));
+		vertex(mouseX + 10*cos(PI/6) + 200, mouseY-10*sin(PI/6));
+		vertex(mouseX + 200, mouseY);
+	endShape(CLOSE);
+	beginShape();
+		vertex(mouseX + 200, mouseY);
+		vertex(mouseX + 10*cos(PI/6) + 200, mouseY - 10*sin(PI/6));
+		vertex(mouseX + 10*cos(PI/6) + 200, mouseY - 10*sin(PI/6) + 200);
+		vertex(mouseX + 200, mouseY + 200);
+	endShape(CLOSE);
+	for(int i=20; i<=200;  i=i+20){
+		line(mouseX, mouseY + i, mouseX + 200, mouseY + i);
+	}
+	for(int i=20; i<=200;  i=i+20){
+		line(mouseX + i, mouseY, mouseX + i, mouseY + 200);
+	}
+	for(int i=20; i<=200;  i=i+20){
+		line(mouseX + i, mouseY, mouseX + 10*cos(PI/6) + i, mouseY - 10*sin(PI/6) );
+	}
+	for(int i=20; i<=200;  i=i+20){
+		line(mouseX + 200, mouseY + i, mouseX + 10*cos(PI/6)+200, mouseY - 10*sin(PI/6) + i );
+	}
+	} 
+    else if (draggingAnExistingRectClass!=UNDEFINED) {
+    // menggeser bagunan yang sudah ada
+    Node RectClass = nodes.get(draggingAnExistingRectClass);
+    RectClass.incrementXY( mouseX-pmouseX, mouseY-pmouseY );
+  }
+}
+
+void mousePressed() {
+     draggingAnExistingRectClass=UNDEFINED; // reset 
+	  if (mouseX >= 15 && mouseX <= 55 && mouseY >= 75 && mouseY <= 105 ) {
+      dragging=DRAG_RECT1;
+      return;
+      } 
+      else if (mouseX >= 125 && mouseX<= 155 && mouseY >= 75 && mouseY <= 275 ) {
+      dragging=DRAG_RECT2;
+      return;
+      } 
+      else if (mouseX >= 15 && mouseX <= 230 && mouseY >= 360 && mouseY <= 560) {
+      dragging=DRAG_RECT3;
+      return;
+      } 
+      else {
+      for (int i = 0; i < nodes.size (); i++) { 
+        Node RectClass = nodes.get(i);
+          if (RectClass.over()) {
+             draggingAnExistingRectClass = i; 
+              return;        
+             }
+        }
+      }    
+}
+
+void mouseReleased() {
+      if (dragging==DRAG_RECT1) {
+      dragging = DRAG_NONE;   
+      nodes.add (new kubusSatuan(mouseX, mouseY));
+      } 
+      else if (dragging==DRAG_RECT2) {
+      dragging = DRAG_NONE; // reset
+      nodes.add (new kubusPuluhan(mouseX, mouseY));
+      } 
+      else if (dragging==DRAG_RECT3) {
+      dragging = DRAG_NONE; // reset 
+      nodes.add (new kubusRatusan(mouseX, mouseY));
+      } 
+    draggingAnExistingRectClass=UNDEFINED; // reset
+}
+
+interface Node {
+  void display();
+  void incrementXY(float x_, float y_);
+  PVector getPos();
+  boolean over();
+}
+// menghapus broooo
+void keyPressed() {
+  // only in state EDIT: 
+  if (state==EDIT) {
+    if (key==' ') {
+      state=RUN;
+      frameRate(2);
+    } else if (key==DELETE) {
+      if (nodes.size()>0) { 
+        nodes.remove(nodes.size()-1);
+      }
+    }
+  }
+}
+
+class kubusSatuan implements Node {  
+  float x=0;
+  float y=0;
+  kubusSatuan(float tempX, float tempY) {
+    x = tempX;
+    y = tempY;
+  } 
+  void display() {    
+    strokeWeight(1);
+	stroke(230);
+	fill(255,0,0);
+	rect(x, y, 20, 20);
+	fill(150,0,0);
+	beginShape();
+		vertex(x, y);
+		vertex(x+10*cos(PI/6), y-10*sin(PI/6));
+		vertex(x+10*cos(PI/6)+20, y-10*sin(PI/6));
+		vertex(x+20,y);
+	endShape(CLOSE);
+	beginShape();
+		vertex(x+20,y);
+		vertex(x+10*cos(PI/6)+20, y-10*sin(PI/6));
+		vertex(x+10*cos(PI/6)+20, y-10*sin(PI/6) + 20);
+		vertex(x+20, y+20);
+	endShape(CLOSE);
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x+w/2, y+h/2);
+  }
+  boolean over() {
+    return mouseX>x && mouseX<x+20 && mouseY>y && mouseY<y+20;
+  }
+} 
+
+class kubusPuluhan implements Node {  
+  float x=0;
+  float y=0;
+  kubusPuluhan(float tempX, float tempY) {
+    x = tempX;
+    y = tempY;
+  } 
+  void display() {    
+    fill(0,0,255);
+	rect(x,y,20,200);
+	fill(0,0,150);
+	beginShape();
+		vertex(x,y);
+		vertex(x+10*cos(PI/6), y-10*sin(PI/6));
+		vertex(x+10*cos(PI/6)+20, y-10*sin(PI/6));
+		vertex(x+20, y);
+	endShape(CLOSE);
+	beginShape();
+		vertex(x+20,y);
+		vertex(x+10*cos(PI/6)+20, y-10*sin(PI/6));
+		vertex(x+10*cos(PI/6)+20, y-10*sin(PI/6) + 200);
+		vertex(x+20, y+200);
+	endShape(CLOSE);
+	for(int i=20; i<=200;  i=i+20){
+		line(x, y+i, x+20, y+i);
+	}
+	for(int i=20; i<=200;  i=i+20){
+		line(x+20, y + i, x + 10*cos(PI/6) + 20, y - 10*sin(PI/6) + i);
+	}
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x+w/2, y+h/2);
+  }
+  boolean over() {
+    return mouseX>x && mouseX<x+20 && mouseY>y && mouseY<y+200;
+  }
+} 
+
+class kubusRatusan implements Node {  
+  float x=0;
+  float y=0;
+  kubusRatusan(float tempX, float tempY) {
+    x = tempX;
+    y = tempY;
+  } 
+  void display() {    
+    fill(0,255,0);
+	rect(x, y, 200, 200);
+	fill(0,150,0);
+	beginShape();
+		vertex(x, y);
+		vertex(x + 10*cos(PI/6), y-10*sin(PI/6));
+		vertex(x + 10*cos(PI/6) + 200, y-10*sin(PI/6));
+		vertex(x + 200, y);
+	endShape(CLOSE);
+	beginShape();
+		vertex(x + 200, y);
+		vertex(x + 10*cos(PI/6) + 200, y - 10*sin(PI/6));
+		vertex(x + 10*cos(PI/6) + 200, y - 10*sin(PI/6) + 200);
+		vertex(x + 200, y + 200);
+	endShape(CLOSE);
+	for(int i=20; i<=200;  i=i+20){
+		line(x, y + i, x + 200, y + i);
+	}
+	for(int i=20; i<=200;  i=i+20){
+		line(x + i, y, x + i, y + 200);
+	}
+	for(int i=20; i<=200;  i=i+20){
+		line(x + i, y, x + 10*cos(PI/6) + i, y - 10*sin(PI/6) );
+	}
+	for(int i=20; i<=200;  i=i+20){
+		line(x + 200, y + i, x + 10*cos(PI/6)+200, y - 10*sin(PI/6) + i );
+	}
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x+w/2, y+h/2);
+  }
+  boolean over() {
+    return mouseX>x && mouseX<x+200 && mouseY>y && mouseY<y+200;
+  }
+} 
+
+
+
+//------------------------------------------------------------------------------------------------------- 
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+</body>
+<footer>
+<b>Didukung Oleh :</b> 
+<li>
+<a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+</li>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

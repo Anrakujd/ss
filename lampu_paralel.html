@@ -1,0 +1,506 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Listrik & Magnet</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> SIMULASI RANGKAIAN LAMPU PARALEL</h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="file/lampu_paralel.windows64.rar" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="file/lampu_paralel.rar" target="_blank">Download Source Code</a></li>
+					
+				</ul>
+			</li>
+				<li><i class="fa fa-bolt" aria-hidden="true"></i><b> Listrik & Magnet</b>
+				<ul>
+					<li><a href="sel_Volta.html">Sel Volta</a></li>
+					<li><a href="hukum_Ohm.html">Hukum Ohm</a></li>
+					<li><a href="resistor.html">Hambatan Resistor</a></li>
+					<li><a href="Rangkaian Sederhana.html">Rangkaian Sederhana</a></li>
+					<li><a href="seri_paralel.html">Rangkaian Lampu Seri & Paralel</a></li>
+					<li><a href="lampu_seri.html">Simulasi Rangkaian Lampu Seri</a></li>
+					<li><a href="lampu_paralel.html">Simulasi Rangkaian Lampu Paralel</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+		
+<div class="kotak2">
+<h1> Simulasi Rangkaian Lampu Paralel </h1>
+<script type="text/processing" >
+boolean s1, s2, s3;
+PSU psu;
+float C;
+float V1;
+float V2;
+float i1;
+float i1a;
+float i1b;
+float i2;
+float i3;
+int r1 ;
+int r2 ;
+int g1 ;
+int g2 ;
+int b1 ;
+int b2 ;
+
+void setup() {
+  size(800, 600); 
+  psu = new PSU(50, 300, 76, 25, 10);
+}
+
+void draw() {
+  background(230);
+  textSize(16);
+  text("Simulasi Hukum Ohm Rangkaian Lampu Paralel", 230, 30);
+  psu.update();
+  psu.display();
+  C = psu.getPos()-50;
+  V1 = C;
+  V2 = C;
+  i1 = C/3;
+  i1a = C/6;
+  i1b =C/6;
+  i2 = C/6;
+  i3 = C/6;
+  b1=int(V1);
+  b2=int(V2);
+  if(!s1 && !s2 && !s3){
+  Voltmeter(0,550,80);
+  Voltmeter(0,550,250);
+  Ammeter(0,200,450);
+  Ammeter(0,400,80);
+  Ammeter(0,400,250);
+  saklarHOFF(250,275);
+  saklarHOFF(425,185);
+  saklarHOFF(425,375);
+  lampuHOFF(575,185,20);
+  lampuHOFF(575,375,20);
+  }
+  if(!s1 && !s2 && s3){
+  Voltmeter(0,550,80);
+  Voltmeter(0,550,250);
+  Ammeter(0,200,450);
+  Ammeter(0,400,80);
+  Ammeter(0,400,250);
+  saklarHOFF(250,275);
+  saklarHOFF(425,185);
+  saklarHON(425,375);
+  lampuHOFF(575,185,20);
+  lampuHOFF(575,375,20);
+  }
+  if(!s1 && s2 && !s3){
+  Voltmeter(0,550,80);
+  Voltmeter(0,550,250);
+  Ammeter(0,200,450);
+  Ammeter(0,400,80);
+  Ammeter(0,400,250);
+  saklarHOFF(250,275);
+  saklarHON(425,185);
+  saklarHOFF(425,375);
+  lampuHOFF(575,185,20);
+  lampuHOFF(575,375,20);
+  }
+  if(!s1 && s2 && s3){
+  Voltmeter(0,550,80);
+  Voltmeter(0,550,250);
+  Ammeter(0,200,450);
+  Ammeter(0,400,80);
+  Ammeter(0,400,250);
+  saklarHOFF(250,275);
+  saklarHON(425,185);
+  saklarHON(425,375);
+  lampuHOFF(575,185,20);
+  lampuHOFF(575,375,20);  
+  }
+  if(s1 && !s2 && !s3){
+  Voltmeter(0,550,80);
+  Voltmeter(0,550,250);
+  Ammeter(0,200,450);
+  Ammeter(0,400,80);
+  Ammeter(0,400,250);
+  saklarHON(250,275);
+  saklarHOFF(425,185);
+  saklarHOFF(425,375);
+  lampuHOFF(575,185,20);
+  lampuHOFF(575,375,20);  
+  }
+  if(s1 && !s2 && s3){
+  Voltmeter(0,550,80);
+  Voltmeter(V2,550,250);
+  Ammeter(i1b,200,450);
+  Ammeter(0,400,80);
+  Ammeter(i3,400,250);
+  saklarHON(250,275);
+  saklarHOFF(425,185);
+  saklarHON(425,375);
+  lampuHOFF(575,185,20);
+  lampuHON(575,375,20,148+b2*8,148+b2*8,0);   
+  if (b1>=15) {
+      Voltmeter(0,550,80);
+      Voltmeter(V2,550,250);
+      Ammeter(0,200,450);
+      Ammeter(0,400,80);
+      Ammeter(i3,400,250);
+      //lampuHRusak(575,185, 20);
+      lampuHRusak(575,375, 20);
+    } else if (b1<=3) {
+      lampuHOFF(575, 185, 20);
+      lampuHOFF(575, 375, 20);
+    }
+  }
+  if(s1 && s2 && !s3){
+  Voltmeter(V1,550,80);
+  Voltmeter(0,550,250);
+  Ammeter(i1a,200,450);
+  Ammeter(i2,400,80);
+  Ammeter(0,400,250);
+  saklarHON(250,275);
+  saklarHON(425,185);
+  saklarHOFF(425,375);
+  lampuHON(575,185,20,148+b1*8,148+b1*8,0);
+  lampuHOFF(575,375,20);   
+  if (b1>=15) {
+      Voltmeter(V1,550,80);
+      Voltmeter(0,550,250);
+      Ammeter(0,200,450);
+      Ammeter(i2,400,80);
+      Ammeter(0,400,250);
+      lampuHRusak(575,185, 20);
+      //lampuHRusak(575,375, 20);
+    } else if (b1<=3) {
+      lampuHOFF(575, 185, 20);
+      lampuHOFF(575, 375, 20);
+    }
+  }
+  if(s1 && s2 && s3){
+  Voltmeter(V1,550,80);
+  Voltmeter(V2,550,250);
+  Ammeter(i1,200,450);
+  Ammeter(i2,400,80);
+  Ammeter(i3,400,250);
+  saklarHON(250,275);
+  saklarHON(425,185);
+  saklarHON(425,375);
+  lampuHON(575,185,20,148+b1*8,148+b1*8,0);
+  lampuHON(575,375,20,148+b2*8,148+b2*8,0);  
+  if (b1>=15) {
+      Voltmeter(0,550,80);
+      Voltmeter(0,550,250);
+      Ammeter(0,200,450);
+      Ammeter(0,400,80);
+      Ammeter(0,400,250);
+      lampuHRusak(575,185, 20);
+      lampuHRusak(575,375, 20);
+    } else if (b1<=3) {
+      lampuHOFF(575, 185, 20);
+      lampuHOFF(575, 375, 20);
+    }
+  }
+  stroke(255,0,0);
+  line(120,330,120,350);
+  line(120,350,175,350);
+  line(175,350,175,275);
+  line(175,275,230,275);
+  line(638,125,638,150);
+  line(638,150,535,150);
+  line(535,150,535,185);
+  line(535,185,502,185);
+  line(502,185,502,125);
+  line(638,350,535,350);
+  line(535,350,535,375);
+  line(535,375,502,375);
+  line(502,375,502,295);
+  line(638,350,638,295);
+  fill(255,0,0);
+  ellipse(535,185,5,5);
+  ellipse(535,375,5,5);
+  stroke(0,0,255);
+  line(287,495,287,520);
+  line(287,520,60,520);
+  line(60,520,60,330);
+  line(651.5,185,651.5,125);
+  line(651.5,375,651.5,295);
+  line(488,125,488,185);
+  line(488,295,488,375);
+  line(488,185,480,185);
+  line(488,375,480,375);
+  fill(0,0,255);
+  ellipse(480,375,5,5);
+  ellipse(480,185,5,5);
+  ellipse(651.5,185,5,5);
+  ellipse(651.5,375,5,5);
+  stroke(0);
+  line(310,275,325,275);
+  line(325,185,325,375);
+  line(325,185,410,185);
+ // line(485,185,540,185);
+  line(610,185,715,185);
+  line(325,375,410,375);
+ // line(485,375,540,375);
+  line(610,375,715,375);
+  line(715,185,715,375);
+  line(715,275,750,275);
+  line(750,275,750,495);
+  line(750,495,300,495);
+  fill(0);
+  stroke(0);
+  textSize(14);
+  text("Lampu 1: ", 50, 50);
+  text("Daya(P): 24W", 50, 65);
+  text("Tegangan(V): 12V", 50, 80);
+  text("Hambatan dalam (R): 6 Ohm", 50, 95);
+  text("Lampu 2: ", 50, 120);
+  text("Daya(P): 24W", 50, 135);
+  text("Tegangan(V): 12V", 50, 150);
+  text("Hambatan dalam (R): 6 Ohm", 50, 165);
+  }
+
+
+public void saklarHON(int x1, int y1) {
+  //saklar OFF (posisi X1, posisi y1)
+  line(x1, y1, x1-20, y1);
+  line(x1+30, y1, x1+60, y1);
+  line(x1, y1, x1+25, y1);
+  fill(255, 0, 0);
+  ellipse(x1+30, y1, 6, 6);
+  ellipse(x1+25, y1, 6, 6);
+  ellipse(x1, y1, 6, 6);
+}
+
+public void saklarHOFF(int x1, int y1) {
+  //saklar OFF (posisi X1, posisi y1)
+  line(x1, y1, x1-20, y1);
+  line(x1+30, y1, x1+60, y1);
+  line(x1, y1, x1+25, y1-15);
+  fill(255, 0, 0);
+  ellipse(x1+30, y1, 6, 6);
+  ellipse(x1+25, y1-15, 6, 6);
+  ellipse(x1, y1, 6, 6);
+}
+
+public void lampuHON(int x, int y, int d, int r, int g, int b) {
+  //Lampu OFF vertikal (posisi X, posisi Y, Jari-jari r)
+  fill(r, g, b);
+  ellipse(x, y, d*2, d*2);
+  line(x+d, y, x+(2*d), y);
+  line(x-d, y, x-(2*d), y);
+  fill(0);
+  textSize(16);
+  text("ON", x-d/1.7, y+d/3);
+}
+
+public void lampuHOFF(int x, int y, int d) {
+  //Lampu OFF
+  fill(255);
+  ellipse(x, y, d*2, d*2);
+  line(x+d, y, x+(2*d), y);
+  line(x-d, y, x-(2*d), y);
+  fill(0);
+  textSize(16);
+  text("Off", x-(d/1.7), y+(d/3));
+}
+
+public void lampuHRusak(int x, int y, int d) {
+  //Lampu rusak
+  fill(0);
+  ellipse(x, y, d*2, d*2);
+  line(x+d, y, x+(2*d), y);
+  line(x-d, y, x-(2*d), y);
+  stroke(255, 0, 0);
+  line(x+d, y-d, x-d, y+d);
+  line(x+d, y+d, x-d, y-d);
+  stroke(0);
+}
+
+class PSU {
+  int swidth, sheight;    // width and height of bar
+  float xpos, ypos;       // x and y position of bar
+  float spos, newspos;    // x position of slider
+  float sposMin, sposMax; // max and min values of slider
+  int loose;              // how loose/heavy
+  boolean over;           // is the mouse over the slider?
+  boolean locked;
+  float ratio;
+  PSU (float xp, float yp, int sw, int sh, int l) {
+    swidth = sw;
+    sheight = sh;
+    xpos = xp;
+    ypos = yp-sheight/2;
+    spos = xpos + swidth/2 - sheight/2;
+    newspos = spos;
+    sposMin = xpos;
+    sposMax = xpos + swidth - sheight;
+    loose = l;
+  }
+  void update() {
+    if (overEvent()) {
+      over = true;
+    } else {
+      over = false;
+    }
+    if (mousePressed && over) {
+      locked = true;
+    }
+    if (!mousePressed) {
+      locked = false;
+    }
+    if (locked) {
+      newspos = constrain(mouseX-sheight/2, sposMin, sposMax);
+    }
+    if (abs(newspos - spos) > 1) {
+      spos = spos + (newspos-spos)/loose;
+    }
+  }
+  float constrain(float val, float minv, float maxv) {
+    return min(max(val, minv), maxv);
+  }
+  boolean overEvent() {
+    if (mouseX > xpos && mouseX < xpos+swidth &&
+      mouseY > ypos && mouseY < ypos+sheight) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  void display() {
+    strokeWeight(2);
+    fill(80);
+    rect(xpos-15, ypos-(2*sheight)-20, 110, 100);
+    fill(255);
+    rect(xpos-15, ypos-(2*sheight)+80, 110, 20);
+    fill(150);
+    rect(xpos, ypos, swidth, sheight);
+    fill(0, 0, 255);
+    ellipse(xpos+10, ypos+40, 10, 10);
+    fill(0);
+    textSize(14);
+    text("-", xpos-10, ypos+45);
+    fill(255, 0, 0);
+    ellipse(xpos+70, ypos+40, 10, 10);
+    fill(0);
+    textSize(14);
+    text("+", xpos+80, ypos+45);
+    fill(255);
+    textSize(14);
+    text("Power Suplay", xpos-3, ypos-55);
+    float E;
+    E = spos-50;
+    fill(155, 0, 0);
+    rect(xpos+10, ypos-(2*sheight)+4, 50, 30);
+    fill(255);
+    textSize(18);
+    text(nf(E, 0, 1), xpos+(swidth/2)-23, ypos-sheight);
+    text("V", xpos+27+(swidth/2), ypos-sheight);
+    if (over || locked) {
+      fill(255, 0, 0);
+    } else {
+      fill(100, 100, 100);
+    }
+    rect(spos, ypos, sheight, sheight);
+  }
+  float getPos() {
+    return spos;
+  }
+}
+
+public void Ammeter(float A, int x, int y) {
+  fill(100);
+  rect(x-10, y-10, 80+(2*20), (80+(2*20))/2);
+  fill(150, 0, 0);
+  rect(x, y, 80, 40);
+  ellipse(x+102, y+45, 5, 5);
+  fill(0, 0, 150);
+  ellipse(x+88, y+45, 5, 5);
+  fill(255);
+  textSize(25);
+  text("A", x+87, y+30);
+  text(nf(A, 0, 2), x+5, y+30);
+}
+
+public void Voltmeter(float V, int x, int y) {
+  fill(100);
+  rect(x-10, y-10, 80+(2*20), (80+(2*20))/2);
+  fill(150, 0, 0);
+  rect(x, y, 80, 40);
+  ellipse(x+88, y+45, 5, 5);
+  fill(0, 0, 150);
+  ellipse(x+102, y+45, 5, 5);
+  fill(255);
+  textSize(25);
+  text("V", x+87, y+30);
+  text(nf(V, 0, 2), x+5, y+30);
+}
+
+void mousePressed() {
+  if (mouseX >225 && mouseX < 275 && mouseY> 250 && mouseY<300) {
+    if (s1==false) {
+      s1 = true;
+    } else {
+      s1 = false;
+    }
+  }
+  if (mouseX >400 && mouseX < 450 && mouseY> 160 && mouseY<310) {
+    if (s2==false) {
+      s2 = true;
+    } else {
+      s2 = false;
+    }
+  }
+  if (mouseX >400 && mouseX < 450 && mouseY> 350 && mouseY<400) {
+    if (s3==false) {
+      s3 = true;
+    } else {
+      s3 = false;
+    }
+  }
+}
+</script>
+<canvas></canvas>
+</div>	
+</div>
+
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

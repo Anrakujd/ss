@@ -1,0 +1,101 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Bineary Tree</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+
+<body>
+<section id="kotaks">
+<div class="kotak2">
+
+<script>
+
+// javascript program for different tree traversals
+class Node {
+	constructor(nilai) {
+		this.key = nilai;
+		this.left = null;
+		this.right = null;
+	}
+}
+
+	// Root of Binary Tree
+	var root = null;
+	
+	/*print its nodes in postorder */
+	function printPostorder(node) {
+		if (node == null)
+			return;
+
+		// first recur on left subtree
+		printPostorder(node.left);
+
+		// then recur on right subtree
+		printPostorder(node.right);
+
+		// now deal with the node
+		document.write(node.key + " ");
+	}
+
+	/* print its nodes in inorder */
+	function printInorder(node) {
+		if (node == null)
+			return;
+
+		/* first recur on left child */
+		printInorder(node.left);
+
+		/* then print the data of node */
+		document.write(node.key + " ");
+
+		/* now recur on right child */
+		printInorder(node.right);
+	}
+
+	/* print its nodes in preorder */
+	function printPreorder(node) {
+		if (node == null)
+			return;
+
+		/* first print data of node */
+		document.write(node.key + " ");
+
+		/* then recur on left subtree */
+		printPreorder(node.left);
+
+		/* now recur on right subtree */
+		printPreorder(node.right);
+		
+	}
+
+	// Driver method
+		root = new Node(8);
+		root.left = new Node(6);
+		root.right = new Node(10);
+		root.left.left = new Node(5);
+		root.left.right = new Node(7);
+		root.right.left = new Node(9);
+		root.right.right = new Node(11);
+
+		document.write("Preorder traversal of binary tree is (root-left-right)<br/>");
+		printPreorder(root);
+		document.write("<br/>Inorder traversal of binary tree is (left-root-right) <br/>");
+		printInorder(root);
+		document.write("<br/>Postorder traversal of binary tree is (left-right-root) <br/>");
+		printPostorder(root);
+
+</script>
+</div>
+</section>
+</body>
+
+
+</html>

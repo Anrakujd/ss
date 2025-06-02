@@ -1,0 +1,309 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Listrik & Magnet</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> Percobaan Hukum Ohm </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="file/Hukum_Ohm.windows64.rar" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="file/Hukum_Ohm.rar" target="_blank">Download Source Code</a></li>
+					
+				</ul>
+			</li>
+				<li><i class="fa fa-bolt" aria-hidden="true"></i><b> Listrik & Magnet</b>
+				<ul>
+					<li><a href="sel_Volta.html">Sel Volta</a></li>
+					<li><a href="hukum_Ohm.html">Hukum Ohm</a></li>
+					<li><a href="resistor.html">Hambatan Resistor</a></li>
+					<li><a href="Rangkaian Sederhana.html">Rangkaian Sederhana</a></li>
+					<li><a href="seri_paralel.html">Rangkaian Lampu Seri & Paralel</a></li>
+					<li><a href="lampu_seri.html">Simulasi Rangkaian Lampu Seri</a></li>
+					<li><a href="lampu_paralel.html">Simulasi Rangkaian Lampu Paralel</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+		
+<div class="kotak2">
+<h1> Percobaan Hukum Ohm</h1>
+<script type="text/processing" >
+Rheostat R;
+PSU psu;
+float t;
+float i;
+float V;
+float r;
+
+void setup() {
+  size(800, 600);
+  R = new Rheostat(300, 150, 226, 25, 10);
+  psu = new PSU(300,450,76,25,10);
+}
+
+void draw() {
+  background(230);
+  strokeWeight(2);
+  //rheostat  
+  R.update();
+  R.display();
+  //ampere meter
+  i = (psu.getPos()-300)/(R.getPos()-300);
+  Ammeter(i,500,300);
+  //power supply
+  psu.update();
+  psu.display();
+  stroke(255,0,0);
+  line(240,500,310,500);
+  line(310,478,310,500);
+  line(240,500,240,170);
+  line(240,170,300,170);
+  line(515,150,600,150);
+  line(600,150,600,285);
+  fill(255,0,0);
+  ellipse(600,290,7,7);
+  stroke(0,0,255);
+  line(600,350,600,500);
+  fill(0,0,255);
+  ellipse(600,350,7,7);
+  line(600,500,370,500);
+  line(370,500,370,478);  
+  stroke(0);
+  fill(0);
+  textSize(20);
+  text("Variabel Resistor",320,95);
+  text("Amperemeter",460,280);
+  text("Power Suplai",275,360);
+  text("Hukum Ohm:", 50,200);
+  textSize(30);
+  text("V=i.R",50,250);
+  textSize(14);
+  text("V : tegangan (Volt)",50,300);
+  text("i : kuat arus listrik (A)", 50, 325);
+  text("R : Hambatan (Ohm)", 50, 350);
+}
+class PSU {
+  int swidth, sheight;    // width and height of bar
+  float xpos, ypos;       // x and y position of bar
+  float spos, newspos;    // x position of slider
+  float sposMin, sposMax; // max and min values of slider
+  int loose;              // how loose/heavy
+  boolean over;           // is the mouse over the slider?
+  boolean locked;
+  float ratio;
+  PSU (float xp, float yp, int sw, int sh, int l) {
+    swidth = sw;
+    sheight = sh;
+    xpos = xp;
+    ypos = yp-sheight/2;
+    spos = xpos + swidth/2 - sheight/2;
+    newspos = spos;
+    sposMin = xpos;
+    sposMax = xpos + swidth - sheight;
+    loose = l;
+  }
+  void update() {
+    if (overEvent()) {
+      over = true;
+    } else {
+      over = false;
+    }
+    if (mousePressed && over) {
+      locked = true;
+    }
+    if (!mousePressed) {
+      locked = false;
+    }
+    if (locked) {
+      newspos = constrain(mouseX-sheight/2, sposMin, sposMax);
+    }
+    if (abs(newspos - spos) > 1) {
+      spos = spos + (newspos-spos)/loose;
+    }
+  }
+  float constrain(float val, float minv, float maxv) {
+    return min(max(val, minv), maxv);
+  }
+  boolean overEvent() {
+    if (mouseX > xpos && mouseX < xpos+swidth &&
+      mouseY > ypos && mouseY < ypos+sheight) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  void display() {
+    strokeWeight(2);
+    fill(80);
+    rect(xpos-15,ypos-(2*sheight)-20,110,100);
+    fill(255);
+    rect(xpos-15,ypos-(2*sheight)+80,110,20);
+    fill(150);
+    rect(xpos, ypos, swidth, sheight);
+    fill(255,0,0);
+    ellipse(xpos+10,ypos+40,10,10);
+    fill(0);
+    textSize(14);
+    text("+",xpos-10,ypos+45);
+    fill(0,0,255);
+    ellipse(xpos+70,ypos+40,10,10);
+    fill(0);
+    textSize(14);
+    text("-",xpos+80,ypos+45);
+    fill(255);
+    textSize(20);
+    text("PSU",xpos+20, ypos-52);
+    float E;
+    E = spos-300;
+    fill(155,0,0);
+    rect(xpos+10,ypos-(2*sheight)+4, 50,30);
+    fill(255);
+    textSize(18);
+    text(nf(E,0,1), xpos+(swidth/2)-20, ypos-sheight);
+    text("V", xpos+25+(swidth/2), ypos-sheight);
+    if (over || locked) {
+      fill(255, 0, 0);
+    } else {
+      fill(100, 100, 100);
+    }
+    rect(spos, ypos, sheight, sheight);
+  }
+  float getPos() {
+    return spos;
+  }
+}
+
+public void Ammeter(float A, int x, int y) {
+  fill(100);
+  rect(x-10,y-10, 80+(2*20), (80+(2*20))/2);
+  fill(150,0,0);
+  rect(x,y,80,40);
+  fill(255);
+  textSize(25);
+  text("A",x+87,y+30);
+  text(nf(A,0,2),x+5,y+30);
+}
+
+class Rheostat {
+  int swidth, sheight;    // width and height of bar
+  float xpos, ypos;       // x and y position of bar
+  float spos, newspos;    // x position of slider
+  float sposMin, sposMax; // max and min values of slider
+  int loose;              // how loose/heavy
+  boolean over;           // is the mouse over the slider?
+  boolean locked;
+  float ratio;
+  Rheostat (float xp, float yp, int sw, int sh, int l) {
+    swidth = sw;
+    sheight = sh;
+    xpos = xp;
+    ypos = yp-sheight/2;
+    spos = xpos + swidth/2 - sheight/2;
+    newspos = spos;
+    sposMin = xpos;
+    sposMax = xpos + swidth - sheight;
+    loose = l;
+  }
+  void update() {
+    if (overEvent()) {
+      over = true;
+    } else {
+      over = false;
+    }
+    if (mousePressed && over) {
+      locked = true;
+    }
+    if (!mousePressed) {
+      locked = false;
+    }
+    if (locked) {
+      newspos = constrain(mouseX-sheight/2, sposMin, sposMax);
+    }
+    if (abs(newspos - spos) > 1) {
+      spos = spos + (newspos-spos)/loose;
+    }
+  }
+  float constrain(float val, float minv, float maxv) {
+    return min(max(val, minv), maxv);
+  }
+  boolean overEvent() {
+    if (mouseX > xpos && mouseX < xpos+swidth &&
+      mouseY > ypos-10 && mouseY < ypos+sheight) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  void display() {
+    strokeWeight(2);
+    fill(150);
+    rect(xpos-13, ypos, swidth, sheight);
+    rect(xpos, ypos+sheight, swidth/10, sheight/2);
+    rect(xpos+swidth -50, ypos+sheight, swidth/10, sheight/2);
+    float N;
+    N = spos-300;
+    fill(0);
+    textSize(14);
+    text(nf(N,0,1), xpos-20+(swidth/2), ypos-sheight);
+    text("R=", xpos-40+(swidth/2), ypos-sheight);
+    text("Ohm", xpos+20+(swidth/2), ypos-sheight);
+    if (over || locked) {
+      fill(255, 0, 0);
+    } else {
+      fill(100, 100, 100);
+    }
+    ellipse(spos, ypos, sheight, sheight);
+  }
+  float getPos() {
+    return spos;
+  }
+}
+
+</script>
+<canvas></canvas>
+</div>	
+</div>
+
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

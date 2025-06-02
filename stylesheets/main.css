@@ -1,0 +1,313 @@
+body{
+	background-color:whitesmoke;
+	margin: 0px;
+	padding:0px;
+	color:black;
+	font:Times New Romas;
+	font-size: 15px;
+	line-height: 1.5;
+	}
+
+header{
+	font-size-adjust: auto;
+	font-stretch: normal;
+	font-size: 12pt;
+	width: 100%;
+	padding-top: 5px;
+	min-height: 10px;
+	border-bottom:#000000 3px solid;
+	background-color: #9ACBFF;
+	}
+header a{
+	color:black;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 16px;
+}
+header ul{
+	margin:0;
+	padding:0;
+	}
+header li{
+	float:right;
+	display: inline;
+	padding: 0 20px 0 20px;
+}
+header a:hover{
+	font-weight: bold;
+	background-color:darkslategray;
+	color:whitesmoke;
+	trasition:0.9s;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	border-radius: 15px;
+}
+.container .box:hover{
+	font-weight: bold;
+	background-color:darkslategray;
+	color:whitesmoke;
+	trasition:0.9s;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	border-radius: 15px;
+	width: 20%;
+	float: left;
+
+}
+
+.container{
+	width:90%;
+	margin:auto;
+	overflow: hidden;
+	}	
+#boxes{
+	margin-top: 20px;
+}
+#boxes .box{
+	width: 18%;
+	float: left;
+	padding: 5px;
+}
+#boxes .box p{
+	text-align: justify;
+}
+#boxes .box h3{
+	text-align: center;
+}
+#boxes .box img{
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width:70%;
+	height:auto;
+}
+#navi2 li{
+	float:left;
+	display: inline;
+	margin-top: 20px;
+	padding: 0 20px 0 20px;
+}
+#navi2 a{
+	color:black;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 14px;
+}
+#navi2 a:hover{
+	font-weight: bold;
+	background-color:darkslategray;
+	color:whitesmoke;
+	trasition:0.9s;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	border-radius: 15px;
+}
+#kotaks {
+	margin-top:10px;
+}
+#kotaks .kotak{
+	float:left;
+	width: 10%;
+	padding:15px;
+}
+#kotaks .kotak1{
+	float: left;
+	width: 20%;
+	padding:0px;
+}
+#kotaks .kotak2{
+	float: left;
+	width: 75%;
+	padding:1px;
+	text-align: center;
+}
+#kotaks .kotak3{
+	float: none;
+	width: 90%;
+	padding: 1px;
+	text-align: center;
+}
+#kotaks .kotak img{
+	width:90px;
+	text-align: center;
+}
+footer{
+	color:black;
+	text-align: center;
+	margin-top: 20px;
+}
+
+/*===================================================================================================*/
+/* Media Query___________ketika masuk ke mode handphone css nya jadi yang ini broooo ________________*/
+
+@media(max-width: 1000px){
+	header nav, header nav li, header {
+		float: none;
+		text-align:right;
+		width: 100%;
+		display: block;
+		margin-bottom: 1px;
+		}
+	header h1{
+		float: none;
+		text-align:right;
+		width: 100%;
+		display: block;
+		margin-bottom: 1px;
+	}
+	header{
+		padding-bottom: 5px;
+	}
+	footer, footer .fot{
+	color:black;
+	text-align: center;
+	margin-top: 2px;
+	font-size: 12px;
+	}
+	#kotaks .kotak img{
+	width:50px;
+	}
+    #kotaks .kotak{
+	float:none;
+	width: 100%;
+	padding:5px;
+	text-align: center;
+	display: block;
+	margin-bottom: 1px;
+	}
+	#kotaks .kotak1{
+	float:none;
+	width: 100%;
+	padding:5px;
+	text-align: left;
+	}
+	#kotaks .kotak2{
+	float: none;
+	width: 100%;
+	padding: 5px;
+	text-align: center;
+	display: block;
+	margin-bottom: 1px;
+	}
+	#kotaks .kotak3{
+	float: none;
+	width: 100%;
+	padding: 5px;
+	text-align: center;
+	}
+	#kotaks .kotak2 h1{
+		font-size: 14px;
+	}
+	#kotaks .kotak2 canvas{
+		width: 100%;
+		float: none;
+		display: block;
+		margin-bottom: 1px;
+		
+	}
+	#kotaks {
+	margin-top:5px;
+	}
+	#navi2 a{
+	color:black;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 12px;
+	}
+	#navi2 li{
+	float:none;
+	display: table;
+	padding: 0;
+	font-size: 14px;
+	text-decoration: underline;
+	}
+	.container{
+	width:100%;
+	margin:auto;
+	overflow: hidden;
+	}
+	header{
+	background-image:url(../images/Headerfis.jpg);
+	background-repeat: no-repeat;
+	background-size:cover;
+	background-position:left;
+	font-size: 12pt;
+	width: 100%;
+	padding-top: 5px;
+	min-height: 55px;
+	border-bottom:#000000 3px solid;
+	}
+	header ul{
+	display: none;
+	}
+    #navi2 a:hover{
+	font-weight: bold;
+	background-color:darkslategray;
+	color:whitesmoke;
+	trasition:0.9s;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	border-radius: 5px;
+	}
+	
+#boxes{
+	margin-top:8px;
+}
+#boxes .box{
+	width: 100%;
+	float: none;
+	padding: 0px;
+}
+#boxes .box p{
+	text-align: justify;
+	font-size:12px;
+}
+#boxes .box h3{
+	text-align: center;
+}
+#boxes .box a{
+	text-align:left;
+	font-size:12px;
+	margin-top:3px;
+}
+#boxes .box img{
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

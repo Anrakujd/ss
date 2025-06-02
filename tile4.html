@@ -1,0 +1,567 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen matematika bebas diakses oleh guru dan siswa untuk membantu memahami matematika di sekolah">
+<meta name="Keywords" content="matematika, eksperimen, praktikum online, webbase praktikum, matematika online, pengubinan, tiling, tile, gasing">
+<meta name="author" content="Djukarna">
+<title>Geometri</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> TANGRAM </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-square-o" aria-hidden="true"></i><b> Geometri </b>
+				<ul>
+					<li><a href="tile1.html">Pengubinan Segitiga Sama Sisi (Polyamonds)</a></li>
+					<li><a href="tile2.html">Pengubinan Persegi (Polyominos)</a></li>
+					<li><a href="tile3.html">Pengubinan Polyamonds & Polyominos </a></li>
+					<li><a href="tile4.html">Tangram</a></li>
+					<li><a href="tile5.html">Puzzle Two and Half</a></li>
+					<li><a href="tile6.html">Puzzle Angka Satu</a></li>
+					<li><a href="tile7.html">Kubus Iluminasi (Polyrhomb)</a></li>
+					<li><a href="tile8.html">Heptomino</a></li>
+					<li><a href="tile9.html">Pentomino</a></li>
+					<li><a href="tile10.html">Menara Hanoi</a></li>
+				</ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1> TANGRAM </h1>
+<script type="text/processing" >
+ArrayList<S1> Tiga1 = new ArrayList<S1>();
+ArrayList<S2> Tiga2 = new ArrayList<S2>();
+ArrayList<S3> Kotak = new ArrayList<S3>();
+ArrayList<S4> Tiga3 = new ArrayList<S4>();
+ArrayList<S5> Tiga4 = new ArrayList<S5>();
+ArrayList<S6> Tiga5 = new ArrayList<S6>();
+ArrayList<S7> Tupat = new ArrayList<S7>();
+
+PImage [] gbr = new PImage[41]; 
+
+float a = 175;//
+float b = 240;
+float d = 90;//
+float e = 325;
+float g = 240;//
+float n = 315;
+float p = 175;//
+float q = 360;
+float u = 285;//
+float v = 255;
+float w = 260;//
+float z = 400;
+float j = 135;//
+float k = 415;
+float h = 100;
+int xp = 550;
+int yp = 610;
+int xp1 = 440;
+boolean t1,t2,t3;
+int r;
+int warna = 0;
+int warna2 = 0;
+
+void setup() {
+  size(1000, 700);
+  Tiga1.add(new S1(a, b, h, #0000FF));
+  Tiga2.add(new S2(d, e, h, #FF0000));
+  Kotak.add(new S3(g, n, h, #00FF00));
+  Tiga3.add(new S4(p, q, h, #00FFFF));
+  Tiga4.add(new S5(u, v, h, #FFFF00));
+  Tiga5.add(new S6(w, z, h, #FF00FF));
+  Tupat.add(new S7(j, k, h, #120012));
+  //for (int i = 0; i<gbr.length; i++) {
+  //  gbr[i] = loadImage(i+".png");
+  //}
+ gbr[0] = loadImage("tangram/0.png");
+ gbr[1] = loadImage("tangram/1.png");
+ gbr[2] = loadImage("tangram/2.png");
+ gbr[3] = loadImage("tangram/3.png");
+ gbr[4] = loadImage("tangram/4.png");
+ gbr[5] = loadImage("tangram/5.png");
+ gbr[6] = loadImage("tangram/6.png");
+ gbr[7] = loadImage("tangram/7.png");
+ gbr[8] = loadImage("tangram/8.png");
+ gbr[9] = loadImage("tangram/9.png");
+ gbr[10] = loadImage("tangram/10.png");
+ gbr[11] = loadImage("tangram/11.png");
+ gbr[12] = loadImage("tangram/12.png");
+ gbr[13] = loadImage("tangram/13.png");
+ gbr[14] = loadImage("tangram/14.png");
+ gbr[15] = loadImage("tangram/15.png");
+ gbr[16] = loadImage("tangram/16.png");
+ gbr[17] = loadImage("tangram/17.png");
+ gbr[18] = loadImage("tangram/18.png");
+ gbr[19] = loadImage("tangram/19.png");
+ gbr[20] = loadImage("tangram/20.png");
+ gbr[21] = loadImage("tangram/21.png");
+ gbr[22] = loadImage("tangram/22.png");
+ gbr[23] = loadImage("tangram/23.png");
+ gbr[24] = loadImage("tangram/24.png");
+ gbr[25] = loadImage("tangram/25.png");
+ gbr[26] = loadImage("tangram/26.png");
+ gbr[27] = loadImage("tangram/27.png");
+ gbr[28] = loadImage("tangram/28.png");
+ gbr[29] = loadImage("tangram/29.png");
+ gbr[30] = loadImage("tangram/30.png");
+ gbr[31] = loadImage("tangram/31.png");
+ gbr[32] = loadImage("tangram/32.png");
+ gbr[33] = loadImage("tangram/33.png");
+ gbr[34] = loadImage("tangram/34.png");
+ gbr[35] = loadImage("tangram/35.png");
+ gbr[36] = loadImage("tangram/36.png");
+ gbr[37] = loadImage("tangram/37.png");
+ gbr[38] = loadImage("tangram/38.png");
+ gbr[39] = loadImage("tangram/39.png");
+ gbr[40] = loadImage("tangram/40.png");
+}
+
+void draw() {
+  background(0,255,255);
+  fill(0);
+  text("klik kiri dan drag untuk mengeser",20,20);
+  text("klik kanan untuk memutar 45 derajat",20,40);
+  fill(warna);
+  beginShape();
+  vertex(xp,yp);
+  vertex(xp+15,yp);
+  vertex(xp+15,yp-5);
+  vertex(xp+20,yp+6);
+  vertex(xp+15,yp+17);
+  vertex(xp+15,yp+12);
+  vertex(xp,yp+12);
+  endShape(CLOSE);
+  fill(warna2);
+  beginShape();
+  vertex(xp1,yp);
+  vertex(xp1-15,yp);
+  vertex(xp1-15,yp-5);
+  vertex(xp1-20,yp+6);
+  vertex(xp1-15,yp+17);
+  vertex(xp1-15,yp+12);
+  vertex(xp1,yp+12);
+  endShape(CLOSE);
+  fill(230);
+  rect(445,yp-6,100,20,5,5,5,5);
+  textSize(16);
+  fill(0);
+  text("Ganti Pola", 455, yp+10);
+ if (mouseX >xp && mouseX < xp+20 && mouseY>yp && mouseY<yp+12) {
+    warna = #FF0000;
+    warna2 = #000000;
+  }
+  else if(mouseX >xp1-20 && mouseX < xp1 && mouseY>yp && mouseY<yp+12){
+   warna = #000000;
+   warna2 = #FF0000;
+   }
+  else{
+    warna = #000000;
+    warna2 = #000000;
+   }
+   
+  if(t1)  {
+    r = r + 1;
+		if (r > 40){
+			r=0;}
+   }
+   if(t2){
+     r = r - 1;
+        if (r < 0){
+          r=40;}
+   }
+   
+  image(gbr[r], 200, 45); 
+    t1=false;
+    t2=false;
+	
+   // segitiga besar 1
+  for (S1 tangram : Tiga1) {
+    tangram.display();
+  }
+  // segitiga besar 2
+  for (S2 tangram2 : Tiga2) {
+    tangram2.display();
+  }
+  // kotak
+  for (S3 tangram : Kotak) {
+    tangram.display();
+  } 
+  // segitiga kecil 3
+  for (S4 tangram : Tiga3) {
+    tangram.display();
+  } 
+  // segitiga kecil 4
+  for (S5 tangram : Tiga4) {
+    tangram.display();
+  } 
+  // segitiga sedang 5
+  for (S6 tangram : Tiga5) {
+    tangram.display();
+  }
+  // jajaran genjang
+  for (S7 tangram : Tupat) {
+    tangram.display();
+  }
+}
+//--------------tombol ganti pola ------------------------------
+void mousePressed() {
+  if (mouseX >xp && mouseX < xp+20 && mouseY>yp && mouseY<yp+12) {
+    if (t1==false) {
+       t1 = true;
+    } else {
+       t1 = false;
+    }
+  }
+  if(mouseX >xp1-20 && mouseX < xp1 && mouseY>yp && mouseY<yp+12){
+   if(t2==false){
+     t2=true;
+   }else{
+     t2=false;
+   }
+  }
+}
+//---------------------class S1 (segitigas no 1)--------------------
+class S1 {
+  float x1;
+  float y1;
+  float h1;
+  color c1;
+  float angle1 = 0;
+   S1(float x0, float y0, float h0, color warna) {
+   x1 = x0; 
+   y1 = y0;
+    c1 = warna;
+    h1 = h0;
+  }
+  void display() {
+    fill(c1);
+    if (dist(mouseX, mouseY, x1, y1) < h1/2) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x1 = mouseX;
+        y1 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle1 = angle1 + 45;
+		for(int i = 0;  i <= 100000000; i+=1){
+		i= i + 1;}
+        return;
+      }  else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(0, 0, 255);
+    }
+    pushMatrix();
+    translate(x1, y1);
+    rotate(radians(angle1));
+    beginShape();
+    vertex(-h1, -(0.3333*h1));
+    vertex(+h1, -(0.3333*h1));
+    vertex(0, (0.6667*h1));
+    endShape(CLOSE);
+    popMatrix();
+  }
+}
+//--------------------class S2 (segitigas no 2)----------------------
+class S2 {
+  float x2;
+  float y2;
+  float h2 = 100;
+  color c2;
+  float angle2 = 0;
+  public S2(float x0, float y0, float h0, color warna) {
+    this.x2 = x0; 
+    this.y2 = y0;
+    this.c2 = warna;
+    this.h2 = h0;
+  }
+  void display() {
+    fill(c2);
+    if (dist(mouseX, mouseY, x2, y2) < h2/2) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x2 = mouseX;
+        y2 = mouseY;
+      }  else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle2 = angle2 + 45;
+		for(int i = 0;  i <= 100000000; i+=1){
+		i= i + 1;}		
+        return;
+      }else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(155, 0, 0);
+    }
+    pushMatrix();
+    translate(x2, y2);
+    rotate(radians(angle2));
+    beginShape();
+    vertex(-(0.3333*h2), -h2);
+    vertex(-(0.3333*h2), +h2);
+    vertex((0.6667*h2), 0);
+    endShape(CLOSE);
+    popMatrix();
+  }
+}
+//--------------------class S3 (persegi)----------------------
+class S3 {
+  float x3;
+  float y3;
+  float h3 = 100;
+  color c3;
+  float angle3 = 0;
+  S3(float x0, float y0, float h0, color warna) {
+    x3 = x0; 
+    y3 = y0;
+    c3 = warna;
+    h3 = h0;
+  }
+  void display() {
+    fill(c3);
+    if (dist(mouseX, mouseY, x3, y3) < h3/2) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x3 = mouseX;
+        y3 = mouseY;
+        } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle3 = angle3 + 45; 
+		for(int i = 0;  i <= 100000000; i+=1){
+		i= i + 1;}
+       return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(0, 100, 0);
+    }
+    pushMatrix();
+    translate(x3, y3);
+    rotate(radians(angle3));
+    beginShape();
+    vertex(-h3/2, 0);
+    vertex(0, -h3/2);
+    vertex(h3/2, 0);
+    vertex(0, h3/2);
+    endShape(CLOSE);
+    popMatrix();
+  }
+}
+//--------------------class S4 (segitigas no 3)----------------------
+class S4 {
+  float x4;
+  float y4;
+  float h4 = 100;
+  color c4;
+  float angle4 = 0;
+  S4(float x0, float y0, float h0, color warna) {
+    x4 = x0; 
+    y4 = y0;
+    c4 = warna;
+    h4 = h0;
+  }
+ void display() {
+    fill(c4);
+    if (dist(mouseX, mouseY, x4, y4) < h4/2.5) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x4 = mouseX;
+        y4 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle4 = angle4 + 45;
+        for(int i = 0;  i <= 100000000; i+=1){
+		i= i + 1;}		
+      return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(255, 155, 255);
+    }
+    pushMatrix();
+    translate(x4, y4);
+    rotate(radians(angle4));
+    beginShape();
+    vertex(-0.5*h4, (0.3333*0.5*h4));
+    vertex(0.5*h4, (0.3333*0.5*h4));
+    vertex(0, -(0.6667*0.5*h4));
+    endShape(CLOSE);
+    popMatrix();
+  }
+}
+//--------------------class S5 (segitiga no 4)----------------------
+class S5 {
+  float x5;
+  float y5;
+  float h5 = 100;
+  color c5;
+  float angle5 = 0;
+  S5(float x0, float y0, float h0, color warna) {
+    x5 = x0; 
+    y5 = y0;
+    c5 = warna;
+    h5 = h0;
+  }
+  void display() {
+    fill(c5);
+    if (dist(mouseX, mouseY, x5, y5) < h5/2.5) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x5 = mouseX;
+        y5 = mouseY;
+      }else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle5 = angle5 + 45; 
+		for(int i = 0;  i <= 100000000; i+=1){
+		i= i + 1;}
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(255, 255, 0);
+    }
+    pushMatrix();
+    translate(x5, y5);
+    rotate(radians(angle5));
+    beginShape();
+    vertex((0.3333*0.5*h5), -0.5*h5);
+    vertex((0.3333*0.5*h5), 0.5*h5);
+    vertex(-(0.6667*0.5*h5), 0);
+    endShape(CLOSE);
+    popMatrix();
+  }
+}
+//--------------------class S6 (segitigas no 5)----------------------
+class S6 {
+  float x6;
+  float y6;
+  float h6 = 100;
+  color c6;
+  float angle6 = 0;
+  S6(float x0, float y0, float h0, color warna) {
+    x6 = x0; 
+    y6 = y0;
+    c6 = warna;
+    h6 = h0;
+  }
+  void display() {
+    fill(c6);
+    if (dist(mouseX, mouseY, x6, y6) < h6/2) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x6 = mouseX;
+        y6 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle6 = angle6 + 45; 
+		for(int i = 0;  i <= 100000000; i+=1){
+		i= i + 1;}
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(255, 0, 255);
+    }
+    pushMatrix();
+    translate(x6, y6);
+    rotate(radians(angle6));
+    beginShape();
+    vertex(0.3333*h6, 0.3333*h6);
+    vertex(-0.6667*h6, 0.3333*h6);
+    vertex(0.3333*h6, -0.6667*h6);
+    endShape(CLOSE);
+    popMatrix();
+  }
+}
+//--------------------class S7 (jajaran genjang)----------------------
+class S7 {
+  float x7;
+  float y7;
+  float h7 = 100;
+  color c7;
+  float angle7 = 0;
+  S7(float x0, float y0, float h0, color warna) {
+    x7 = x0; 
+    y7 = y0;
+    c7 = warna;
+    h7 = h0;
+  }
+  void display() {
+    fill(c7);
+    if (dist(mouseX, mouseY, x7, y7) < h7/2.5) {
+      if (mousePressed && mouseButton==LEFT) {
+        fill(255, 0, 0);
+        x7 = mouseX;
+        y7 = mouseY;
+      } else if (mousePressed && mouseButton==RIGHT) {
+        fill(255, 0, 0);
+        angle7 = angle7 + 45;
+		for(int i = 0;  i <= 100000000; i+=1){
+		i= i + 1;}
+        return;
+      } else {
+        fill(0, 255, 0);
+      }
+    } else {
+      fill(100, 0, 105);
+    }
+    pushMatrix();
+    translate(x7, y7);
+    rotate(radians(angle7));
+    beginShape();
+    vertex(0.25*h7, 0.25*h7);
+    vertex(0.75*h7, -0.25*h7);
+    vertex(-0.25*h7, -0.25*h7);
+    vertex(-0.75*h7, 0.25*h7);
+    endShape(CLOSE);
+    popMatrix();
+  }
+}
+//------------------------------------------------------------------------------------------------------- 
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+</body>
+<footer>
+<b>Didukung Oleh :</b> 
+<li>
+<a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+</li>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

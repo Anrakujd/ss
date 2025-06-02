@@ -1,0 +1,97 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Bineary Tree</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+
+<body>
+<section id="kotaks">
+<div class="kotak2">
+
+<script>
+
+// non-recursive javascript program for inorder traversal
+
+/* Class containing left and right child of
+current node and key value*/
+class Node {
+
+	constructor(item) {
+		this.data = item;
+		this.left = this.right = null;
+	}
+}
+
+/* Class to print the inorder traversal */
+
+	var root;
+
+	function inorder()
+	{
+		if (root == null)
+			return;
+
+		var s = [];
+		var curr = root;
+
+		// traverse the tree
+		while (curr != null || s.length > 0)
+		{
+
+			/*
+			* Reach the left most Node of the curr Node
+			*/
+			while (curr != null)
+			{
+			
+				/*
+				* place pointer to a tree node on the stack before traversing the node's left
+				* subtree
+				*/
+				s.push(curr);
+				curr = curr.left;
+			}
+
+			/* Current must be NULL at this point */
+			curr = s.pop();
+
+			document.write(curr.data + " ");
+
+			/*
+			* we have visited the node and its left subtree. Now, it's right subtree's turn
+			*/
+			curr = curr.right;
+		}
+	}
+
+	
+		/*
+		* creating a binary tree and entering the nodes
+		*/
+		root = new Node(8);
+		root.left = new Node(6);
+		root.right = new Node(10);
+		root.left.left = new Node(5);
+		root.left.right = new Node(7);
+		root.right.left = new Node(9);
+		root.right.right = new Node(11);
+		document.write("<br/>Inorder traversal of binary tree is (left-root-right) <br/>");
+		inorder();
+
+// This code is contributed by umadevi9616
+</script>
+
+</div>
+</section>
+</body>
+
+
+</html>

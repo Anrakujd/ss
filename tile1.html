@@ -1,0 +1,585 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen matematika bebas diakses oleh guru dan siswa untuk membantu memahami matematika di sekolah">
+<meta name="Keywords" content="matematika, eksperimen, praktikum online, webbase praktikum, matematika online, pengubinan, tiling, tile, gasing">
+<meta name="author" content="Djukarna">
+<title>Geometri</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> PENGUBINAN DENGAN SEGITIGA SAMA SISI (POLYAMONDS) </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-square-o" aria-hidden="true"></i><b> Geometri </b>
+				<ul>
+					<li><a href="tile1.html">Pengubinan Segitiga Sama Sisi (Polyamonds)</a></li>
+					<li><a href="tile2.html">Pengubinan Persegi (Polyominos)</a></li>
+					<li><a href="tile3.html">Pengubinan Polyamonds & Polyominos </a></li>
+					<li><a href="tile4.html">Tangram</a></li>
+					<li><a href="tile5.html">Puzzle Two and Half</a></li>
+					<li><a href="tile6.html">Puzzle Angka Satu</a></li>
+					<li><a href="tile7.html">Kubus Iluminasi (Polyrhomb)</a></li>
+					<li><a href="tile8.html">Heptomino</a></li>
+					<li><a href="tile9.html">Pentomino</a></li>
+					<li><a href="tile10.html">Menara Hanoi</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1> Pengubinan dengan Segitiga Sama Sisi (Polyamonds) </h1>
+<p> Klik dan drag ubin segitiga dan susun menjadi pengubinan sesuka mu, Untuk menghapus tekan DEL </p>
+<script type="text/processing" >
+ArrayList<Node> nodes = new ArrayList();
+// their size 
+final int rectWidth = 50;
+final int rectHeight = 50;
+// states
+final int EDIT = 0; // dragging 
+final int RUN  = 1; // run the result
+int state = EDIT; 
+// dragging for a new RectClass: 
+final int DRAG_NONE = 0; 
+final int DRAG_RECT = 1;
+final int DRAG_ELLIPSE = 2;
+final int DRAG_TRIANGLE1 =3;
+final int DRAG_TRIANGLE2 =4;
+final int DRAG_TRIANGLE3 =5;
+final int DRAG_TRIANGLE4 =6;
+int dragging = DRAG_NONE;  
+// dragging an existing RectClass:
+final int UNDEFINED = -1; 
+int draggingAnExistingRectClass = UNDEFINED; 
+// buttons 
+final PVector pvRect = new PVector(40, 110); 
+final PVector pvEllipse = new PVector(40, 180);
+// for run: current RectClass number 
+int iForStateRUN = 0; 
+
+void setup() {
+  size(1200, 700);
+} 
+
+void draw() {
+  // depending on state 
+  
+  switch(state) {
+  case EDIT: 
+    // state EDIT
+	drawForStateEdit(); 
+    break; 
+  case RUN:
+    // state RUN
+    drawForStateRun();
+    break;
+  }
+} 
+
+void drawForStateEdit() {
+  background(0,255,255);
+  // for-loop nodes 
+  for (int i = 0; i < nodes.size ()-1; i++) { 
+    Node currentNode = nodes.get(i);
+    currentNode.display();
+  }
+  // show last node 
+  if (nodes.size()>0) {
+    Node currentNode = nodes.get(nodes.size()-1);
+    currentNode.display();
+  }
+  //frame Menu
+  fill(0);
+  stroke(0,0,255);
+  strokeWeight(2);
+  fill(255);
+  rect(10, 180, 70, 350);
+   
+  // button 3 triangle 1
+  stroke(0);
+  strokeWeight(1);
+  fill(0, 255, 0);
+  triangle(20, 230, 70, 230, 45, 276.097);
+  // button 4 triangle 2
+  stroke(0);
+  fill(0, 255, 0);
+  triangle(20, 300, 20, 350, 66.097, 325);
+  // button 4 triangle 3
+  stroke(0);
+  fill(0, 255, 0);
+  triangle(20, 385, 66.097, 360, 66.097, 410);
+  // button 4 triangle 4
+  stroke(0);
+  fill(0, 255, 0);
+  triangle(20, 480, 70, 480, 45, 433.903);
+
+  // dragging 
+  if (dragging==DRAG_RECT) {
+    // dragging sign (persegi baru)
+    fill(255, 0, 0);
+    rect(mouseX, mouseY, 50, 50);
+  } else if (dragging==DRAG_ELLIPSE) {
+    // dragging sign (ellipse baru)
+    fill(0, 0, 255);
+    ellipse(mouseX, mouseY, 50, 50);
+  } else if (dragging==DRAG_TRIANGLE1) {
+    // dragging sign (setigita tipe1 baru)
+    fill(0, 255, 0);
+    triangle(mouseX, mouseY, mouseX+50, mouseY, mouseX+25, mouseY+46.097);
+  } else if (dragging==DRAG_TRIANGLE2) {
+    // dragging sign (setigita tipe2 baru)
+    fill(0, 255, 0);
+    triangle(mouseX, mouseY, mouseX, mouseY+50, mouseX+46.097, mouseY+25);
+  } else if (dragging==DRAG_TRIANGLE3) {
+    // dragging sign (setigita tipe3 baru)
+    fill(0, 255, 0);
+    triangle(mouseX, mouseY, mouseX, mouseY+50, mouseX-49.097, mouseY+25);
+  } else if (dragging==DRAG_TRIANGLE4) {
+    // dragging sign (setigita tipe4 baru)
+    fill(0, 255, 0);
+    triangle(mouseX, mouseY, mouseX+50, mouseY, mouseX+25, mouseY-46.097);
+  } else if (draggingAnExistingRectClass!=UNDEFINED) {
+    // drag bangun datar yg sudah ada
+    Node RectClass = nodes.get(draggingAnExistingRectClass);
+    //Node Triangle2Class = nodes.get(draggingAnExistingRectClass);
+    RectClass.incrementXY( mouseX-pmouseX, mouseY-pmouseY );
+    //Triangle2Class.incrementXY(mouseX-pmouseX, mouseY-pmouseY);// change position
+  }
+  
+}  
+
+void drawForStateRun() {
+  background(230);
+  // iForStateRUN controls which RectClass we run  
+  if (iForStateRUN<nodes.size ()) { 
+    // show current Node in run mode
+    Node currentNode = nodes.get(iForStateRUN);
+    currentNode.displayForRun() ;
+    // small text 
+    fill(255);
+    text("RUN " + iForStateRUN, 21, 14);
+  } // if  
+  // next Node 
+  iForStateRUN++;
+  // are we done?
+  if (iForStateRUN>nodes.size ()) {
+    // go back
+    state = EDIT;
+    // reset
+    iForStateRUN=0;
+    frameRate(155);
+  }
+}  
+
+// =============================================================================
+// Inputs Mouse 
+
+void mousePressed() {
+  // only in state EDIT: 
+  if (state==EDIT) {
+    // possible begin of drag 
+    draggingAnExistingRectClass=UNDEFINED; // reset 
+    if (dist(mouseX, mouseY, pvRect.x, pvRect.y)<0) { // ganti 0 dengan 20 untuk mengaktfikan !
+      dragging=DRAG_RECT;
+      return;
+    } else if (dist(mouseX, mouseY, pvEllipse.x, pvEllipse.y)<0) {// ganti 0 dengan 20 untuk mengaktfikan !
+      dragging=DRAG_ELLIPSE;
+      return;
+    } else if (mouseX >= 20 && mouseX <= 70 && mouseY >= 230 && mouseY <= 276) {
+      dragging=DRAG_TRIANGLE1;
+      return;
+    } else if (mouseX >= 20 && mouseX <= 70 && mouseY >= 300 && mouseY <= 350) {
+      dragging=DRAG_TRIANGLE2;
+      return;
+    } else if (mouseX >= 20 && mouseX <= 70 && mouseY >= 360 && mouseY <= 410) {
+      dragging=DRAG_TRIANGLE3;
+      return;
+    } else if (mouseX >= 20 && mouseX <= 70 && mouseY >= 430 && mouseY <= 480) {
+      dragging=DRAG_TRIANGLE4;
+      return;
+    } else {
+      //for-loop:
+      // search all existing nodes 
+      for (int i = 0; i < nodes.size (); i++) { 
+        Node RectClass = nodes.get(i);
+        //is the mouse in the RectClass?
+        if (RectClass.over()) {
+          //existing RectClass
+          draggingAnExistingRectClass = i; // set 
+          return;        // leave
+        }
+      }
+    }
+  }
+}
+
+void mouseReleased() {
+  // only in state EDIT: 
+  if (state==EDIT) {
+    if (dragging==DRAG_RECT) {
+      dragging = DRAG_NONE; // reset
+      color randomColor = color(255, 0, 0);  
+      nodes.add ( new RectClass(mouseX, mouseY, rectWidth, rectHeight, randomColor));
+    } else if (dragging==DRAG_ELLIPSE) {
+      dragging = DRAG_NONE; // reset
+      color randomColor = color(0, 0, 255);  
+      nodes.add ( new EllipseClass(mouseX, mouseY, rectWidth, rectHeight, randomColor));
+    } else if (dragging==DRAG_TRIANGLE1) {
+      dragging = DRAG_NONE; // reset
+      color randomColor = color(0, 255, 0);  
+      nodes.add ( new Triangle1Class(mouseX, mouseY, mouseX+50, mouseY, mouseX+25, mouseY+46.097, randomColor));
+    } else if (dragging==DRAG_TRIANGLE2) {
+      dragging = DRAG_NONE; // reset
+      color randomColor = color(0, 255, 0);  
+      nodes.add ( new Triangle2Class(mouseX, mouseY, mouseX, mouseY+50, mouseX+46.097, mouseY+25, randomColor));
+    } else if (dragging==DRAG_TRIANGLE3) {
+      dragging = DRAG_NONE; // reset
+      color randomColor = color(0, 255, 0);  
+      nodes.add ( new Triangle3Class(mouseX, mouseY, mouseX, mouseY+50, mouseX-49.097, mouseY+25, randomColor));
+    } else if (dragging==DRAG_TRIANGLE4) {
+      dragging = DRAG_NONE; // reset
+      color randomColor = color(0, 255, 0);  
+      nodes.add ( new Triangle4Class(mouseX, mouseY, mouseX+50, mouseY, mouseX+25, mouseY-46.097, randomColor));
+    }
+    draggingAnExistingRectClass=UNDEFINED; // reset
+  }
+}
+
+void mouseClicked() {
+  if (state==RUN) {
+    state=EDIT;
+    iForStateRUN=0;
+    frameRate(155);
+  }
+}
+// ==============================================
+// Inputs Keyboard 
+void keyPressed() {
+  // only in state EDIT: 
+  if (state==EDIT) {
+    if (key==' ') {
+      state=RUN;
+      frameRate(2);
+    } else if (key==DELETE) {
+      if (nodes.size()>0) { 
+        nodes.remove(nodes.size()-1);
+      }
+    }
+  }
+}
+// ==============================================
+// classes
+interface Node {
+  //Let's abstract 
+  void display();
+  void displayForRun(); 
+  void incrementXY(float x_, float y_);
+  PVector getPos();
+  boolean over();
+}
+class Triangle1Class implements Node {
+  float x = 0;
+  float y = 0;
+  float x1 = 0;
+  float y1 = 0;
+  float x2 = 0;
+  float y2 = 0;
+  float x3 = 0;
+  float y3 = 0;
+  color warna; 
+  Triangle1Class(float tempX1, float tempY1, float tempX2, float tempY2, float tempX3, float tempY3, color tempwarna) {
+    x1 = tempX1;
+    y1 = tempY1;
+    x2 = tempX2;
+    y2 = tempY2;
+    x3 = tempX3;
+    y3 = tempY3;
+    warna = tempwarna;
+  }
+  void display() {
+    stroke(0);
+    fill(warna);
+    triangle(x1, y1, x2, y2, x3, y3);
+  }
+  void displayForRun() {
+    stroke(0);
+    fill(warna); 
+    triangle(x1, y1, x2, y2, x3, y3);
+  }
+  void setXY(float x_, float y_) {
+    x1=x_;
+    y1=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x1+=x_;
+    y1+=y_;
+    x2=x1+x_+50;
+    y2=y2+y_;
+    x3=x1+x_+25;
+    y3=y1+y_+46.097;
+  }
+  PVector getPos() {
+    return new PVector(x, y);
+  }
+  boolean over() {
+    return  mouseX > x1 && mouseX < x2 && mouseY > y1 && mouseY < y3;
+  }
+}
+//--------------------------------------------------------------------------------------------------------------
+class Triangle2Class implements Node {
+  float x = 0;
+  float y = 0;
+  float x1 = 0;
+  float y1 = 0;
+  float x2 = 0;
+  float y2 = 0;
+  float x3 = 0;
+  float y3 = 0;
+  color warna; 
+  Triangle2Class(float tempX1, float tempY1, float tempX2, float tempY2, float tempX3, float tempY3, color tempwarna) {
+    x1 = tempX1;
+    y1 = tempY1;
+    x2 = tempX2;
+    y2 = tempY2;
+    x3 = tempX3;
+    y3 = tempY3;
+    warna = tempwarna;
+  }
+  void display() {
+    fill(warna);
+    triangle(x1, y1, x2, y2, x3, y3);
+  }
+  void displayForRun() {
+    fill(warna); 
+    triangle(x1, y1, x2, y2, x3, y3);
+  }
+  void setXY(float x_, float y_) {
+    x1=x_;
+    y1=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x1 += x_;
+    y1 += y_;
+    x2 = x2 + x_;
+    y2 = y1 + y_ + 50;
+    x3 = x1 + x_ + 46.097;
+    y3 = y1 + y_ + 25;
+  }
+  PVector getPos() {
+    return new PVector(x, y);
+  }
+  boolean over() {
+    return  mouseX > x1 && mouseX < x3 && mouseY > y1 && mouseY < y2;
+  }
+}
+//-------------------------------------------------------------------------------------------------------
+class Triangle3Class implements Node {
+  float x = 0;
+  float y = 0;
+  float x1 = 0;
+  float y1 = 0;
+  float x2 = 0;
+  float y2 = 0;
+  float x3 = 0;
+  float y3 = 0;
+  color warna; 
+  Triangle3Class(float tempX1, float tempY1, float tempX2, float tempY2, float tempX3, float tempY3, color tempwarna) {
+    x1 = tempX1;
+    y1 = tempY1;
+    x2 = tempX2;
+    y2 = tempY2;
+    x3 = tempX3;
+    y3 = tempY3;
+    warna = tempwarna;
+  }
+  void display() {
+    fill(warna);
+    triangle(x1, y1, x2, y2, x3, y3);
+  }
+  void displayForRun() {
+    fill(warna); 
+    triangle(x1, y1, x2, y2, x3, y3);
+  }
+  void setXY(float x_, float y_) {
+    x1=x_;
+    y1=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x1 += x_;
+    y1 += y_;
+    x2 = x2 + x_;
+    y2 = y1 + y_ + 50;
+    x3 = x1 + x_ - 46.097;
+    y3 = y1 + y_ + 25;
+  }
+  PVector getPos() {
+    return new PVector(x, y);
+  }
+  boolean over() {
+    return  mouseX > x3 && mouseX < x1 && mouseY > y1 && mouseY < y2;
+  }
+}
+//-------------------------------------------------------------------------------------------------------
+class Triangle4Class implements Node {
+  float x = 0;
+  float y = 0;
+  float x1 = 0;
+  float y1 = 0;
+  float x2 = 0;
+  float y2 = 0;
+  float x3 = 0;
+  float y3 = 0;
+  color warna; 
+  Triangle4Class(float tempX1, float tempY1, float tempX2, float tempY2, float tempX3, float tempY3, color tempwarna) {
+    x1 = tempX1;
+    y1 = tempY1;
+    x2 = tempX2;
+    y2 = tempY2;
+    x3 = tempX3;
+    y3 = tempY3;
+    warna = tempwarna;
+  }
+  void display() {
+    fill(warna);
+    triangle(x1, y1, x2, y2, x3, y3);
+  }
+  void displayForRun() {
+    fill(warna); 
+    triangle(x1, y1, x2, y2, x3, y3);
+  }
+  void setXY(float x_, float y_) {
+    x1=x_;
+    y1=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x1 += x_;
+    y1 += y_;
+    x2 = x1 + x_ + 50;
+    y2 = y1 + y_;
+    x3 = x1 + x_ + 25;
+    y3 = y1 + y_ - 46.097;
+  }
+  PVector getPos() {
+    return new PVector(x, y);
+  }
+  boolean over() {
+    return  mouseX > x1 && mouseX < x2 && mouseY > y3 && mouseY < y2;
+  }
+}
+//-------------------------------------------------------------------------------------------------------
+class RectClass implements Node {  
+  float x=0;
+  float y=0;
+  float w=0;
+  float h=0;
+  color RectClassColor=0; 
+  RectClass(float tempX, float tempY, float tempW, float tempH, color tempRectClassColor) {
+    x = tempX;
+    y = tempY;
+    w = tempW;
+    h = tempH;
+    RectClassColor = tempRectClassColor;
+  } 
+  void display() {    
+    fill(RectClassColor);
+    rect (x, y, w, h);
+  }
+  void displayForRun() {
+    fill(RectClassColor);
+    rectMode(CENTER); 
+    rect (width/2, height/2, 122, 122);
+    rectMode(CORNER);
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x+w/2, y+h/2);
+  }
+  boolean over() {
+    return mouseX>x && mouseX<x+w && mouseY>y && mouseY<y+h;
+  }
+} 
+//------------------------------------------------------------------------------------------------------------
+class EllipseClass  implements Node {  
+  float x;
+  float y;
+  float w;
+  float h;
+  color RectClassColor; 
+  EllipseClass(float tempX, float tempY, float tempW, float tempH, color tempRectClassColor) {
+    x = tempX;
+    y = tempY;
+    w = tempW;
+    h = tempH;
+    RectClassColor = tempRectClassColor;
+  }
+  void display() {
+    fill(RectClassColor);
+    ellipse (x, y, w, h);
+  }
+  void displayForRun() {
+    fill(RectClassColor);
+    ellipse (width/2, height/2, 122, 122);
+  }
+  void setXY(float x_, float y_) {
+    x=x_;
+    y=y_;
+  }
+  void incrementXY(float x_, float y_) {
+    x+=x_;
+    y+=y_;
+  }
+  PVector getPos() {
+    return new PVector(x, y);
+  }
+  boolean over() {
+    return  dist(mouseX, mouseY, x, y) < max(w, h);
+  }
+} 
+
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

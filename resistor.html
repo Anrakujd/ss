@@ -1,0 +1,991 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Listrik & Magnet</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> Menentukan Nilai Hambatan Resistor </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="file/resistor.windows64.rar" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="file/resistor.rar" target="_blank">Download Source Code</a></li>
+					
+				</ul>
+			</li>	
+			<li><i class="fa fa-bolt" aria-hidden="true"></i><b> Listrik & Magnet</b>
+				<ul>
+					<li><a href="sel_Volta.html">Sel Volta</a></li>
+					<li><a href="hukum_Ohm.html">Hukum Ohm</a></li>
+					<li><a href="resistor.html">Hambatan Resistor</a></li>
+					<li><a href="Rangkaian Sederhana.html">Rangkaian Sederhana</a></li>
+					<li><a href="seri_paralel.html">Rangkaian Lampu Seri & Paralel</a></li>
+					<li><a href="lampu_seri.html">Simulasi Rangkaian Lampu Seri</a></li>
+					<li><a href="lampu_paralel.html">Simulasi Rangkaian Lampu Paralel</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+		
+<div class="kotak2">
+<h1> Menentukan Hambatan Resistor</h1>
+<script type="text/processing" >
+boolean t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11;
+boolean s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11;
+boolean r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11;
+boolean u1, u2, u3;
+float g1=0;
+float g2=0;
+String g3="0";
+float gh3=0;
+float gh4=0;
+String g4="0";
+int w1=230;
+int w2=230;
+int w3=230;
+int w4=230;
+float RA;
+float RB;
+
+void setup() {
+  size(900, 600);
+}
+
+void draw() {
+  background(230); 
+  //--------------Gelang1------
+  fill(#FFD59A);
+  strokeWeight(2);
+  stroke(0);
+  rect(330,99,220,52);
+  rect(300,95,30,60,5,5,5,5);
+  rect(550,95,30,60,5,5,5,5);
+  fill(#BEC2CB);
+  rect(200,120,100,10);
+  rect(580,120,100,10);
+  noStroke();
+  fill(w1);
+  rect(350, 100, 20, 50);
+  if (t1) {
+    fill(0);
+    rect(350, 150, 20, 20);
+    fill(#432711);
+    rect(350, 170, 20, 20);
+    fill(#D30000);
+    rect(350, 190, 20, 20);
+    fill(#FF5E13);
+    rect(350, 210, 20, 20);
+    fill(#FFFF00);
+    rect(350, 230, 20, 20);
+    fill(#00AA00);
+    rect(350, 250, 20, 20);
+    fill(#0000AA);
+    rect(350, 270, 20, 20);
+    fill(#7F00FF);
+    rect(350, 290, 20, 20);
+    fill(180);
+    rect(350, 310, 20, 20);
+    fill(255);
+    rect(350, 330, 20, 20);
+  }
+  if (t2 && t1) {
+    g1=0;
+    w1=0;
+    t1=false;
+    t2=false;
+    t3=false;
+    t4=false;
+    t5=false;
+    t6=false;
+    t7=false;
+    t8=false;
+    t9=false;
+    t10=false;
+    t11=false;
+    return;
+  }
+  if (t3 && t1) {
+    g1=1;
+    w1=#432711;
+    t1=false;
+    t2=false;
+    t3=false;
+    t4=false;
+    t5=false;
+    t6=false;
+    t7=false;
+    t8=false;
+    t9=false;
+    t10=false;
+    t11=false;
+    return;
+  }
+  if (t4 && t1) {
+    g1=2;
+    w1=#D30000;
+    t1=false;
+    t2=false;
+    t3=false;
+    t4=false;
+    t5=false;
+    t6=false;
+    t7=false;
+    t8=false;
+    t9=false;
+    t10=false;
+    t11=false;
+    return;
+  }
+  if (t5 && t1) {
+    g1=3;
+    w1=#FF5E13;
+    t1=false;
+    t2=false;
+    t3=false;
+    t4=false;
+    t5=false;
+    t6=false;
+    t7=false;
+    t8=false;
+    t9=false;
+    t10=false;
+    t11=false;
+    return;
+  }
+  if (t6 && t1) {
+    g1=4;
+    w1=#FFFF00;
+    t1=false;
+    t2=false;
+    t3=false;
+    t4=false;
+    t5=false;
+    t6=false;
+    t7=false;
+    t8=false;
+    t9=false;
+    t10=false;
+    t11=false;
+    return;
+  }
+  if (t7 && t1) {
+    g1=5;
+    w1=#00AA00;
+    t1=false;
+    t2=false;
+    t3=false;
+    t4=false;
+    t5=false;
+    t6=false;
+    t7=false;
+    t8=false;
+    t9=false;
+    t10=false;
+    t11=false;
+    return;
+  }
+  if (t8 && t1) {
+    g1=6;
+    w1=#0000AA;
+    t1=false;
+    t2=false;
+    t3=false;
+    t4=false;
+    t5=false;
+    t6=false;
+    t7=false;
+    t8=false;
+    t9=false;
+    t10=false;
+    t11=false;
+    return;
+  }
+  if (t9 && t1) {
+    g1=7;
+    w1=#7F00FF;
+    t1=false;
+    t2=false;
+    t3=false;
+    t4=false;
+    t5=false;
+    t6=false;
+    t7=false;
+    t8=false;
+    t9=false;
+    t10=false;
+    t11=false;
+    return;
+  }
+  if (t10 && t1) {
+    g1=8;
+    w1=180;
+    t1=false;
+    t2=false;
+    t3=false;
+    t4=false;
+    t5=false;
+    t6=false;
+    t7=false;
+    t8=false;
+    t9=false;
+    t10=false;
+    t11=false;
+    return;
+  }
+  if (t11 && t1) {
+    g1=9;
+    w1=255;
+    t1=false;
+    t2=false;
+    t3=false;
+    t4=false;
+    t5=false;
+    t6=false;
+    t7=false;
+    t8=false;
+    t9=false;
+    t10=false;
+    t11=false;
+    return;
+  }
+  //---------Gelang 2------------
+  fill(w2);
+  rect(400, 100, 20, 50);
+  if (s1) {
+    fill(0);
+    rect(400, 150, 20, 20);
+    fill(#432711);
+    rect(400, 170, 20, 20);
+    fill(#D30000);
+    rect(400, 190, 20, 20);
+    fill(#FF5E13);
+    rect(400, 210, 20, 20);
+    fill(#FFFF00);
+    rect(400, 230, 20, 20);
+    fill(#00AA00);
+    rect(400, 250, 20, 20);
+    fill(#0000AA);
+    rect(400, 270, 20, 20);
+    fill(#7F00FF);
+    rect(400, 290, 20, 20);
+    fill(180);
+    rect(400, 310, 20, 20);
+    fill(255);
+    rect(400, 330, 20, 20);
+  }
+  if (s2 && s1) {
+    g2=0;
+    w2=0;
+    s1=false;
+    s2=false;
+    s3=false;
+    s4=false;
+    s5=false;
+    s6=false;
+    s7=false;
+    s8=false;
+    s9=false;
+    s10=false;
+    s11=false;
+    return;
+  }
+  if (s3 && s1) {
+    g2=1;
+    w2=#432711;
+    s1=false;
+    s2=false;
+    s3=false;
+    s4=false;
+    s5=false;
+    s6=false;
+    s7=false;
+    s8=false;
+    s9=false;
+    s10=false;
+    s11=false;
+    return;
+  }
+  if (s4 && s1) {
+    g2=2;
+    w2=#D30000;
+    s1=false;
+    s2=false;
+    s3=false;
+    s4=false;
+    s5=false;
+    s6=false;
+    s7=false;
+    s8=false;
+    s9=false;
+    s10=false;
+    s11=false;
+    return;
+  }
+  if (s5 && s1) {
+    g2=3;
+    w2=#FF5E13;
+    s1=false;
+    s2=false;
+    s3=false;
+    s4=false;
+    s5=false;
+    s6=false;
+    s7=false;
+    s8=false;
+    s9=false;
+    s10=false;
+    s11=false;
+    return;
+  }
+  if (s6 && s1) {
+    g2=4;
+    w2=#FFFF00;
+    s1=false;
+    s2=false;
+    s3=false;
+    s4=false;
+    s5=false;
+    s6=false;
+    s7=false;
+    s8=false;
+    s9=false;
+    s10=false;
+    s11=false;
+    return;
+  }
+  if (s7 && s1) {
+    g2=5;
+    w2=#00AA00;
+    s1=false;
+    s2=false;
+    s3=false;
+    s4=false;
+    s5=false;
+    s6=false;
+    s7=false;
+    s8=false;
+    s9=false;
+    s10=false;
+    s11=false;
+    return;
+  }
+  if (s8 && s1) {
+    g2=6;
+    w2=#0000AA;
+    s1=false;
+    s2=false;
+    s3=false;
+    s4=false;
+    s5=false;
+    s6=false;
+    s7=false;
+    s8=false;
+    s9=false;
+    s10=false;
+    s11=false;
+    return;
+  }
+  if (s9 && s1) {
+    g2=7;
+    w2=#7F00FF;
+    s1=false;
+    s2=false;
+    s3=false;
+    s4=false;
+    s5=false;
+    s6=false;
+    s7=false;
+    s8=false;
+    s9=false;
+    s10=false;
+    s11=false;
+    return;
+  }
+  if (s10 && s1) {
+    g2=8;
+    w2=180;
+    s1=false;
+    s2=false;
+    s3=false;
+    s4=false;
+    s5=false;
+    s6=false;
+    s7=false;
+    s8=false;
+    s9=false;
+    s10=false;
+    s11=false;
+    return;
+  }
+  if (s11 && s1) {
+    g2=9;
+    w2=255;
+    s1=false;
+    s2=false;
+    s3=false;
+    s4=false;
+    s5=false;
+    s6=false;
+    s7=false;
+    s8=false;
+    s9=false;
+    s10=false;
+    s11=false;
+    return;
+  }
+  //-------------- Gelang 3 ----------------------
+  fill(w3);
+  rect(450, 100, 20, 50);
+  if (r1) {
+    fill(0);
+    rect(450, 150, 20, 20);
+    fill(#432711);
+    rect(450, 170, 20, 20);
+    fill(#D30000);
+    rect(450, 190, 20, 20);
+    fill(#FF5E13);
+    rect(450, 210, 20, 20);
+    fill(#FFFF00);
+    rect(450, 230, 20, 20);
+    fill(#00AA00);
+    rect(450, 250, 20, 20);
+    fill(#0000AA);
+    rect(450, 270, 20, 20);
+    fill(#7F00FF);
+    rect(450, 290, 20, 20);
+    fill(180);
+    rect(450, 310, 20, 20);
+    fill(255);
+    rect(450, 330, 20, 20);
+  }
+  if (r2 && r1) {
+    g3="Ohm";
+    gh3=1;
+    w3=0;
+    r1=false;
+    r2=false;
+    r3=false;
+    r4=false;
+    r5=false;
+    r6=false;
+    r7=false;
+    r8=false;
+    r9=false;
+    r10=false;
+    r11=false;
+    return;
+  }
+  if (r3 && r1) {
+    g3="0 Ohm";
+    gh3=10;
+    w3=#432711;
+    r1=false;
+    r2=false;
+    r3=false;
+    r4=false;
+    r5=false;
+    r6=false;
+    r7=false;
+    r8=false;
+    r9=false;
+    r10=false;
+    r11=false;
+    return;
+  }
+  if (r4 && r1) {
+    g3="00 Ohm";
+    gh3=100;
+    w3=#D30000;
+    r1=false;
+    r2=false;
+    r3=false;
+    r4=false;
+    r5=false;
+    r6=false;
+    r7=false;
+    r8=false;
+    r9=false;
+    r10=false;
+    r11=false;
+    return;
+  }
+  if (r5 && r1) {
+    g3="kOhm";
+    gh3=1000;
+    w3=#FF5E13;
+    r1=false;
+    r2=false;
+    r3=false;
+    r4=false;
+    r5=false;
+    r6=false;
+    r7=false;
+    r8=false;
+    r9=false;
+    r10=false;
+    r11=false;
+    return;
+  }
+  if (r6 && r1) {
+    g3="0 kOhm";
+    gh3=10000;
+    w3=#FFFF00;
+    r1=false;
+    r2=false;
+    r3=false;
+    r4=false;
+    r5=false;
+    r6=false;
+    r7=false;
+    r8=false;
+    r9=false;
+    r10=false;
+    r11=false;
+    return;
+  }
+  if (r7 && r1) {
+    g3="00 Kohm";
+    gh3=100000;
+    w3=#00AA00;
+    r1=false;
+    r2=false;
+    r3=false;
+    r4=false;
+    r5=false;
+    r6=false;
+    r7=false;
+    r8=false;
+    r9=false;
+    r10=false;
+    r11=false;
+    return;
+  }
+  if (r8 && r1) {
+    g3="MOhm";
+    gh3=1000000;
+    w3=#0000AA;
+    r1=false;
+    r2=false;
+    r3=false;
+    r4=false;
+    r5=false;
+    r6=false;
+    r7=false;
+    r8=false;
+    r9=false;
+    r10=false;
+    r11=false;
+    return;
+  }
+  if (r9 && r1) {
+    g3="0 MOhm";
+    gh3=10000000;
+    w3=#7F00FF;
+    r1=false;
+    r2=false;
+    r3=false;
+    r4=false;
+    r5=false;
+    r6=false;
+    r7=false;
+    r8=false;
+    r9=false;
+    r10=false;
+    r11=false;
+    return;
+  }
+  if (r10 && r1) {
+    g3="00 MOhm";
+    gh3=100000000;
+    w3=180;
+    r1=false;
+    r2=false;
+    r3=false;
+    r4=false;
+    r5=false;
+    r6=false;
+    r7=false;
+    r8=false;
+    r9=false;
+    r10=false;
+    r11=false;
+    return;
+  }
+  if (r11 && r1) {
+    g3="GOhm";
+    gh3=1000000000;
+    w3=255;
+    r1=false;
+    r2=false;
+    r3=false;
+    r4=false;
+    r5=false;
+    r6=false;
+    r7=false;
+    r8=false;
+    r9=false;
+    r10=false;
+    r11=false;
+    return;
+  }
+  //-------------- Gelang 4-----------
+  fill(w4);
+  rect(525, 100, 20, 50);
+  if (u1) {
+    fill(#BEC2CB);
+    rect(525, 150, 20, 20);
+    fill(#D7BE69);
+    rect(525, 170, 20, 20);
+  }
+  if (u2 && u1) {
+    g4="10%";
+    gh4=0.1;
+    w4=#BEC2CB;
+    u1=false;
+    u2=false;
+    u3=false;
+    return;
+  }
+  if (u3 && u1) {
+    g4="5%";
+    gh4=0.05;
+    w4=#D7BE69;
+    u1=false;
+    u2=false;
+    u3=false;
+    return;
+  }
+  fill(255);
+  stroke(0);
+  rect(380,365,260,60,10,10,10,10);
+  rect(50,185,200,95);
+  fill(0);
+  textSize(16);
+  text("Klik gelang warna pada",55,205);
+  text("resistor, kemudian pilih", 55,225);
+  text("warna yang sesuai ", 55,245);
+  text("dengan soal di LKS !",55, 265);
+  textSize(25);
+  text("Menentukan Nilai Hambatan Resistor",220,50);
+  text("Besar Hambatan Resistor: ",50,400);
+  text("Nilai atas Resistor: ",50,475);
+  text("Nilai bawah Resistor: ",50,550); 
+  text(g1, 405, 400);
+  text(g2, 420, 400);
+  text(g3, 435, 400);
+  text("+",557,400);
+  stroke(0);
+  line(560,407,575,407);
+  text(g4, 580, 400);
+  RA = (((g1*10)+g2)*gh3) - (((g1*10)+g2)*gh3*gh4);
+  RB = (((g1*10)+g2)*gh3) + (((g1*10)+g2)*gh3*gh4);
+  text(nf(RB,0,0),405,475);
+  text(nf(RA,0,0),405,550);
+  text("Ohm",590,475);
+  text("Ohm",590,550);
+}
+
+void mousePressed() {
+  //--------------------- Gelang 1 ---------------------------------
+  if (mouseX>=350 && mouseX<=370 && mouseY>=100 && mouseY<=150) {
+    if (t1 == false) {
+      t1 = true;
+    } else {
+      t1 = false;
+    }
+  }
+  if (mouseX>=350 && mouseX<=370 && mouseY>=150 && mouseY<=170) {
+    if (t2 == false) {
+      t2 = true;
+    } else {
+      t2 = false;
+    }
+  }
+  if (mouseX>=350 && mouseX<=370 && mouseY>=170 && mouseY<=190) {
+    if (t3 == false) {
+      t3 = true;
+    } else {
+      t3 = false;
+    }
+  }
+  if (mouseX>=350 && mouseX<=370 && mouseY>=190 && mouseY<=210) {
+    if (t4 == false) {
+      t4 = true;
+    } else {
+      t4 = false;
+    }
+  }
+  if (mouseX>=350 && mouseX<=370 && mouseY>=210 && mouseY<=230) {
+    if (t5 == false) {
+      t5 = true;
+    } else {
+      t5 = false;
+    }
+  }
+  if (mouseX>=350 && mouseX<=370 && mouseY>=230 && mouseY<=250) {
+    if (t6 == false) {
+      t6 = true;
+    } else {
+      t6 = false;
+    }
+  }
+  if (mouseX>=350 && mouseX<=370 && mouseY>=250 && mouseY<=270) {
+    if (t7 == false) {
+      t7 = true;
+    } else {
+      t7 = false;
+    }
+  }
+  if (mouseX>=350 && mouseX<=370 && mouseY>=270 && mouseY<=290) {
+    if (t8 == false) {
+      t8 = true;
+    } else {
+      t8 = false;
+    }
+  }
+  if (mouseX>=350 && mouseX<=370 && mouseY>=290 && mouseY<=310) {
+    if (t9 == false) {
+      t9 = true;
+    } else {
+      t9 = false;
+    }
+  }
+  if (mouseX>=350 && mouseX<=370 && mouseY>=310 && mouseY<=330) {
+    if (t10 == false) {
+      t10 = true;
+    } else {
+      t10 = false;
+    }
+  }
+  if (mouseX>=350 && mouseX<=370 && mouseY>=330 && mouseY<=350) {
+    if (t11 == false) {
+      t11 = true;
+    } else {
+      t11 = false;
+    }
+  }
+  //-------------- ------------ Gelang 2---------------------------
+  if (mouseX>=400 && mouseX<=420 && mouseY>=100 && mouseY<=150) {
+    if (s1 == false) {
+      s1 = true;
+    } else {
+      s1 = false;
+    }
+  }
+  if (mouseX>=400 && mouseX<=420 && mouseY>=150 && mouseY<=170) {
+    if (s2 == false) {
+      s2 = true;
+    } else {
+      s2 = false;
+    }
+  }
+  if (mouseX>=400 && mouseX<=420 && mouseY>=170 && mouseY<=190) {
+    if (s3 == false) {
+      s3 = true;
+    } else {
+      s3 = false;
+    }
+  }
+  if (mouseX>=400 && mouseX<=420 && mouseY>=190 && mouseY<=210) {
+    if (s4 == false) {
+      s4 = true;
+    } else {
+      s4 = false;
+    }
+  }
+  if (mouseX>=400 && mouseX<=420 && mouseY>=210 && mouseY<=230) {
+    if (s5 == false) {
+      s5 = true;
+    } else {
+      s5 = false;
+    }
+  }
+  if (mouseX>=400 && mouseX<=420 && mouseY>=230 && mouseY<=250) {
+    if (s6 == false) {
+      s6 = true;
+    } else {
+      s6 = false;
+    }
+  }
+  if (mouseX>=400 && mouseX<=420 && mouseY>=250 && mouseY<=270) {
+    if (s7 == false) {
+      s7 = true;
+    } else {
+      s7 = false;
+    }
+  }
+  if (mouseX>=400 && mouseX<=420 && mouseY>=270 && mouseY<=290) {
+    if (s8 == false) {
+      s8 = true;
+    } else {
+      s8 = false;
+    }
+  }
+  if (mouseX>=400 && mouseX<=420 && mouseY>=290 && mouseY<=310) {
+    if (s9 == false) {
+      s9 = true;
+    } else {
+      s9 = false;
+    }
+  }
+  if (mouseX>=400 && mouseX<=420 && mouseY>=310 && mouseY<=330) {
+    if (s10 == false) {
+      s10 = true;
+    } else {
+      s10 = false;
+    }
+  }
+  if (mouseX>=400 && mouseX<=420 && mouseY>=330 && mouseY<=350) {
+    if (s11 == false) {
+      s11 = true;
+    } else {
+      s11 = false;
+    }
+  }
+  //-------------------Gelang 3----------------------------------
+  if (mouseX>=450 && mouseX<=470 && mouseY>=100 && mouseY<=150) {
+    if (r1 == false) {
+      r1 = true;
+    } else {
+      r1 = false;
+    }
+  }
+  if (mouseX>=450 && mouseX<=470 && mouseY>=150 && mouseY<=170) {
+    if (r2 == false) {
+      r2 = true;
+    } else {
+      r2 = false;
+    }
+  }
+  if (mouseX>=450 && mouseX<=470 && mouseY>=170 && mouseY<=190) {
+    if (r3 == false) {
+      r3 = true;
+    } else {
+      r3 = false;
+    }
+  }
+  if (mouseX>=450 && mouseX<=470 && mouseY>=190 && mouseY<=210) {
+    if (r4 == false) {
+      r4 = true;
+    } else {
+      r4 = false;
+    }
+  }
+  if (mouseX>=450 && mouseX<=470 && mouseY>=210 && mouseY<=230) {
+    if (r5 == false) {
+      r5 = true;
+    } else {
+      r5 = false;
+    }
+  }
+  if (mouseX>=450 && mouseX<=470 && mouseY>=230 && mouseY<=250) {
+    if (r6 == false) {
+      r6 = true;
+    } else {
+      r6 = false;
+    }
+  }
+  if (mouseX>=450 && mouseX<=470 && mouseY>=250 && mouseY<=270) {
+    if (r7 == false) {
+      r7 = true;
+    } else {
+      r7 = false;
+    }
+  }
+  if (mouseX>=450 && mouseX<=470 && mouseY>=270 && mouseY<=290) {
+    if (r8 == false) {
+      r8 = true;
+    } else {
+      r8 = false;
+    }
+  }
+  if (mouseX>=450 && mouseX<=470 && mouseY>=290 && mouseY<=310) {
+    if (r9 == false) {
+      r9 = true;
+    } else {
+      r9 = false;
+    }
+  }
+  if (mouseX>=450 && mouseX<=470 && mouseY>=310 && mouseY<=330) {
+    if (r10 == false) {
+      r10 = true;
+    } else {
+      r10 = false;
+    }
+  }
+  if (mouseX>=450 && mouseX<=470 && mouseY>=330 && mouseY<=350) {
+    if (r11 == false) {
+      r11 = true;
+    } else {
+      r11 = false;
+    }
+  }
+  //------------------------------- gelang 4-------------------------
+  if (mouseX>=525 && mouseX<=545 && mouseY>=100 && mouseY<=150) {
+    if (u1 == false) {
+      u1 = true;
+    } else {
+      u1 = false;
+    }
+  }
+  if (mouseX>=525 && mouseX<=545 && mouseY>=150 && mouseY<=170) {
+    if (u2 == false) {
+      u2 = true;
+    } else {
+      u2 = false;
+    }
+  }
+  if (mouseX>=525 && mouseX<=545 && mouseY>=170 && mouseY<=190) {
+    if (u3 == false) {
+      u3 = true;
+    } else {
+      u3 = false;
+    }
+  }
+}
+</script>
+<canvas></canvas>
+</div>	
+</div>
+
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

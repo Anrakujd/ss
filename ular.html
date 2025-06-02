@@ -1,0 +1,146 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Games</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> GAMES ULAR KLASIK</h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="file/ular.windows64.rar" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="file/ular.rar" target="_blank">Download Source Code</a></li>
+					
+				</ul>
+			</li>
+				<li><i class="fa fa-bolt" aria-hidden="true"></i><b>Games</b>
+				<ul>
+					<li><a href="games1.html">Gerak Random Molekul</a></li>
+					<li><a href="sampah1.html">Memilah Sampah</a></li>
+					<li><a href="ular.html">Ular</a></li>
+					<li><a href="frogger.html">Frogger</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+		
+<div class="kotak2">
+<h1> Games Klasik Ular</h1>
+<script type="text/processing" >
+ArrayList<Integer> x = new ArrayList<Integer>(), y = new ArrayList<Integer>();
+int w=40;        // w didapat dari width size/blocks
+int h=30;        // h didapat dari height size/blocks
+int blocks=20;
+int arah=2; //0 = ke bawah, 1 = ke kiri, 2 ke kanan dan 3 ke atas
+int foodx=15, foody=15; //ukuran makanan
+int fc1=255, fc2=255, fc3=255;  //warna makanan
+int[]x_arah={0, 0, 1, -1};  //matrik arah sb Y
+int[]y_arah={1, -1, 0, 0};  // matrik arah sb X
+int speed=8; // kecepatan gerak
+boolean gameover=false;
+
+void setup() {
+  size(800, 600);
+  x.add(0);
+  y.add(15);
+}
+
+void draw() {
+  background(230);
+  fill(56, 168, 50);
+  for (int i=0; i<x.size(); i++)
+    rect(x.get(i)*blocks, y.get(i)*blocks, blocks, blocks); //ularnya 
+  if (!gameover) {
+    fill(fc1, fc2, fc3);
+    ellipse(foodx*blocks+10, foody*blocks+10, blocks, blocks); // makanannya
+    textAlign(LEFT);
+    textSize(25);
+    fill(0);
+    text("Skor: "+x.size(), 10, 10, width-20, 50);  //skor
+    if (frameCount%8==0) {
+      x.add(0, x.get(0) + x_arah[arah]);       //ganti arah X
+      y.add(0, y.get(0) + y_arah[arah]);       // ganti arah Y
+      
+      if (x.get(0) < 0 || y.get(0)<0 || x.get(0) >= w || y.get(0) >=h) gameover=true;   // mentok tembok gameover
+      for (int i = 1; i<x.size(); i++)
+      if (x.get(0) == x.get(i) && y.get(0)==y.get(i)) gameover = true;                     // mentok badannya sendiri juga gameover
+        
+      if (x.get(0)==foodx && y.get(0)==foody) {           // ular makan food
+        if (x.get(0)%2==0 && speed>=2)speed -=1;         // makan gede makin kenceng jalan ne
+        foodx = (int)random(0, w);
+        foody = (int)random(0, h);
+        fc1 = (int)random(255);
+        fc2 = (int)random(255);
+        fc3 = (int)random(255);
+      } else {
+        x.remove(x.size()-1);           // untuk menghilangkan jejak si ular arah X
+        y.remove(y.size()-1);           // untuk menghilangkan jejak si ular arah Y
+      }
+    }
+   }else {                               // kode bagian game over. maka semua nilai di restart setelah tekan tombol enter
+      fill(0);
+      textSize(30);
+      textAlign(CENTER);
+      text("GAME OVER \n Skor kamu: "+ x.size() +"\n Tekan ENTER untuk Restart", width/2, height/3);
+      if (keyCode == ENTER) {
+        x.clear();
+        y.clear();
+        x.add(0);
+        y.add(15);
+        arah = 2;
+        speed = 8;
+        gameover = false;
+      }
+    }
+  }
+
+void keyPressed() {
+  int newdir = keyCode == DOWN?0:(keyCode == UP?1:(keyCode == RIGHT?2:(keyCode == LEFT?3:-1)));  // fungsi keyboard panah atas, kiri, kanan dan bawah
+  if (newdir != -1) arah=newdir;
+}
+</script>
+<canvas></canvas>
+</div>	
+</div>
+
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>

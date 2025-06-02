@@ -1,0 +1,116 @@
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Bagun Datar</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> Bangun Datar Persegi</h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="file/lampu_seri.windows64.rar" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="file/lampu_seri.rar" target="_blank">Download Source Code</a></li>
+				</ul>
+			</li>
+				<li><i class="fa fa-bolt" aria-hidden="true"></i><b> Matematika</b>
+				<ul>
+					<li><a href="processing.html">Bangun Datar Persegi</a></li>
+					
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+
+<div class="kotak2">	
+<h1>Bangun Datar Dasar Pada Processing</h1>
+<script type="text/processing" >
+//-------------------------- Tempat kode processing ---------------------
+void setup(){
+size(900,600);
+}
+void draw(){
+strokeWeight(1);
+stroke(0);
+fill(255);
+rect(100, 200, 400, 100);
+
+fill(0);
+rect(100, 350, 400, 100);
+
+fill(255, 255, 0);
+rect(100, 500, 100, 50);
+
+fill(150, 0, 0);
+rect(250, 500, 100, 50);
+
+noStroke();
+fill(0, 0, 200);
+rect(400, 500, 100, 50);
+
+stroke(150,0,0);
+strokeWeight(5);
+fill(250,100,0);
+rect(600, 200, 100, 300);
+
+stroke(255);
+strokeWeight(5);
+fill(0);
+rect(750, 200, 100, 300);
+
+for(int i=0; i <= 730; i += 20){
+rect(100+i, 50, 10, 10);
+rect(100+i, 150, 10, 10)}
+
+for (int j=0; j<=730; j +=80){
+    for(int i=0; i <= 80; i += 20){
+        rect(100+j, 50+i, 10, 10);}
+}
+}
+//----------------------------------------------------------------------
+</script>
+<canvas></canvas>
+</div>	
+</div>
+
+</section>
+</body>
+
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+
+</html>

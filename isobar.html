@@ -1,0 +1,271 @@
+<html>
+
+<head> 
+<meta charset="utf-8">
+<meta name="Deskripsi" content="Website eksperimen fisika bebas diakses oleh guru dan siswa untuk membantu memahami fisika di sekolah">
+<meta name="Keywords" content="fisika, eksperimen, praktikum online, webbase praktikum, fisika online">
+<meta name="author" content="Djukarna">
+<title>Energi & Kalor</title>
+<link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<header>
+	<div class="container">
+	<h1> PROSES TEKANAN KONSTAN (ISOBAR) </h1>
+		<nav id="navi2">
+			<ul>
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> <b>Home</b></a></li>
+				<li><a href="AnimasiFisika.html"><i class="fa fa-truck" aria-hidden="true"></i> <b>Fisika</b></a></li>
+				<li><a href="AnimasiKimia.html"><i class="fa fa-thermometer-half" aria-hidden="true"></i> <b>Kimia</b></a></li>
+				<li><a href="AnimasiMatematika.html"><i class="fa fa-bolt" aria-hidden="true"></i> <b>Matematika</b></a></li>
+				<li><a href="TeknikMesin.html"><i class="fa fa-sun-o" aria-hidden="true"></i> <b>Mesin</b></a></li>
+				<li><a href="tutorial.html"><i class="fa fa-video-camera" aria-hidden="true"></i> <b>Tutorial</b></a></li>
+				<li><a href="games.html"><i class="fa fa-snowflake-o" aria-hidden="true"></i> <b>Games</b></a></li>
+				<li><a href="about.html"><i class="fa fa-male" aria-hidden="true"></i> <b>About</b></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<body>
+
+<section id="kotaks">
+	<div class="container">
+		<div class="kotak1">
+		<ul>
+			<li><i class="fa fa-fw fa-download"></i> <b>Download</b>
+				<ul>
+					<li><a href="" target="_blank">Download Program Simulasi</a></li>
+					<li><a href="" target="_blank">Download Source Code</a></li>
+					
+				</ul>
+			</li>
+				<li><i class="fa fa-thermometer-half" aria-hidden="true"></i><b> Energi & Kalor</b>
+				<ul>
+					<li><a href="termometer.html">Skala Termometer</a></li>
+					<li><a href="gaylussac.html">Proses Isokhorik</a></li>
+					<li><a href="isothermal.html">Proses Isotermal</a></li>
+					<li><a href="isentropis.html">Proses Isentropis</a></li>
+					<li><a href="isobar.html">Proses Isobar</a></li>
+				</ul>
+			</li>
+			<li> <b>Didukung Oleh :</b> 
+			     <ul>
+				 <a href="http:www.stkipsurya.ac.id" target="_blank"><img src="image/logo.jpg"></img></a>
+				 </ul>
+			</li>
+		</ul>
+		</div>
+<div class="kotak2">
+<h1> Proses Tekanan Konstan (Isobar)</h1>
+<script type="text/processing" >
+Kompor kmp1;
+float P1;
+float dl=0;
+float T;
+float T0 = 273;
+float t = 273;
+float V0 = 1000;
+float V1;
+float dt;
+
+void setup(){
+size(900,600);
+kmp1 = new Kompor(200,340,200);
+
+}
+
+void draw(){
+background(230);
+kmp1.update();
+kmp1.display();
+P1 = kmp1.nilai();
+//text(nf(P1,1,2),50,50);
+//text(nf(dl,1,2),50,100);
+dl = dl - (P1/10);
+stroke(0);
+strokeWeight(2);
+fill(100);
+rect(250,160,90,140);
+fill(230);
+rect(260,160,70,130);
+fill(10);
+stroke(0);
+if (dl>=2720){dl=2720; text("Minimum", 370,290);}
+if (dl<=-8000){dl=-8000; text("Maximum", 370,165);}
+rect(262,240+(dl/100),66,15);
+stroke(255,255,0);
+fill(255,255,0);
+rect(262,288,66,-33+(dl/100));
+stroke(0);
+ for (i=0; i < 140; i=i+5) {
+      line(345, 160+i, 355, 160+i);
+    }
+    for (i=0; i < 140; i=i+25) {
+     line(345, 160+i, 365, 160+i);
+    }
+Termometer(T,50,100);
+textSize(20);
+fill(0);
+text("Termometer", 50,90);
+line(170,120,235,120);
+line(235,120,235,285);
+line(235,285,300,285);
+ellipse(300,285,5,5);
+T = 273 - dl/10;
+V1 = (T/T0)*1000;
+textSize(16);
+fill(0);
+text("Volume Gas: ",35,200);
+text("Tekanan Gas: ",35,250);
+text("1 bar",145,250);
+text(nf(V1,1,2),130,200);
+text("cm",190,200);
+textSize(14);
+text("3",210,195);
+text("Proses tekanan konstan (Isobar) adalah proses ekspansi atau kompresi gas yang terjadi karena pemuaian atau penyusutan ",50,430);
+text("akibatn pemanasan atau pendinginan. Karena batas sistem dapat berubah (piston dapat bergerak tanpa gesekan), maka ", 50,460);
+text("besar tekanan gas di dalam sistem konstan. Semua Kalor yang diberikan diubah menjadi kerja dan energi dalam gas,", 50,490);
+text(" hubungan antara volume dan temperatur gas: ", 50, 520);
+textSize(24);
+text("V", 450,530);
+line(440,540,470,540);
+text("T", 450,570);
+text("= C    atau ", 485,550);
+text("V", 650,530);
+line(640,540,670,540);
+text("T", 650,570);
+text("=", 688,550);
+text("V", 730,530);
+line(720,540,750,540);
+text("T", 730,570);
+text("V-T Diagram", 600,50);
+text("Alat Simulasi", 150,50);
+textSize(16);
+text("0                1",662,535);
+text("0                1",662,575);
+//grafik T-V
+line(500,330,850,330);
+line(850,330,840,325);
+line(850,330,840,335);
+line(545,375,545,100);
+line(545,100,550,110);
+line(545,100,540,110);
+stroke(255,0,0);
+line(600,300,600+((V1-1000)/20),300-((T-273)/10));
+ellipse(600+((V1-1000)/20),300-((T-273)/10),7,7);
+text("Temperatur(K)",750,350);
+text("3",560,85);
+text("Volume(cm  )",480,90);
+
+}
+
+class Kompor{
+	float newspos; 
+	int xpos;
+	int ypos;
+	int panjang;
+	int tebal;
+	float p;
+	boolean over;           
+	boolean locked;
+	float pMin;
+	float pMax;
+	float x;
+	float a;
+	Kompor(int x, int y, int w){
+		xpos = x;
+		ypos = y;
+		panjang = w;
+		tebal = 20;
+		p = (panjang/2)+ xpos -(tebal/2);
+		a = (panjang/2)+ xpos -(tebal/2);
+		pMin = xpos;
+		pMax = xpos + panjang - tebal;
+		newspos = p;
+	}
+	void display(){
+		stroke(0);
+		strokeWeight(2);
+		fill(200,0,0);
+		rect(xpos-40,ypos-20,panjang+80,tebal+60);
+		fill(100);
+		rect(xpos,ypos-40,panjang,tebal);
+		fill(0,200,0);
+		rect(xpos,ypos,panjang,tebal);
+		fill(0);
+		rect(p, ypos-10,tebal,2*tebal);
+		x = p - a;
+		if( x == 0){
+			text("OFF",a-40,ypos+50);}
+		else if(x <= -1){
+			text("PENDINGINAN",a-40,ypos+50);
+			text("Gas Menyusut",255,150)}
+		else if(x >= 1){
+			text("PEMANASAN",a-40,ypos+50);
+			text("Gas Memuai",255,150)}
+	}
+	void update() {
+		if (overEvent()){
+			over = true;
+			}
+		else {
+			over = false;
+			}
+		if (mousePressed && over){
+			locked = true;
+			}
+		if (!mousePressed){
+			locked = false;
+			}
+		if (locked){
+			newspos = constrain(mouseX-tebal/2, pMin, pMax);
+			}
+		if (abs(newspos - p) > 1){
+			p = p + (newspos-p)/4;
+			}
+	}
+	float constrain(float val, float minv, float maxv) {
+        return min(max(val, minv), maxv);
+	}
+
+	boolean overEvent(){
+		if (mouseX > xpos && mouseX < xpos+panjang && mouseY > ypos && mouseY < ypos+tebal){
+			return true;
+			} 
+		else {
+			return false;
+			}
+	}
+	float nilai() {
+		return x;
+		}
+}
+
+public void Termometer(float T, int x, int y){
+stroke(0);
+strokeWeight(2);
+fill(120);
+rect(x,y,120,40);
+fill(150,0,0);
+rect(x+5,y+5,80, 30);
+fill(255);
+textSize(20);
+text("K", x+95, y+30);
+text(nf(T,1,1), x+10, y+30);
+textSize(16);
+//text("o", x+87, y+20);
+}
+</script>
+<canvas></canvas>
+</div>	
+</div>
+</section>
+</body>
+<footer>
+<p> Copyright <i class="fa fa-copyright" aria-hidden="true"></i> Djukarna 2021</p>
+<p> Open Source, silakan download dan modifikasi sendiri :)</p>
+</footer>
+</html>
