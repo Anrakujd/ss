@@ -60,383 +60,349 @@
 <h1> Menara Hanoi </h1>
 <p>Pindahkan semua balok dari tiang satu ke tiang lainnya, dengan tidak menempatkan balok yang lebih besar di atas balok yang lebih kecil !</p>
 <script type="text/processing" >
-float x, x1, x2, x3, x4, x5, x6;
-float y, y1, y2, y3, y4, y5, y6;
-float h = 20;
-float w1 = 180;
-float w2 = 160;
-float w3 = 140;
-float w4 = 120;
-float w5 = 100;
-float w6 = 80;
-float w7 = 60;
-boolean t, t1, t2, t3, t4, t5, t6;
+// =====================================================
+// TOWER OF HANOI - PROCESSING
+// Djukarna & my best asisten GPT
+// =====================================================
 
-void setup(){
-  size(900,600);
-  x = 150;  y = 435;  
-  x1 = 150;  y1 = 405;  
-  x2 = 150;  y2 = 375;
-  x3 = 150;  y3 = 345;
-  x4 = 150;  y4 = 315;
-  x5 = 150;  y5 = 285;
-  x6 = 150;  y6 = 255;
-   
-  t =  true;
-  t1 = false;
-  t2 = false;
-  t3 = false;
-  t4 = false;
-  t5 = false;
-  t6 = false;
-  
+// Jumlah piringan
+int jumlahDisk = 7;
+
+// Posisi menara
+float[] towerX = {150, 450, 750};
+
+// Ukuran piringan
+float[] diskW = {
+  180,
+  160,
+  140,
+  120,
+  100,
+  80,
+  60
+};
+
+float diskH = 20;
+
+// Posisi setiap piringan
+float[] x = new float[jumlahDisk];
+float[] y = new float[jumlahDisk];
+
+// Menara tempat piringan berada
+// 0 = Menara 1
+// 1 = Menara 2
+// 2 = Menara 3
+int[] tower = new int[jumlahDisk];
+
+// Status piringan sedang dipilih
+int selectedDisk = -1;
+
+// Posisi awal saat mulai drag
+float oldX;
+float oldY;
+
+// Posisi awal menara saat mulai drag
+int oldTower;
+
+
+// =====================================================
+// SETUP
+// =====================================================
+
+void setup() {
+
+  size(900, 600);
+
+  // Semua piringan awal berada di Menara 1
+  for (int i = 0; i < jumlahDisk; i++) {
+
+    tower[i] = 0;
+
+    x[i] = towerX[0];
+
+    // Piringan terbesar berada paling bawah
+    y[i] = 435 - (i * 30);
+  }
 }
 
-void draw(){
-  background(0,255,255);
- 
-  if(!t){
-    x = lerp(x,(x<300)?(150):((x>600)?(750):(450)),1);
-  }
-  if(!t1){
-    x1 = lerp(x1,(x1<300)?(150):((x1>600)?(750):(450)),1);
-  }
-  if(!t2){
-    x2 = lerp(x2,(x2<300)?(150):((x2>600)?(750):(450)),1);
-  }
-  if(!t3){
-    x3 = lerp(x3,(x3<300)?(150):((x3>600)?(750):(450)),1);
-  }
-  if(!t4){
-    x4 = lerp(x4,(x4<300)?(150):((x4>600)?(750):(450)),1);
-  }
-  if(!t5){
-    x5 = lerp(x5,(x5<300)?(150):((x5>600)?(750):(450)),1);
-  }
-  if(!t6){
-    x6 = lerp(x6,(x6<300)?(150):((x6>600)?(750):(450)),1);
-  }
-  
-  strokeWeight(2);
-  fill(128);
+
+// =====================================================
+// DRAW
+// =====================================================
+
+void draw() {
+
+  background(0, 255, 255);
+
+  drawTowers();
+  drawDisks();
+}
+
+
+// =====================================================
+// GAMBAR MENARA
+// =====================================================
+
+void drawTowers() {
+
   rectMode(CENTER);
-  rect(150,300,10,300,5,5,0,0);
-  rect(450,300,10,300,5,5,0,0);
-  rect(750,300,10,300,5,5,0,0);
+
+  // Batang menara
+  fill(128);
+  stroke(0);
+  strokeWeight(2);
+
+  rect(150, 300, 10, 300, 5, 5, 0, 0);
+  rect(450, 300, 10, 300, 5, 5, 0, 0);
+  rect(750, 300, 10, 300, 5, 5, 0, 0);
+
+  // Pembatas bawah
   fill(0);
-  rect(450,475,800,50,10,10,10,10);
-  
-  strokeWeight(1);
-  if( over1() ){ fill(150);} 
-  if( over2() ){ fill(150);}
-  if( over3() ){ fill(150);} 
-  if( over4() ){ fill(150);}
-  if( over5() ){ fill(150);} 
-  if( over6() ){ fill(150);}
-  if( over7() ){ fill(150);} 
-  fill(#FA0D0D);
-  rect(x, y, w1, h, 15, 15, 15, 15);
-  fill(#FA0DE3);
-  rect(x1, y1, w2, h, 15, 15, 15, 15);
-  fill(#B20DFA);
-  rect(x2, y2, w3, h, 15, 15, 15, 15);
-  fill(#0F0DFA);
-  rect(x3, y3, w4, h, 15, 15, 15, 15);
-  fill(#1BFA0D);
-  rect(x4, y4, w5, h, 15, 15, 15, 15);
-  fill(#F9FA0D);
-  rect(x5, y5, w6, h, 15, 15, 15, 15);
-  fill(#FA880D);
-  rect(x6, y6, w7, h, 15, 15, 15, 15);
-  
-  
-  textSize(16);
+  rect(450, 475, 800, 50, 10);
+
+  // Garis batas area menara
+  stroke(100);
+  strokeWeight(2);
+
+  line(300, 160, 300, 450);
+  line(600, 160, 600, 450);
+
+  // Label
   fill(255);
-  text("Menara 1", 120,480);
-  text("Menara 2", 420,480);
-  text("Menara 3", 720,480);
-  }
+  textSize(16);
 
-boolean over1(){
- return(dist(x,y,mouseX,mouseY) < 20);
+  text("Menara 1", 120, 480);
+  text("Menara 2", 420, 480);
+  text("Menara 3", 720, 480);
 }
 
-boolean over2(){
- return(dist(x1,y1,mouseX,mouseY) < 20);
-}
 
-boolean over3(){
- return(dist(x2,y2,mouseX,mouseY) < 20);
-}
+// =====================================================
+// GAMBAR PIRINGAN
+// =====================================================
 
-boolean over4(){
- return(dist(x3,y3,mouseX,mouseY) < 20);
-}
+void drawDisks() {
 
-boolean over5(){
- return(dist(x4,y4,mouseX,mouseY) < 20);
-}
+  rectMode(CENTER);
 
-boolean over6(){
- return(dist(x5,y5,mouseX,mouseY) < 20);
-}
+  for (int i = 0; i < jumlahDisk; i++) {
 
-boolean over7(){
- return(dist(x6,y6,mouseX,mouseY) < 20);
-}
-
-void mousePressed(){
-  if( over1() ){
-    t = true;
-    t1 = false;
-    t2 = false;
-    t3 = false;
-    t4 = false;
-    t5 = false;
-    t6 = false;
-  }
-  if( over2() ){
-    t = false;
-    t1 = true;
-    t2 = false;
-    t3 = false;
-    t4 = false;
-    t5 = false;
-    t6 = false;
-  }
-  if( over3() ){
-    t = false;
-    t1 = false;
-    t2 = true;
-    t3 = false;
-    t4 = false;
-    t5 = false;
-    t6 = false;
-  }
-  if( over4() ){
-    t = false;
-    t1 = false;
-    t2 = false;
-    t3 = true;
-    t4 = false;
-    t5 = false;
-    t6 = false;
-  }
-  if( over5() ){
-    t = false;
-    t1 = false;
-    t2 = false;
-    t3 = false;
-    t4 = true;
-    t5 = false;
-    t6 = false;
-  }
-  if( over6() ){
-    t = false;
-    t1 = false;
-    t2 = false;
-    t3 = false;
-    t4 = false;
-    t5 = true;
-    t6 = false;
-  }
-  if( over7() ){
-    t = false;
-    t1 = false;
-    t2 = false;
-    t3 = false;
-    t4 = false;
-    t5 = false;
-    t6 = true;
-  }
-}
-
-void mouseDragged(){
-  if( t ){
-    x +=mouseX-pmouseX;
-    y +=mouseY-pmouseY;
-    y = constrain(y, 0, 440);
-  }
-  if( t1 ){
-    x1 +=mouseX-pmouseX;
-    y1 +=mouseY-pmouseY;
-    y1 = constrain(y1, 0, 440);
-  }
-  if( t2 ){
-    x2 +=mouseX-pmouseX;
-    y2 +=mouseY-pmouseY;
-    y2 = constrain(y2, 0, 440);
-  }
-  if( t3 ){
-    x3 +=mouseX-pmouseX;
-    y3 +=mouseY-pmouseY;
-    y3 = constrain(y3, 0, 440);
-  }
-  if( t4 ){
-    x4 +=mouseX-pmouseX;
-    y4 +=mouseY-pmouseY;
-    y4 = constrain(y4, 0, 440);
-  }
-  if( t5 ){
-    x5 +=mouseX-pmouseX;
-    y5 +=mouseY-pmouseY;
-    y5 = constrain(y5, 0, 440);
-  }
-  if( t6 ){
-    x6 +=mouseX-pmouseX;
-    y6 +=mouseY-pmouseY;
-    y6 = constrain(y6, 0, 440);
-  }
-}
-    
-void mouseReleased(){
-   if (t) { 
-    if(y < 250){
-      y = 255;
-    } else if(y > 250 && y < 270){
-      y = 255;
-    } else if(y > 270 && y < 290){
-      y = 285;
-    } else if(y > 290 && y < 320){
-      y = 315;
-    } else if(y > 320 && y < 350){
-      y = 345;
-    } else if(y > 350 && y < 380){
-      y = 375;
-    } else if(y > 380 && y < 420){
-      y = 405;
-    } else if(y > 420 && y < 450){
-      y = 435;
+    // Piringan yang sedang dipilih diberi warna lebih terang
+    if (i == selectedDisk) {
+      stroke(255);
+      strokeWeight(4);
+    } else {
+      stroke(0);
+      strokeWeight(1);
     }
-    t = false;
-    y = constrain(y, 0, 440);
+
+    // Warna piringan
+    if (i == 0) fill(#FA0D0D);
+    if (i == 1) fill(#FA0DE3);
+    if (i == 2) fill(#B20DFA);
+    if (i == 3) fill(#0F0DFA);
+    if (i == 4) fill(#1BFA0D);
+    if (i == 5) fill(#F9FA0D);
+    if (i == 6) fill(#FA880D);
+
+    rect(
+      x[i],
+      y[i],
+      diskW[i],
+      diskH,
+      15,
+      15,
+      15,
+      15
+    );
   }
-  if (t1) {
-    if(y1 < 250){
-      y1 = 255;
-    } else if(y1+10 > 240 && y1+10 < 270){
-      y1 = 255;
-    } else if(y1+10 > 270 && y1+10 < 300){
-      y1 = 285;
-    } else if(y1+10 > 300 && y1+10 < 330){
-      y1 = 315;
-    } else if(y1+10 > 330 && y1+10 < 360){
-      y1 = 345;
-    } else if(y1+10 > 360 && y1+10 < 390){
-      y1 = 375;
-    } else if(y1+10 > 390 && y1+10 < 420){
-      y1 = 405;
-    } else if(y1+10 > 420 && y1+10 <  450){
-      y1 = 435;
+}
+
+
+// =====================================================
+// MENCARI PIRINGAN PALING ATAS
+// =====================================================
+
+int topDisk(int towerNumber) {
+
+  int top = -1;
+
+  for (int i = 0; i < jumlahDisk; i++) {
+
+    if (tower[i] == towerNumber) {
+
+      if (top == -1 || y[i] < y[top]) {
+        top = i;
+      }
     }
-    t1 = false;
-    y1 = constrain(y1, 0, 440);
   }
-  if (t2) {
-    if(y2 < 250){
-      y2 = 255;
-    } else if(y2+10 > 240 && y2+10 < 270){
-      y2 = 255;
-    } else if(y2+10 > 270 && y2+10 < 300){
-      y2 = 285;
-    } else if(y2+10 > 300 && y2+10 < 330){
-      y2 = 315;
-    } else if(y2+10 > 330 && y2+10 < 360){
-      y2 = 345;
-    } else if(y2+10 > 360 && y2+10 < 390){
-      y2 = 375;
-    } else if(y2+10 > 390 && y2+10 < 420){
-      y2 = 405;
-    } else if(y2+10 > 420 && y2+10 < 450){
-      y2 = 435;
+
+  return top;
+}
+
+
+// =====================================================
+// MENENTUKAN MENARA BERDASARKAN POSISI MOUSE
+// =====================================================
+
+int getTowerFromMouse() {
+
+  if (mouseX < 300) {
+    return 0;
+  }
+
+  else if (mouseX < 600) {
+    return 1;
+  }
+
+  else {
+    return 2;
+  }
+}
+
+
+// =====================================================
+// CEK APAKAH MOUSE BERADA DI ATAS PIRINGAN
+// =====================================================
+
+boolean overDisk(int i) {
+
+  return mouseX > x[i] - diskW[i] / 2 &&
+         mouseX < x[i] + diskW[i] / 2 &&
+         mouseY > y[i] - diskH / 2 &&
+         mouseY < y[i] + diskH / 2;
+}
+
+
+// =====================================================
+// MOUSE PRESSED
+// =====================================================
+
+void mousePressed() {
+
+  // Cari piringan yang diklik
+  for (int i = 0; i < jumlahDisk; i++) {
+
+    if (overDisk(i)) {
+
+      // Hanya piringan paling atas yang boleh diambil
+      if (topDisk(tower[i]) == i) {
+
+        selectedDisk = i;
+
+        oldX = x[i];
+        oldY = y[i];
+
+        oldTower = tower[i];
+
+        break;
+      }
     }
-    t2= false;
-    y2 = constrain(y2, 0, 440);
   }
-  if (t3) {
-    if(y3 < 250){
-      y3 = 255;
-    } else if(y3+10 > 240 && y3+10 < 270){
-      y3 = 255;
-    } else if(y3+10 > 270 && y3+10 < 300){
-      y3 = 285;
-    } else if(y3+10 > 300 && y3+10 < 330){
-      y3 = 315;
-    } else if(y3+10 > 330 && y3+10 < 360){
-      y3 = 345;
-    } else if(y3+10 > 360 && y3+10 < 390){
-      y3 = 375;
-    } else if(y3+10 > 390 && y3+10 < 420){
-      y3 = 405;
-    } else if(y3+10 > 420 && y3+10 < 450){
-      y3 = 435;
+}
+
+
+// =====================================================
+// MOUSE DRAGGED
+// =====================================================
+
+void mouseDragged() {
+
+  if (selectedDisk != -1) {
+
+    x[selectedDisk] += mouseX - pmouseX;
+    y[selectedDisk] += mouseY - pmouseY;
+
+    // Membatasi agar piringan tidak keluar layar
+    x[selectedDisk] = constrain(
+      x[selectedDisk],
+      diskW[selectedDisk] / 2,
+      width - diskW[selectedDisk] / 2
+    );
+
+    y[selectedDisk] = constrain(
+      y[selectedDisk],
+      20,
+      440
+    );
+  }
+}
+
+
+// =====================================================
+// MOUSE RELEASED
+// =====================================================
+
+void mouseReleased() {
+
+  if (selectedDisk == -1) {
+    return;
+  }
+
+  // Menentukan menara tujuan
+  int destinationTower = getTowerFromMouse();
+
+  // Piringan paling atas pada menara tujuan
+  int destinationTop = topDisk(destinationTower);
+
+  boolean valid = true;
+
+
+  // =================================================
+  // CEK ATURAN TOWER OF HANOI
+  // =================================================
+
+  // Jika menara tujuan tidak kosong
+  if (destinationTop != -1) {
+
+    // Piringan besar tidak boleh di atas piringan kecil
+    if (diskW[selectedDisk] > diskW[destinationTop]) {
+
+      valid = false;
     }
-    t3 = false;
-    y3 = constrain(y3, 0, 440);
   }
-  if (t4) {
-    if(y4 < 250){
-      y4 = 255;
-    } else if(y4+10 > 240 && y4+10 < 270){
-      y4 = 255;
-    } else if(y4+10 > 270 && y4+10 < 300){
-      y4 = 285;
-    } else if(y4+10 > 300 && y4+10 < 330){
-      y4 = 315;
-    } else if(y4+10 > 330 && y4+10 < 360){
-      y4 = 345;
-    } else if(y4+10 > 360 && y4+10 < 390){
-      y4 = 375;
-    } else if(y4+10 > 390 && y4+10 < 420){
-      y4 = 405;
-    } else if(y4+10 > 420 && y4+10 < 450){
-      y4 = 435;
+
+
+  // =================================================
+  // JIKA GERAKAN VALID
+  // =================================================
+
+  if (valid) {
+
+    tower[selectedDisk] = destinationTower;
+
+    // Piringan diletakkan pada posisi paling atas
+    if (destinationTop == -1) {
+
+      y[selectedDisk] = 435;
     }
-    t4 = false;
-    y4 = constrain(y4, 0, 440);
-  }
-  if (t5) {
-   if(y5<250){
-      y5 = 255;
-    } else if(y5+10>240 && y5+10<270){
-      y5 = 255;
-    } else if(y5+10>270 && y5+10<300){
-      y5 = 285;
-    } else if(y5+10>300 && y5+10<330){
-      y5 = 315;
-    } else if(y5+10>330 && y5+10<360){
-      y5 = 345;
-    } else if(y5+10>360 && y5+10<390){
-      y5 = 375;
-    } else if(y5+10>390 && y5+10<420){
-      y5 = 405;
-    } else if(y5+10>420 && y5+10<450){
-      y5 = 435;
+
+    else {
+
+      y[selectedDisk] =
+        y[destinationTop] - 30;
     }
-    t5 = false;
-    y5 = constrain(y5, 0, 440);
+
+    x[selectedDisk] =
+      towerX[destinationTower];
   }
-  if (t6) {
-    if(y6<250){
-      y6 = 255;
-    } else if(y6+10>240 && y6+10<270){
-      y6 = 255;
-    } else if(y6+10>270 && y6+10<300){
-      y6 = 285;
-    } else if(y6+10>300 && y6+10<330){
-      y6 = 315;
-    } else if(y6+10>330 && y6+10<360){
-      y6 = 345;
-    } else if(y6+10>360 && y6+10<390){
-      y6 = 375;
-    } else if(y6+10>390 && y6+10<420){
-      y6 = 405;
-    } else if(y6+10>420 && y6+10<450){
-      y6 = 435;
-    }
-    t6 = false;
-    y6 = constrain(y6, 0, 440);
+
+
+  // =================================================
+  // JIKA GERAKAN TIDAK VALID
+  // =================================================
+
+  else {
+
+    // Kembali ke posisi semula
+    x[selectedDisk] = oldX;
+    y[selectedDisk] = oldY;
+    tower[selectedDisk] = oldTower;
   }
+
+
+  // Reset
+  selectedDisk = -1;
 }
 </script>
 <canvas></canvas>
