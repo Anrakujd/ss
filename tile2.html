@@ -60,324 +60,288 @@
 <h1> Pengubinan dengan Persegi (Polyominos) </h1>
 <p> Klik dan drag ubin persegi dan susun menjadi pengubinan sesuka mu, Untuk menghapus tekan DEL </p>
 <script type="text/processing" >
-ArrayList<Node> nodes = new ArrayList();
+	ArrayList<Tile> tiles = new ArrayList<Tile>();
 
-final int rectWidth = 50;
-final int rectHeight = 50;
-final int DRAG_NONE = 0; 
-final int DRAG_RECT1 = 1;
-final int DRAG_RECT2 = 2;
-final int DRAG_RECT3 = 3;
-final int DRAG_RECT4 = 4;
+final int TILE_SIZE = 50;
+final int SNAP_DISTANCE = 20;
 
-int dragging = DRAG_NONE; 
+// Jenis ubin yang sedang diambil dari panel
+final int NONE = 0;
+final int RED = 1;
+final int GREEN = 2;
+final int BLUE = 3;
+final int YELLOW = 4;
 
-final int EDIT = 0; // dragging 
-final int RUN  = 1; // run the result
-int state = EDIT;
+int draggingNewTile = NONE;
+int draggingTileIndex = -1;
 
-final int UNDEFINED = -1; 
-int draggingAnExistingRectClass = UNDEFINED; 
+// Offset agar ubin tidak meloncat saat mulai digeser
+float offsetX, offsetY;
 
-final PVector pvRect = new PVector(40, 110); 
+color tileColor(int type) {
+  if (type == RED)    return color(255, 0, 0);
+  if (type == GREEN)  return color(0, 255, 0);
+  if (type == BLUE)   return color(0, 0, 255);
+  if (type == YELLOW) return color(255, 255, 0);
+  return color(255);
+}
 
 void setup() {
   size(1000, 700);
-} 
+  rectMode(CORNER);
+}
 
 void draw() {
-  background(0,200,200);
-  
-  for (int i = 0; i < nodes.size ()-1; i++) { 
-    Node currentNode = nodes.get(i);
-    currentNode.display();
+  background(0, 200, 200);
+
+  // Tampilkan semua ubin di kanvas
+  for (Tile t : tiles) {
+    t.display();
   }
-  
-  if (nodes.size()>0) {
-    Node currentNode = nodes.get(nodes.size()-1);
-    currentNode.display();
-  }
-  
+
+  // Panel pemilihan ubin
+  noStroke();
   fill(255);
   rect(10, 50, 70, 390);
-  
-  stroke(0);
-  strokeWeight(1);
-  fill(255, 0, 0);
-  rect(20, pvRect.y-30, 50, 50); 
-  
-  stroke(0);
-  strokeWeight(1);
-  fill(0, 255, 0);
-  rect(20, pvRect.y+60, 50, 50); 
-  
-  stroke(0);
-  strokeWeight(1);
-  fill(0, 0, 255);
-  rect(20, pvRect.y+150, 50, 50); 
-  
-  stroke(0);
-  strokeWeight(1);
-  fill(255, 255, 0);
-  rect(20, pvRect.y+240, 50, 50); 
-  
-   if (dragging==DRAG_RECT1) {
-    // dragging sign (persegi merah baru)
-    fill(255, 0, 0);
-    rect(mouseX, mouseY, 50, 50);
-    } 
-    else if (dragging==DRAG_RECT2) {
-    // dragging sign (persegi hijau baru)
-    fill(0, 255, 0);
-    rect(mouseX, mouseY, 50, 50);
-    } 
-    else if (dragging==DRAG_RECT3) {
-    // dragging sign (persegi biru baru)
-    fill(0, 0, 255);
-    rect(mouseX, mouseY, 50, 50);
-    } 
-    else if (dragging==DRAG_RECT4) {
-    // dragging sign (persegi kuning baru)
-    fill(255, 255, 0);
-    rect(mouseX, mouseY, 50, 50);
-    }
-    else if (draggingAnExistingRectClass!=UNDEFINED) {
-    // menggeser persegi yang sudah ada
-    Node RectClass = nodes.get(draggingAnExistingRectClass);
-    RectClass.incrementXY( mouseX-pmouseX, mouseY-pmouseY );
+
+  drawPaletteTile(RED, 20, 80);
+  drawPaletteTile(GREEN, 20, 170);
+  drawPaletteTile(BLUE, 20, 260);
+  drawPaletteTile(YELLOW, 20, 350);
+
+  // Pratinjau ubin baru saat sedang ditarik
+  if (draggingNewTile != NONE) {
+    fill(tileColor(draggingNewTile));
+    stroke(0);
+    rect(mouseX - offsetX, mouseY - offsetY,
+         TILE_SIZE, TILE_SIZE);
   }
+}
+
+void drawPaletteTile(int type, float x, float y) {
+  stroke(0);
+  strokeWeight(1);
+  fill(tileColor(type));
+  rect(x, y, TILE_SIZE, TILE_SIZE);
 }
 
 void mousePressed() {
-     draggingAnExistingRectClass=UNDEFINED; // reset 
-    if (dist(mouseX, mouseY, pvRect.x, pvRect.y)<20) {
-      dragging=DRAG_RECT1;
-      return;
-      } 
-      else if (mouseX >= 20 && mouseX<= 70 && mouseY >= 170 && mouseY <= 220 ) {
-      dragging=DRAG_RECT2;
-      return;
-      } 
-      else if (mouseX >= 20 && mouseX <= 70 && mouseY >= 260 && mouseY <= 310) {
-      dragging=DRAG_RECT3;
-      return;
-      } 
-      else if (mouseX >= 20 && mouseX <= 70 && mouseY >= 350 && mouseY <= 400) {
-      dragging=DRAG_RECT4;
-      return;
-      } 
-      else {
-      for (int i = 0; i < nodes.size (); i++) { 
-        Node RectClass = nodes.get(i);
-          if (RectClass.over()) {
-             draggingAnExistingRectClass = i; 
-              return;        
-             }
-        }
-      }    
-}
+  draggingNewTile = NONE;
+  draggingTileIndex = -1;
 
-void mouseReleased() {
-      if (dragging==DRAG_RECT1) {
-      dragging = DRAG_NONE; 
-      color randomColor = color(255, 0, 0);  
-      nodes.add ( new Rect1Class(mouseX, mouseY, rectWidth, rectHeight, randomColor));
-      } 
-      else if (dragging==DRAG_RECT2) {
-      dragging = DRAG_NONE; // reset
-      color randomColor = color(0, 255, 0);  
-      nodes.add ( new Rect2Class(mouseX, mouseY, rectWidth, rectHeight, randomColor));
-      } 
-      else if (dragging==DRAG_RECT3) {
-      dragging = DRAG_NONE; // reset
-      color randomColor = color(0, 0, 255);  
-      nodes.add ( new Rect3Class(mouseX, mouseY, rectWidth, rectHeight, randomColor));
-      } 
-      else if (dragging==DRAG_RECT4) {
-      dragging = DRAG_NONE; // reset
-      color randomColor = color(255, 255, 0);  
-      nodes.add ( new Rect4Class(mouseX, mouseY, rectWidth, rectHeight, randomColor));
-      } 
-    draggingAnExistingRectClass=UNDEFINED; // reset
-}
+  // Cek apakah pengguna memilih ubin dari panel
+  if (insideRect(mouseX, mouseY, 20, 80, 50, 50)) {
+    draggingNewTile = RED;
+    offsetX = TILE_SIZE / 2.0;
+    offsetY = TILE_SIZE / 2.0;
+    return;
+  }
 
-interface Node {
-  void display();
-  void incrementXY(float x_, float y_);
-  PVector getPos();
-  boolean over();
-}
+  if (insideRect(mouseX, mouseY, 20, 170, 50, 50)) {
+    draggingNewTile = GREEN;
+    offsetX = TILE_SIZE / 2.0;
+    offsetY = TILE_SIZE / 2.0;
+    return;
+  }
 
-// menghapus broooo
-void keyPressed() {
-  // only in state EDIT: 
-  if (state==EDIT) {
-    if (key==' ') {
-      state=RUN;
-      frameRate(2);
-    } else if (key==DELETE) {
-      if (nodes.size()>0) { 
-        nodes.remove(nodes.size()-1);
-      }
+  if (insideRect(mouseX, mouseY, 20, 260, 50, 50)) {
+    draggingNewTile = BLUE;
+    offsetX = TILE_SIZE / 2.0;
+    offsetY = TILE_SIZE / 2.0;
+    return;
+  }
+
+  if (insideRect(mouseX, mouseY, 20, 350, 50, 50)) {
+    draggingNewTile = YELLOW;
+    offsetX = TILE_SIZE / 2.0;
+    offsetY = TILE_SIZE / 2.0;
+    return;
+  }
+
+  // Cari ubin yang diklik, mulai dari yang paling atas
+  for (int i = tiles.size() - 1; i >= 0; i--) {
+    Tile t = tiles.get(i);
+
+    if (t.contains(mouseX, mouseY)) {
+      draggingTileIndex = i;
+
+      offsetX = mouseX - t.x;
+      offsetY = mouseY - t.y;
+
+      // Pindahkan ubin yang dipilih ke lapisan paling atas
+      tiles.remove(i);
+      tiles.add(t);
+      draggingTileIndex = tiles.size() - 1;
+
+      return;
     }
   }
 }
 
-class Rect1Class implements Node {  
-  float x=0;
-  float y=0;
-  float w=0;
-  float h=0;
-  color RectClassColor=0; 
-  Rect1Class(float tempX, float tempY, float tempW, float tempH, color tempRectClassColor) {
-    x = tempX;
-    y = tempY;
-    w = tempW;
-    h = tempH;
-    RectClassColor = tempRectClassColor;
-  } 
-  void display() {    
-    fill(RectClassColor);
-    rect (x, y, w, h);
-  }
-  void displayForRun() {
-    fill(RectClassColor);
-    rectMode(CENTER); 
-    rect (width/2, height/2, 122, 122);
-    rectMode(CORNER);
-  }
-  void setXY(float x_, float y_) {
-    x=x_;
-    y=y_;
-  }
-  void incrementXY(float x_, float y_) {
-    x+=x_;
-    y+=y_;
-  }
-  PVector getPos() {
-    return new PVector(x+w/2, y+h/2);
-  }
-  boolean over() {
-    return mouseX>x && mouseX<x+w && mouseY>y && mouseY<y+h;
-  }
-} 
+void mouseDragged() {
+  // Geser ubin yang sudah ada
+  if (draggingTileIndex >= 0) {
+    Tile t = tiles.get(draggingTileIndex);
 
-class Rect2Class implements Node {  
-  float x=0;
-  float y=0;
-  float w=0;
-  float h=0;
-  color RectClassColor=0; 
-  Rect2Class(float tempX, float tempY, float tempW, float tempH, color tempRectClassColor) {
-    x = tempX;
-    y = tempY;
-    w = tempW;
-    h = tempH;
-    RectClassColor = tempRectClassColor;
-  } 
-  void display() {    
-    fill(RectClassColor);
-    rect (x, y, w, h);
-  }
-  void displayForRun() {
-    fill(RectClassColor);
-    rectMode(CENTER); 
-    rect (width/2, height/2, 122, 122);
-    rectMode(CORNER);
-  }
-  void setXY(float x_, float y_) {
-    x=x_;
-    y=y_;
-  }
-  void incrementXY(float x_, float y_) {
-    x+=x_;
-    y+=y_;
-  }
-  PVector getPos() {
-    return new PVector(x+w/2, y+h/2);
-  }
-  boolean over() {
-    return mouseX>x && mouseX<x+w && mouseY>y && mouseY<y+h;
-  }
-} 
-
-class Rect3Class implements Node {  
-  float x=0;
-  float y=0;
-  float w=0;
-  float h=0;
-  color RectClassColor=0; 
-  Rect3Class(float tempX, float tempY, float tempW, float tempH, color tempRectClassColor) {
-    x = tempX;
-    y = tempY;
-    w = tempW;
-    h = tempH;
-    RectClassColor = tempRectClassColor;
-  } 
-  void display() {    
-    fill(RectClassColor);
-    rect (x, y, w, h);
-  }
-  void displayForRun() {
-    fill(RectClassColor);
-    rectMode(CENTER); 
-    rect (width/2, height/2, 122, 122);
-    rectMode(CORNER);
-  }
-  void setXY(float x_, float y_) {
-    x=x_;
-    y=y_;
-  }
-  void incrementXY(float x_, float y_) {
-    x+=x_;
-    y+=y_;
-  }
-  PVector getPos() {
-    return new PVector(x+w/2, y+h/2);
-  }
-  boolean over() {
-    return mouseX>x && mouseX<x+w && mouseY>y && mouseY<y+h;
+    t.x = mouseX - offsetX;
+    t.y = mouseY - offsetY;
   }
 }
 
-class Rect4Class implements Node {  
-  float x=0;
-  float y=0;
-  float w=0;
-  float h=0;
-  color RectClassColor=0; 
-  Rect4Class(float tempX, float tempY, float tempW, float tempH, color tempRectClassColor) {
-    x = tempX;
-    y = tempY;
-    w = tempW;
-    h = tempH;
-    RectClassColor = tempRectClassColor;
-  } 
-  void display() {    
-    fill(RectClassColor);
-    rect (x, y, w, h);
+void mouseReleased() {
+  // Buat ubin baru setelah dilepas di kanvas
+  if (draggingNewTile != NONE) {
+    float x = mouseX - offsetX;
+    float y = mouseY - offsetY;
+
+    // Jangan membuat ubin di atas panel pilihan
+    if (x >= 85) {
+      Tile t = new Tile(x, y, tileColor(draggingNewTile));
+      tiles.add(t);
+
+      // Tempelkan otomatis seperti magnet
+      snapToNeighbors(t);
+    }
   }
-  void displayForRun() {
-    fill(RectClassColor);
-    rectMode(CENTER); 
-    rect (width/2, height/2, 122, 122);
-    rectMode(CORNER);
+
+  // Ubin yang dipindahkan juga akan menempel otomatis
+  if (draggingTileIndex >= 0) {
+    Tile t = tiles.get(draggingTileIndex);
+    snapToNeighbors(t);
   }
-  void setXY(float x_, float y_) {
-    x=x_;
-    y=y_;
+
+  draggingNewTile = NONE;
+  draggingTileIndex = -1;
+}
+
+// Memeriksa apakah titik berada di dalam persegi
+boolean insideRect(float px, float py,
+                   float x, float y,
+                   float w, float h) {
+  return px >= x && px <= x + w &&
+         py >= y && py <= y + h;
+}
+
+// LOGIKA MAGNET
+void snapToNeighbors(Tile moving) {
+  float bestDistance = SNAP_DISTANCE + 1;
+  float bestX = moving.x;
+  float bestY = moving.y;
+
+  for (Tile other : tiles) {
+    if (other == moving) continue;
+
+    // Kandidat menempel di kanan
+    float candidateX = other.x + other.w;
+    float candidateY = moving.y;
+
+    if (overlapY(candidateY, moving.h, other.y, other.h)) {
+      float d = abs(candidateX - moving.x);
+
+      if (d < bestDistance) {
+        bestDistance = d;
+        bestX = candidateX;
+        bestY = candidateY;
+      }
+    }
+
+    // Kandidat menempel di kiri
+    candidateX = other.x - moving.w;
+    candidateY = moving.y;
+
+    if (overlapY(candidateY, moving.h, other.y, other.h)) {
+      float d = abs(candidateX - moving.x);
+
+      if (d < bestDistance) {
+        bestDistance = d;
+        bestX = candidateX;
+        bestY = candidateY;
+      }
+    }
+
+    // Kandidat menempel di bawah
+    candidateX = moving.x;
+    candidateY = other.y + other.h;
+
+    if (overlapX(candidateX, moving.w, other.x, other.w)) {
+      float d = abs(candidateY - moving.y);
+
+      if (d < bestDistance) {
+        bestDistance = d;
+        bestX = candidateX;
+        bestY = candidateY;
+      }
+    }
+
+    // Kandidat menempel di atas
+    candidateX = moving.x;
+    candidateY = other.y - moving.h;
+
+    if (overlapX(candidateX, moving.w, other.x, other.w)) {
+      float d = abs(candidateY - moving.y);
+
+      if (d < bestDistance) {
+        bestDistance = d;
+        bestX = candidateX;
+        bestY = candidateY;
+      }
+    }
   }
-  void incrementXY(float x_, float y_) {
-    x+=x_;
-    y+=y_;
+
+  // Terapkan posisi magnet jika masih dalam jarak toleransi
+  if (bestDistance <= SNAP_DISTANCE) {
+    moving.x = bestX;
+    moving.y = bestY;
   }
-  PVector getPos() {
-    return new PVector(x+w/2, y+h/2);
+}
+
+// Memastikan dua ubin memiliki rentang vertikal yang bertumpang tindih
+boolean overlapY(float y1, float h1, float y2, float h2) {
+  return min(y1 + h1, y2 + h2) >
+         max(y1, y2);
+}
+
+// Memastikan dua ubin memiliki rentang horizontal yang bertumpang tindih
+boolean overlapX(float x1, float w1, float x2, float w2) {
+  return min(x1 + w1, x2 + w2) >
+         max(x1, x2);
+}
+
+void keyPressed() {
+  // Hapus ubin terakhir menggunakan Delete atau Backspace
+  if (key == DELETE || key == BACKSPACE) {
+    if (tiles.size() > 0) {
+      tiles.remove(tiles.size() - 1);
+    }
   }
-  boolean over() {
-    return mouseX>x && mouseX<x+w && mouseY>y && mouseY<y+h;
+}
+
+// Kelas ubin
+class Tile {
+  float x, y, w, h;
+  color c;
+
+  Tile(float x_, float y_, color c_) {
+    x = x_;
+    y = y_;
+    w = TILE_SIZE;
+    h = TILE_SIZE;
+    c = c_;
   }
-} 
+
+  void display() {
+    stroke(0);
+    strokeWeight(1);
+    fill(c);
+    rect(x, y, w, h);
+  }
+
+  boolean contains(float px, float py) {
+    return px >= x && px <= x + w &&
+           py >= y && py <= y + h;
+  }
+}
+
 </script>
 <canvas></canvas>
 </div>	
